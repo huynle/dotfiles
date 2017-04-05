@@ -1,0 +1,111 @@
+# Your keymap
+#
+# Atom keymaps work similarly to style sheets. Just as style sheets use
+# selectors to apply styles to elements, Atom keymaps use selectors to associate
+# keystrokes with events in specific contexts. Unlike style sheets however,
+# each selector can only be declared once.
+#
+# You can create a new keybinding in this file by typing "key" and then hitting
+# tab.
+#
+# Here's an example taken from Atom's built-in keymap:
+#
+# 'atom-text-editor':
+#   'enter': 'editor:newline'
+#
+# 'atom-workspace':
+#   'ctrl-shift-p': 'core:move-up'
+#   'ctrl-p': 'core:move-down'
+#
+# You can find more information about keymaps in these guides:
+# * http://flight-manual.atom.io/using-atom/sections/basic-customization/#_customizing_keybindings
+# * http://flight-manual.atom.io/behind-atom/sections/keymaps-in-depth/
+#
+# If you're having trouble with your keybindings not working, try the
+# Keybinding Resolver: `Cmd+.` on macOS and `Ctrl+.` on other platforms. See the
+# Debugging Guide for more information:
+# * http://flight-manual.atom.io/hacking-atom/sections/debugging/#check-the-keybindings
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+# mapping to switch tab forward and back
+
+# 'body':
+#   'ctrl-tab': 'pane:show-next-item'
+#   'ctrl-shift-tab': 'pane:show-previous-item'
+'atom-text-editor, body, .native-key-bindings':
+  'ctrl-alt-right': 'pane:show-next-item'
+  'ctrl-alt-left': 'pane:show-previous-item'
+  'ctrl-tab': 'pane:show-previous-recently-used-item'
+  'ctrl-shift-e': 'pane:split-right-and-copy-active-item'
+  'ctrl-shift-o': 'pane:split-down-and-copy-active-item'
+  'alt-down': 'window:focus-pane-below'
+  'alt-up': 'window:focus-pane-above'
+  'alt-left': 'window:focus-pane-on-left'
+  'alt-right': 'window:focus-pane-on-right'
+  'ctrl-alt-c': 'color-picker:open'
+  'ctrl-alt-b': 'atom-beautify:beautify-editor'
+
+# '.platform-linux, atom-text-editor':
+#   'ctrl-:': 'spell-check:correct-misspelling'
+
+'.platform-linux, .platform-win32, .atom-workspace':
+  'ctrl-o': 'project-manager:list-projects'
+  'alt-shift-t': 'platformio-ide-terminal:new'
+
+# "atom-workspace":
+  # "ctrl-tab": "tab-switcher:next"
+  # "ctrl-tab ^ctrl": "unset!"
+  # "ctrl-shift-tab": "tab-switcher:previous"
+  # "ctrl-shift-tab ^ctrl": "unset!"
+
+#
+# "ol.tab-switcher-tab-list":
+#   "^ctrl": "tab-switcher:select"
+#   "^shift": "tab-switcher:select"
+#   "ctrl-up": "tab-switcher:previous"
+#   "ctrl-down": "tab-switcher:next"
+#   "ctrl-escape": "tab-switcher:cancel"
+#   "ctrl-n": "tab-switcher:next"
+#   "ctrl-p": "tab-switcher:previous"
+#   "ctrl-w": "tab-switcher:close"
+#   "ctrl-s": "tab-switcher:save"
+
+# Default Keymaps for Markdown Writer
+# https://atom.io/packages/markdown-writer
+#
+# Wiki: https://github.com/zhuochun/md-writer/wiki/Settings-for-Keymaps
+#
+".platform-win32 atom-text-editor:not([mini])":
+  "shift-ctrl-K": "markdown-writer:insert-link"
+  "shift-ctrl-I": "markdown-writer:insert-image"
+  "ctrl-i":       "markdown-writer:toggle-italic-text"
+  "ctrl-b":       "markdown-writer:toggle-bold-text"
+  "ctrl-'":       "markdown-writer:toggle-code-text"
+  'ctrl-`':       "markdown-writer:toggle-codeblock-text"
+  "ctrl-h":       "markdown-writer:toggle-strikethrough-text"
+  "ctrl-1":       "markdown-writer:toggle-h1"
+  "ctrl-2":       "markdown-writer:toggle-h2"
+  "ctrl-3":       "markdown-writer:toggle-h3"
+  "ctrl-4":       "markdown-writer:toggle-h4"
+  "ctrl-5":       "markdown-writer:toggle-h5"
+
+# Default Keymaps for Markdown Writer
+# https://atom.io/packages/markdown-writer
+#
+# Wiki: https://github.com/zhuochun/md-writer/wiki/Settings-for-Keymaps
+#
+".platform-linux atom-text-editor:not([mini])":
+  "shift-ctrl-K": "markdown-writer:insert-link"
+  "shift-ctrl-I": "markdown-writer:insert-image"
+  "ctrl-i":       "markdown-writer:toggle-italic-text"
+  "ctrl-b":       "markdown-writer:toggle-bold-text"
+  "ctrl-'":       "markdown-writer:toggle-code-text"
+  "ctrl-h":       "markdown-writer:toggle-strikethrough-text"
+  "ctrl-1":       "markdown-writer:toggle-h1"
+  "ctrl-2":       "markdown-writer:toggle-h2"
+  "ctrl-3":       "markdown-writer:toggle-h3"
+  "ctrl-4":       "markdown-writer:toggle-h4"
+  "ctrl-5":       "markdown-writer:toggle-h5"

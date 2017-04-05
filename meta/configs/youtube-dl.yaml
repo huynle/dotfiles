@@ -1,5 +1,0 @@
-- shell:
-    - [mkdir -p ~/Downloads/Temp, Creating download directory]
-
-- link:
-    ~/.config/youtube-dl: tools/misc/youtube-dl
