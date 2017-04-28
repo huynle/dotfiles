@@ -1,0 +1,9 @@
+[user]
+	email = dacrazyazn@gmail.com
+	name = Huy Le
+[merge]
+	ff = false
+[mergetool]
+	keepBackup = false
+[push]
+	default = simple

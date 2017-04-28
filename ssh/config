@@ -1,0 +1,49 @@
+Host bitbucket.org
+ User git
+ IdentityFile ~/.ssh/id_bitbucket
+ Hostname bitbucket.org
+
+Host github.com
+ User git
+ IdentityFile ~/.ssh/id_github
+ Hostname ssh.github.com
+ Port 22
+
+Host huynle.com
+ User hle
+ IdentityFile ~/.ssh/id_hizzle_cloud
+ Hostname huynle.com
+ Port 22
+
+Host tnttportland.org
+ User dacrazyazn
+ IdentityFile ~/.ssh/id_hizzle_cloud
+ Hostname tnttportland.org
+
+Host tiny_qnap
+ User admin
+ Port 12121
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_tiny_admin
+ Hostname 10.1.10.110
+
+Host tiny_root
+ User root
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_tiny_root
+ Hostname 10.1.10.110
+
+Host tiny_hle
+ User hle
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_tiny_entware_hle
+ Hostname 10.1.10.110
+
+Host beast
+ User hle
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_beast
+ Hostname 10.1.10.116
