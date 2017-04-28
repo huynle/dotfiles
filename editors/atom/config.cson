@@ -24,6 +24,7 @@
       "minimap"
       "minimap-autohide"
       "markdown-preview-plus"
+      "sync-settings"
     ]
     ignoredNames: [
       ".git"

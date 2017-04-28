@@ -9,17 +9,6 @@ There are [screenshots](https://github.com/vsund/dotfiles/blob/master/SCREENSHOT
 * general
     * `python`
     * `git`
-* gtk
-    * [`arc-theme`](https://github.com/horst3180/arc-theme)
-* i3
-    * [`i3blocks`](https://github.com/vivien/i3blocks)
-    * [`i3-style`](https://github.com/acrisci/i3-style)
-    * [`ttf-font-awesome`](https://aur.archlinux.org/packages/ttf-font-awesome)
-    * [`ttf-font-icons`](https://aur.archlinux.org/packages/ttf-font-icons)
-* icons
-    * [`surfn`](https://github.com/erikdubois/Surfn)
-
-
 
 ## Installation
 
