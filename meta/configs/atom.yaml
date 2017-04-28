@@ -1,12 +1,12 @@
 
 - link:
     ~/.atom/config.cson:
-        path: atom/config.cson
+        path: editors/atom/config.cson
     ~/.atom/init.coffee:
-        path: atom/init.coffee
+        path: editors/atom/init.coffee
     ~/.atom/keymap.cson:
-        path: atom/keymap.cson
+        path: editors/atom/keymap.cson
     ~/.atom/snippets.cson:
-        path: atom/snippets.cson
+        path: editors/atom/snippets.cson
     ~/.atom/styles.less:
-        path: atom/styles.less
+        path: editors/atom/styles.less
