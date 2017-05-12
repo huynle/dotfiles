@@ -85,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Temporary add for GoLang
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/GoProjects
 export PATH=$PATH:$(go env GOPATH)/bin
 
