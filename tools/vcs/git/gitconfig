@@ -9,3 +9,4 @@
 	default = simple
 [core]
 	editor = vim
+	excludesfile = /home/hle/.gitignore

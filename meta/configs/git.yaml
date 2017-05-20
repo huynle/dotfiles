@@ -1,3 +1,4 @@
 - link:
     ~/.gitconfig:     tools/vcs/git/gitconfig
     ~/.gitattributes: tools/vcs/git/gitattributes
+    ~/.gitignore:     tools/vcs/git/gitignore
