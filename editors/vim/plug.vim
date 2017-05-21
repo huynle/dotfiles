@@ -1,6 +1,13 @@
-if &compatible
-  set nocompatible
-end
+
+" Install vim-plug if we don't already have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+    " Ensure all needed directories exist  (Thanks @kapadiamush)
+    execute 'mkdir -p ~/.vim/plugged'
+    execute 'mkdir -p ~/.vim/autoload'
+    " Download the actual plugin manager
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 
 " Remove declared plugins
 function! s:UnPlug(plug_name)
@@ -32,7 +39,7 @@ endfunction
 com! -nargs=+  -bar Plugin call VundleToPlug("Plugin", <args>)
 com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
 
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.vim/plugged')
 
 " Define bundles via Github repos
 Plug 'christoomey/vim-run-interactive'
@@ -55,11 +62,11 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
 
-if filereadable(expand("~/.vimrc.bundles.local"))
-  source ~/.vimrc.bundles.local
+
+if filereadable(expand("~/.plug.vim.local"))
+  source ~/.plug.vim.local
 endif
 
 call plug#end()
