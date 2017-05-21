@@ -15,3 +15,7 @@ Plugin 'Buffergator'
 Plugin 'fatih/vim-go'
 
 Plugin 'plasticboy/vim-markdown'
+
+Plugin 'tpope/vim-fugitive'
+
+" Plugin 'flazz/vim-colorschemes'  "nice colors!

@@ -5,4 +5,5 @@
 # - shell:
 #     - [vim -c 'PluginInstall' +qall, Installing vim plugins]
 - shell:
-    - [vim -c 'PluginInstall' +qall, Installing vim plugins]
+    - [vim +VundleClean +qall, Cleaning vim plugins]
+    - [vim -c 'VundleInstall' +qall, Installing vim plugins]

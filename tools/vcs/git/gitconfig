@@ -2,11 +2,17 @@
 	email = dacrazyazn@gmail.com
 	name = Huy Le
 [merge]
-	ff = false
+	ff = only
 [mergetool]
 	keepBackup = false
 [push]
-	default = simple
+	default = current
 [core]
 	editor = vim
 	excludesfile = /home/hle/.gitignore
+  autocrlf = input
+
+[fetch]
+  prune = true
+[rebase]
+  autosquash = true
