@@ -9,6 +9,3 @@
 [submodule "shells/zsh/oh-my-zsh"]
 	path = shells/zsh/oh-my-zsh
 	url = https://github.com/huynle/oh-my-zsh.git
-[submodule "editors/vim/bundle/Vundle.vim"]
-	path = editors/vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
