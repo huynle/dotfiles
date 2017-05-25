@@ -9,9 +9,7 @@ if [ -z ${RELOAD} ]; then
     zplug 'zplug/zplug', hook-build:'zplug --self-manage'
     zplug 'zsh-users/zsh-syntax-highlighting', defer:2
     zplug 'zsh-users/zsh-autosuggestions'
-
-    export NVM_LAZY_LOAD=true
-    zplug "lukechilds/zsh-nvm"
+    zplug "zsh-users/zsh-history-substring-search"
 
     # Install plugins if there are plugins that have not been installed
     if ! zplug check; then
