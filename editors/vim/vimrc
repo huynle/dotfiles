@@ -160,3 +160,6 @@ set diffopt+=vertical
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+
+let g:airline_theme='onedark'

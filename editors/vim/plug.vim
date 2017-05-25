@@ -43,7 +43,6 @@ call plug#begin('~/.vim/plugged')
 
 " Define bundles via Github repos
 Plug 'christoomey/vim-run-interactive'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
@@ -63,6 +62,21 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/tComment'
+Plug 'kien/ctrlp.vim' " fuzzy find files
+Plug 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
+Plug 'benmills/vimux'
+Plug 'tpope/vim-fugitive' " the ultimate git helper
+Plug 'tpope/vim-commentary' " comment/uncomment lines with gcc or gc in visual mode
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'benmills/vimux' " tmux integration for vim
+
+" Utilities
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
+
+" colorschemes
+Plug 'joshdick/onedark.vim'
+Plug 'chriskempson/base16-vim'
 
 
 if filereadable(expand("~/.plug.vim.local"))

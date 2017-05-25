@@ -5,3 +5,5 @@ terminator
 remmina
 zsh
 vim
+tmux
+tmuxinator
