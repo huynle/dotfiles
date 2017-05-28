@@ -44,7 +44,7 @@ else
         break
         ;;
       "zsh")
-        echo "Cannot do this yet... "
+        tmux detach
         break;;
       *)
         tmux switch -t $opt

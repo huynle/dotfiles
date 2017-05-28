@@ -1,9 +1,9 @@
 #### COLOUR
 
-tm_icon="🙊"
-tm_color_active=colour52
-tm_color_inactive=colour241
-tm_color_feature=colour198
+tm_icon="🤖"
+tm_color_active=colour11
+tm_color_inactive=colour248
+tm_color_feature=colour10
 tm_color_music=colour41
 tm_active_border_color=colour51
 
@@ -58,3 +58,16 @@ tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
 
 set -g status-left $tm_session_name' '
 set -g status-right $tm_tunes' '$tm_date' '$tm_host
+
+
+
+# # show host name and IP address on left side of status bar
+# set -g status-left-length 85
+#
+# # Show host, load averages, and an indicator for the prefix key
+# set -g status-left "#[fg=green]: #h : #[fg=brightblue]#(uptime | rev | cut -d ' ' -f 1-3 | rev) #{?client_prefix,#[fg=colour2]^A,} "
+#
+# # show session name, window & pane number, date and time on right side of
+# # status bar
+# set -g status-right-length 80
+# set -g status-right "#[fg=cyan]#{=15:pane_title} : #[fg=blue]#S #I:#P #[fg=yellow]: %d %b %Y #[fg=green]: %l:%M %p : #(date -u | awk '{print $4}') :"

@@ -1,0 +1,14 @@
+# ~/.tmuxinator/hizzle.yml
+
+name: hizzle
+root: ~/Documents/hizzle
+
+windows:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - vim
+  - status:
+      layout: main-horizontal
+      panes:
+        - top
