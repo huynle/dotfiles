@@ -65,8 +65,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'ctrlpvim/ctrlp.vim'
 
 
-Plug 'edkolev/tmuxline.vim' "airline for tmux"
-
 " markdown
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
 Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
@@ -78,6 +76,11 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 
 " colorschemes
 Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'rakr/vim-one'
+
+" airline for tmux
+Plug 'edkolev/tmuxline.vim'
+
 
 " language specifics
 Plug 'fatih/vim-go'

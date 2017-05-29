@@ -10,17 +10,6 @@ endif
 let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark         " Assume a dark background
 
-" Allow to trigger background
-function! ToggleBG()
-    let s:tbg = &background
-    " Inversion
-    if s:tbg == "dark"
-        set background=light
-    else
-        set background=dark
-    endif
-endfunction
-
 
 let mapleader = " "
 
@@ -211,12 +200,6 @@ if has('clipboard')
     endif
 endif
 
-
-set laststatus=2  " fix airline not starting until split
-colorscheme onedark
-
-
-
 " source all .vimrc files inside of the zsh/ directory
 for f in split(glob('~/.dotfiles/editors/vim/**/*.vimrc'), '\n')
     exe 'source' f
@@ -227,3 +210,8 @@ endfor
 if filereadable($HOME . "~/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+" let vim and tmux backgrounds to match
+set term=screen-256color
+
+nnoremap <Leader>r :source ~/.vimrc<CR>

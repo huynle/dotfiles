@@ -1,7 +1,6 @@
 #### COLOUR
-
 tm_icon="🤖"
-tm_color_active=colour11
+tm_color_active=colour1
 tm_color_inactive=colour248
 tm_color_feature=colour10
 tm_color_music=colour41

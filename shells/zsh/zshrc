@@ -1,5 +1,6 @@
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/shells/zsh
+export BACKGROUND="dark"
 
 command_exists() {
     type "$1" > /dev/null 2>&1
@@ -9,6 +10,7 @@ command_exists() {
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
+# this sets the color for zsh default and will change to screen-256color if in tmux session
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 

@@ -40,9 +40,12 @@ done
 
 
 dark(){
-  export BACKGROUND="dark" && source !/.zshrc
+  export BACKGROUND="dark"
+  vim -c "call UpdateTmuxlineConf()" +qall
 }
 
 light(){
-  export BACKGROUND="light" && source !/.zshrc
+  export BACKGROUND="light"
+  vim -c "call UpdateTmuxlineConf()" +qall
+
 }
