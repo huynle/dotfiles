@@ -1,0 +1,21 @@
+# ~/.tmuxinator/learning.yml
+
+name: learning
+# root: ~/GoProjects/src/github.com/huynle/learn-golang
+
+windows:
+  - go:
+      root: ~/GoProjects/src/github.com/huynle/learn-golang
+      layout: main-horizontal
+      panes:
+        - vim
+  # - hizzle:
+  #     root: ~/Documents/hizzle
+  #     layout: main-horizontal
+  #     panes:
+  #       - vim
+  # - dotfiles:
+  #     root: ~/.dotfiles
+  #     layout: main-horizontal
+  #     panes:
+  #       - vim

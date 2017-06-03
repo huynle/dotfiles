@@ -1,0 +1,10 @@
+# ~/.tmuxinator/go.yml
+
+name: go
+root: ~/GoProjects/src/github.com/huynle/GolangTraining
+
+windows:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - vim

@@ -1,6 +1,11 @@
 # reload zsh config
 alias reload!='RELOAD=1 source ~/.zshrc'
 
+# use neovim as editor
+alias vim="nvim"
+# alias tmux="env TERM=xterm-256color tmux"
+
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"
@@ -38,14 +43,3 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
 
-
-dark(){
-  export BACKGROUND="dark"
-  vim -c "call UpdateTmuxlineConf()" +qall
-}
-
-light(){
-  export BACKGROUND="light"
-  vim -c "call UpdateTmuxlineConf()" +qall
-
-}

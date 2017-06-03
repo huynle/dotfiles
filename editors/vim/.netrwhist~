@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/hle/.dotfiles/shells'
-let g:netrw_dirhist_2='/home/hle/.dotfiles/shells/zsh'
-let g:netrw_dirhist_3='/home/hle/Documents/hizzle/themes'
-let g:netrw_dirhist_4='/home/hle/.dotfiles'
