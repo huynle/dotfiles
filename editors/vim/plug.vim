@@ -62,12 +62,39 @@ Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job con
 " ################## Language Plugins
 Plug 'fatih/vim-go'
 
+" Plug 'nvie/vim-flake8'
+Plug 'klen/python-mode'
+"{{{
+  let g:pymode_python = 'python3'
+"}}}
 " ############## Code completions
+Plug 'SirVer/ultisnips' " allow to include snippets
+"{{{
+  " UltiSnips config
+  inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"}}}
+
+
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "{{{
   let g:deoplete#enable_at_startup = 1
-  " tab completion
-  inoremap <silent><expr> <Tab> pumvisible() ? "<C-n>" : "<Tab>"
+  let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
+
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return pumvisible() ? deoplete#mappings#close_popup() : "\n"
+  endfunction
+
+  " if has("gui_running")
+  "     inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
+  " else
+  "     inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+  " endif
+
   " Close the documentation window when completion is done
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
