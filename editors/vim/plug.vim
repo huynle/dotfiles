@@ -17,28 +17,6 @@ function! s:UnPlug(plug_name)
 endfunction
 command!  -nargs=1 UnPlug call s:UnPlug(<args>)
 
-" Shim command and function to allow migration from Vundle to vim-plug.
-function! VundleToPlug(vundle_command, arg, ...)
-  echom "You are using Vundle's `".a:vundle_command."` command to declare plugins. Dotfiles now uses vim-plug for plugin management. Please rename uses of `".a:vundle_command."` to `Plug`. Plugin was '".a:arg."'."
-  let vim_plug_options = {}
-
-  if a:0 > 0
-    if has_key(a:1, 'name')
-      let name = a:1.name
-      let vim_plug_options.dir = "$HOME/.vim/bundle/".a:1.name
-    endif
-
-    if has_key(a:1, 'rtp')
-      let vim_plug_options.rtp = a:1.rtp
-    endif
-  endif
-
-  Plug a:arg, vim_plug_options
-endfunction
-
-com! -nargs=+  -bar Plugin call VundleToPlug("Plugin", <args>)
-com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
-
 call plug#begin('~/.vim/plugged')
 
 " Define bundles via Github repos
@@ -60,8 +38,12 @@ Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 "}}}
 " Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 "
-
-
+"
+" " Load matchit.vim, but only if the user hasn't installed a newer version.
+" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+"   runtime! macros/matchit.vim
+" endif
+"
 
 Plug 'sickill/vim-pasta' " context-aware pasting
 
@@ -77,7 +59,10 @@ Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job con
 
 " Plug 'tomtom/tlib_vim' " utility functions for vim
 
+" ################## Language Plugins
+Plug 'fatih/vim-go'
 
+" ############## Code completions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "{{{
   let g:deoplete#enable_at_startup = 1
@@ -86,30 +71,31 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Close the documentation window when completion is done
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-Plug 'zchee/deoplete-jedi'
-" {{{
+  " " deoplete-clang
+  " let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+  " let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
 
-" " deoplete-clang
-" let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
-" let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
-
-" deoplete-jedi
-let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
-let g:deoplete#sources#jedi#enable_cache = 1
-let g:deoplete#auto_completion_start_length = 1
-
-" }}}"
+  Plug 'zchee/deoplete-jedi'
+  "{{{
+    " deoplete-jedi
+    let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+    let g:deoplete#sources#jedi#enable_cache = 1
+    let g:deoplete#auto_completion_start_length = 1
+  " }}}"
 
 
-" " deoplete-go
-" let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-" let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-" let g:deoplete#sources#go#use_cache = 1
-" let g:go_fmt_command = 'goimports'
-" let g:deoplete#sources#go = 'vim-go'
-"
+  " " deoplete-go
+  " let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+  " let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+  " let g:deoplete#sources#go#use_cache = 1
+  " let g:go_fmt_command = 'goimports'
+  " let g:deoplete#sources#go = 'vim-go'
+
+" }}}
+
+
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
 Plug 'junegunn/fzf.vim'
 " {{{
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
@@ -195,43 +181,43 @@ Plug 'plasticboy/vim-markdown'
 "{{{
   set conceallevel=2
   let g:vim_markdown_folding_disabled = 1
-  let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+  " let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+  let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
   let g:vim_markdown_frontmatter = 1
   let g:vim_markdown_toml_frontmatter = 1
-
-  let g:vim_markdown_new_list_item_indent = 2
+  " let g:vim_markdown_new_list_item_indent = 2
  "}}}
 
 Plug 'reedes/vim-pencil' " settings to allow vim to be used as a writer
 " {{{
   function! Prose()
-    call pencil#init()
-    call lexical#init()
+    " call pencil#init()
+    " call lexical#init()
     " call litecorrect#init()
     " call textobj#quote#init()
     " call textobj#sentence#init()
 
     " manual reformatting shortcuts
-    nnoremap <buffer> <silent> Q gqap
-    xnoremap <buffer> <silent> Q gq
-    nnoremap <buffer> <silent> <leader>Q vapJgqap
+    " nnoremap <buffer> <silent> Q gqap
+    " xnoremap <buffer> <silent> Q gq
+    " nnoremap <buffer> <silent> <leader>Q vapJgqap
 
     " force top correction on most recent misspelling
-    nnoremap <buffer> <c-s> [s1z=<c-o>
-    inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
+    " nnoremap <buffer> <c-s> [s1z=<c-o>
+    " inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
 
     " replace common punctuation
-    iabbrev <buffer> -- –
-    iabbrev <buffer> --- —
-    iabbrev <buffer> << «
-    iabbrev <buffer> >> »
+    " iabbrev <buffer> -- –
+    " iabbrev <buffer> --- —
+    " iabbrev <buffer> << «
+    " iabbrev <buffer> >> »
 
     " open most folds
     setlocal foldlevel=6
 
     " replace typographical quotes (reedes/vim-textobj-quote)
-    map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
-    map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
+    " map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
+    " map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
 
     " highlight words (reedes/vim-wordy)
     noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
@@ -264,9 +250,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 
-
-" language specifics
-Plug 'fatih/vim-go'
 
 if filereadable(expand("~/.plug.vim.local"))
   source ~/.plug.vim.local

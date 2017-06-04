@@ -23,11 +23,11 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-let base16colorspace=256  " Access colors present in 256 colorspace
 
 let mapleader = " "
 
-
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
 set autowrite                       " Automatically write a file when leaving a modified buffer
 set ignorecase                      " Ignorecase searches
 set swapfile
@@ -42,24 +42,24 @@ set history=1000                    " Store a ton of history (default is 20)
 " set iskeyword-=#                    " '#' is an end of word designator
 " set iskeyword-=-                    " '-' is an end of word designator
 "
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set shiftround
-set expandtab
-set wrap
-set linebreak
-set nolist
-
+" " Softtabs, 2 spaces
+" set tabstop=2
+" set shiftwidth=2
+" set shiftround
+" set expandtab
+" set wrap
+" set linebreak
+" set nolist
+"
 " Reduce the wait time for vim to switch from insert to normal to visual
 set timeoutlen=1000 ttimeoutlen=10
 
 " Make it obvious where 80 characters is
-set textwidth=80
+" set textwidth=80
 
 " Numbers
 set number
-set numberwidth=5
+set numberwidth=2
 
 
 " Setting up the directories {
@@ -95,13 +95,6 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
-
-
-
 augroup vimrcEx
   autocmd!
 
@@ -114,7 +107,6 @@ augroup vimrcEx
     \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
 augroup END
@@ -122,9 +114,6 @@ augroup END
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
 
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -144,27 +133,26 @@ if executable('ag')
   endif
 endif
 
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
+" " Tab completion
+" " will insert tab at beginning of line,
+" " will use completion if not at beginning
+" set wildmode=list:longest,list:full
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <S-Tab> <c-n>
+"
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
 " Detele an entire word when holding control and backspace
 imap <C-h> <C-w>
-
 set backspace=indent,eol,start
 
 
@@ -190,11 +178,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-
+" let g:syntastic_check_on_open=1
+" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_eruby_ruby_quiet_messages =
+"     \ {"regex": "possibly useless use of a variable in void context"}
+"
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
@@ -206,11 +194,11 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 set diffopt+=vertical
 
 
-" Misc {
-if isdirectory(expand("~/.vim/plugged/matchit.zip"))
-    let b:match_ignorecase = 1
-endif
-" }
+" " Misc {
+" if isdirectory(expand("~/.vim/plugged/matchit.zip"))
+"     let b:match_ignorecase = 1
+" endif
+" " }
 
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -298,7 +286,8 @@ execute "set background=".$BACKGROUND
 execute "colorscheme ".$THEME
 "
 " if filereadable(expand("~/.vimrc_background"))
-"   let base16colorspace=256
+"   let base16colorspace=256  " this line is needed for the airline colors to
+"   syn
 "   source ~/.vimrc_background
 "   " execute "let g:airline_theme='"colors_name"'"
 " endif
