@@ -1,11 +1,10 @@
 # ~/.tmuxinator/learning.yml
 
 name: learning
-# root: ~/GoProjects/src/github.com/huynle/learn-golang
-
+root: ~/GoProjects/src/github.com/huynle/learn-golang
+# pre_window: dark
 windows:
   - go:
-      root: ~/GoProjects/src/github.com/huynle/learn-golang
       layout: main-horizontal
       panes:
         - vim

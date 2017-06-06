@@ -19,35 +19,28 @@ command!  -nargs=1 UnPlug call s:UnPlug(<args>)
 
 call plug#begin('~/.vim/plugged')
 
-" Define bundles via Github repos
-" Plug 'elixir-lang/vim-elixir'
+" ############## General
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
 " Plug 'tpope/vim-vinegar'
-" Plug 'tpope/vim-eunuch'
-" Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
 " Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-fugitive' " the ultimate git helper
 Plug 'tpope/vim-commentary' " comment/uncomment lines with gcc or gc sin visual mode
 
-" Plug 'benmills/vimux' " tmux integration for vim
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 "{{{
 " Needed for deoplete completions
 "}}}
-" Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 "
-"
-" " Load matchit.vim, but only if the user hasn't installed a newer version.
-" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-"   runtime! macros/matchit.vim
-" endif
-"
+Plug 'godlygeek/tabular'
 
 Plug 'sickill/vim-pasta' " context-aware pasting
 
+" ######################## Formatting
 
+Plug 'sbdchd/neoformat'
 
 Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
 "{{{
@@ -62,11 +55,18 @@ Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job con
 " ################## Language Plugins
 Plug 'fatih/vim-go'
 
-" Plug 'nvie/vim-flake8'
-Plug 'klen/python-mode'
+Plug 'yssource/python.vim'
+Plug 'klen/python-mode' " comprehensive python plugin
 "{{{
   let g:pymode_python = 'python3'
 "}}}
+
+
+
+" ############## Vim visual
+
+"
+"
 " ############## Code completions
 Plug 'SirVer/ultisnips' " allow to include snippets
 "{{{
@@ -136,7 +136,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-  nnoremap <silent> <leader>. :AgIn 
+  nnoremap <silent> <leader>. :AgIn
 
   nnoremap <silent> K :call SearchWordWithAg()<CR>
   vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
@@ -159,7 +159,7 @@ Plug 'junegunn/fzf.vim'
   imap <c-x><c-j> <plug>(fzf-complete-file-ag)
   " Useful to add line that has been written before
   imap <c-x><c-l> <plug>(fzf-complete-line)
-  
+
 
   function! SearchWordWithAg()
     execute 'Ag' expand('<cword>')
@@ -182,7 +182,7 @@ Plug 'junegunn/fzf.vim'
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
-  
+
 " Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
 
 
@@ -204,6 +204,9 @@ Plug 'janko-m/vim-test'
 Plug 'mattly/iterm-colors-pencil'
 Plug 'reedes/vim-wordy'
 Plug 'reedes/vim-lexical'
+Plug 'reedes/vim-litecorrect'
+Plug 'reedes/vim-textobj-sentence'
+Plug 'reedes/vim-textobj-quote'
 Plug 'plasticboy/vim-markdown'
 "{{{
   set conceallevel=2
@@ -258,7 +261,7 @@ Plug 'reedes/vim-pencil' " settings to allow vim to be used as a writer
 
   " invoke manually by command for other file types
   command! -nargs=0 Prose call Prose()
-  
+
   let g:airline_section_x = '%{PencilMode()}'
 " }}}
 " ################################
