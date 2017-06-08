@@ -5,8 +5,8 @@ end
 
 " In your .vimrc.before.local file
 " list only the plugin groups you will use
-if !exists('g:spf13_bundle_groups')
-    let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
+if !exists('g:plug_groups')
+	let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
 endif
 
 if filereadable(expand("~/.vim/plug.vim"))
@@ -23,8 +23,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 filetype plugin indent on
 
 let mapleader = " "
-
-
 
 " ################################# General Settings
 " {
@@ -146,7 +144,7 @@ execute "colorscheme ".$THEME
 " ################################ General Vim Custom Mapping
 
 nnoremap <leader><leader> <c-^>           " Switch between the last two files
-imap <C-h> <C-w>                          " Detele an entire word when holding control and backspace
+imap <C-h> <C-w>
 set backspace=indent,eol,start            " Backspace for dummies
 nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
 
@@ -235,7 +233,7 @@ nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<C
 
 " ####################################### Navigation
 
-nnoremap <C-n> :e .<CR>
+" nnoremap <C-n> :e .<CR>
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4 "open files in the previous window
@@ -277,7 +275,7 @@ set autochdir
 " Plugins {
 
     " GoLang {
-      if count(g:spf13_bundle_groups, 'go')
+      if count(g:plug_groups, 'go')
           let g:go_highlight_functions = 1
           let g:go_highlight_methods = 1
           let g:go_highlight_structs = 1
@@ -351,20 +349,47 @@ set autochdir
         let g:UltiSnipsExpandTrigger="<tab>"
         let g:UltiSnipsJumpForwardTrigger="<tab>"
         let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-        inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+        " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
     " }
 
     " Deoplete {
-      let g:deoplete#enable_at_startup = 1
-      let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
 
-      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-      function! s:my_cr_function()
-        return pumvisible() ? deoplete#mappings#close_popup() : "\n"
-      endfunction
+      let g:deoplete#enable_at_startup = 1
+
+      " if !exists('g:deoplete#omni#input_patterns')
+      "   let g:deoplete#omni#input_patterns = {}
+      " endif
+
+      " let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
 
       " Close the documentation window when completion is done
-      autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+      " If you prefer the Omni-Completion tip window to close when a selection is
+      " made, these lines close it on movement in insert mode or when leaving
+      " insert mode
+      autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+      autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+
+      " close the preview window when you're not using it
+      " let g:SuperTabClosePreviewOnPopupClose = 1
+
+      " omnifuncs
+      augroup omnifuncs
+        autocmd!
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+      augroup end
+
+      " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+
+      " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+      " function! s:my_cr_function()
+      "   return pumvisible() ? deoplete#mappings#close_popup() : "\n"
+      "endfunction
 
       " " deoplete-clang
       " let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
@@ -505,7 +530,7 @@ set autochdir
       " invoke manually by command for other file types
       command! -nargs=0 Prose call Prose()
 
-      let g:airline_section_x = '%{PencilMode()}'
+      " let g:airline_section_x = '%{PencilMode()}'
     " }
 
 " #################################### Run other Vim setup files

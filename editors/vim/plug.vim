@@ -18,99 +18,118 @@ endfunction
 command!  -nargs=1 UnPlug call s:UnPlug(<args>)
 
 call plug#begin('~/.vim/plugged')
+" ##################
 
-" ############## General
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
-" Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
-" Plug 'vim-scripts/tComment'
-Plug 'tpope/vim-fugitive' " the ultimate git helper
-Plug 'tpope/vim-commentary' " comment/uncomment lines with gcc or gc sin visual mode
+" Deps {
+    Plug 'tomtom/tlib_vim'
+    if executable('ag')
+        Plug 'mileszs/ack.vim'
+        let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    endif
+" }
 
-Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-"{{{
-" Needed for deoplete completions
-"}}}
-"
-Plug 'godlygeek/tabular'
 
-Plug 'sickill/vim-pasta' " context-aware pasting
+" ############## General Plugins
+
+if count(g:plug_groups, 'general')
+	Plug 'mattn/webapi-vim'
+	Plug 'mattn/gist-vim'
+  Plug 'jiangmiao/auto-pairs'
+	" Plug 'tpope/vim-vinegar'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
+	Plug 'sickill/vim-pasta' " context-aware pasting
+  Plug 'powerline/fonts'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+endif
 
 " ######################## Formatting
+if count(g:plug_groups, 'formatting')
+	Plug 'sbdchd/neoformat'
+	Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
+	"{{{
+	  autocmd! BufWritePost * Neomake
+	  let g:neomake_open_list = 2
+	"}}}
+	" Plug 'tomtom/tlib_vim' " utility functions for vim
+endif
 
-Plug 'sbdchd/neoformat'
+" #################### General Programming
+if count(g:plug_groups, 'programming')
+  " Pick one of the checksyntax, jslint, or syntastic
+  Plug 'tpope/vim-fugitive'
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/gist-vim'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-commentary'
+  Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
+  " Plug 'godlygeek/tabular'
+  " Plug 'vim-scripts/tComment'
+  Plug 'luochen1990/rainbow'
+  if executable('ctags')
+    Plug 'majutsushi/tagbar'
+  endif
+endif
 
-Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
-"{{{
-  autocmd! BufWritePost * Neomake
-  let g:neomake_open_list = 2
-"}}}
-
-
-
-" Plug 'tomtom/tlib_vim' " utility functions for vim
 
 " ################## Language Plugins
 
-Plug 'fatih/vim-go'
+if count(g:plug_groups, 'go')
+	Plug 'fatih/vim-go'
+endif
 
-
-Plug 'yssource/python.vim'
-Plug 'klen/python-mode' " comprehensive python plugin
-
+if count(g:plug_groups, 'python')
+	Plug 'yssource/python.vim'
+	Plug 'klen/python-mode' " comprehensive python plugin
+endif
 
 "
-" ############## Code completions
-Plug 'SirVer/ultisnips' " allow to include snippets
+" ############## General Programming
 
+if count(g:plug_groups, 'autocomplete')
+    Plug 'SirVer/ultisnips' " allow to include snippets
+    Plug 'honza/vim-snippets'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'      " python specific deoplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
+    Plug 'zchee/deoplete-jedi'      " python specific deoplete
 
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+endif
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+if count(g:plug_groups, 'programming')
+  Plug 'janko-m/vim-test'
+endif
 
-
-" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
-
-
-Plug 'janko-m/vim-test'
-
-
+" #################### Unit testings
 
 " markdown
-" Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
-" Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+" Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>
+
+
 
 " ######### Vim as a text writer
-Plug 'mattly/iterm-colors-pencil'
-Plug 'reedes/vim-wordy'
-Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-litecorrect'
-Plug 'reedes/vim-textobj-sentence'
-Plug 'reedes/vim-textobj-quote'
-Plug 'plasticboy/vim-markdown'
-Plug 'reedes/vim-pencil'              " settings to allow vim to be used as a writer
+if count(g:plug_groups, 'writing')
+  Plug 'mattly/iterm-colors-pencil'
+  Plug 'reedes/vim-wordy'
+  Plug 'reedes/vim-litecorrect'
+  Plug 'reedes/vim-textobj-sentence'
+  Plug 'reedes/vim-textobj-quote'
+  " Plug 'plasticboy/vim-markdown'
+  " Plug 'reedes/vim-pencil'              " settings to allow vim to be used as a writer
+  Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+endif
 
 " ################################
 
-" Utilities
-" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'ryanoasis/vim-devicons' " file drawer
-
-" colorschemes
-Plug 'joshdick/onedark.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'rakr/vim-one'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-
+if count(g:plug_groups, 'visual')
+  " colorschemes
+  Plug 'joshdick/onedark.vim'
+  Plug 'chriskempson/base16-vim'
+  Plug 'rakr/vim-one'
+endif
 
 if filereadable(expand("~/.plug.vim.local"))
   source ~/.plug.vim.local

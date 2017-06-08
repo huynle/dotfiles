@@ -9,7 +9,6 @@ set autoindent
 set fileformat=unix
 
 
-set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 " set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
   " \ [%l/%L\ (%p%%)
 
