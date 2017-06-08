@@ -59,9 +59,8 @@ endif
 if count(g:plug_groups, 'programming')
   " Pick one of the checksyntax, jslint, or syntastic
   Plug 'tpope/vim-fugitive'
-  Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
-  Plug 'scrooloose/nerdcommenter'
+  " Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-commentary'
   Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
   " Plug 'godlygeek/tabular'

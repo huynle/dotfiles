@@ -140,6 +140,8 @@ set termguicolors                       " set for truecolors
 execute "set background=".$BACKGROUND
 execute "colorscheme ".$THEME
 
+" ############################### Editor
+
 
 " ################################ General Vim Custom Mapping
 
@@ -384,7 +386,6 @@ set autochdir
       augroup end
 
       " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 
       " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
       " function! s:my_cr_function()
