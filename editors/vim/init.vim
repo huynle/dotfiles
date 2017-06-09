@@ -6,7 +6,9 @@ end
 " In your .vimrc.before.local file
 " list only the plugin groups you will use
 if !exists('g:plug_groups')
-	let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
+	" let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
+
+  let g:plug_groups=['general', 'visual', 'programming', 'autocomplete', 'go']
 endif
 
 if filereadable(expand("~/.vim/plug.vim"))
@@ -28,8 +30,8 @@ let mapleader = " "
 " {
   " Display extra whitespace
   set list listchars=tab:»·,trail:·,nbsp:·
-  set ignorecase                      " Ignorecase searches
-  set swapfile
+  set ignorecase                      " Ignorecasspf13_no_restore_cursore searches
+  " set swapfile
   set autoread                " detect when a file is changed
   " set autoindent
   set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
@@ -122,6 +124,8 @@ if has('clipboard')
     endif
 endif
 
+nmap <F8> :TagbarToggle<CR>
+
 
 " #################################### Vim visual
 function! ToggleBG()                    " Allow to trigger background
@@ -143,10 +147,10 @@ execute "colorscheme ".$THEME
 " ############################### Editor
 
 
-" ################################ General Vim Custom Mapping
+" ################################ General  Vim Custom Mapping
 
 nnoremap <leader><leader> <c-^>           " Switch between the last two files
-imap <C-h> <C-w>
+imap <C-\> <C-w>
 set backspace=indent,eol,start            " Backspace for dummies
 nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
 
@@ -299,8 +303,15 @@ set autochdir
     " }
 
     " Python {
+      if count(g:plug_groups, 'python')
         let g:pymode_python = 'python3'
-        " }
+        let g:pymode_doc = 0
+        let g:pymode_folding = 0          " disable code folding
+        let g:pymode_virtualenv = 1       " use virtualenvs
+        let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
+
+      endif
+      " }
 
     " Fugitive {
         if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
@@ -376,14 +387,14 @@ set autochdir
       " let g:SuperTabClosePreviewOnPopupClose = 1
 
       " omnifuncs
-      augroup omnifuncs
-        autocmd!
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-      augroup end
+      " augroup omnifuncs
+      "  autocmd!
+      "  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      "  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      "  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      "  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      "  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+      "augroup end
 
       " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -479,59 +490,13 @@ set autochdir
     " }
 
     " Vim-markdown {
-      set conceallevel=2
-      let g:vim_markdown_folding_disabled = 1
+      " set conceallevel=2
+      " let g:vim_markdown_folding_disabled = 1
       " let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
-      let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
-      let g:vim_markdown_frontmatter = 1
-      let g:vim_markdown_toml_frontmatter = 1
+      " let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
+      " let g:vim_markdown_frontmatter = 1
+      " let g:vim_markdown_toml_frontmatter = 1
       " let g:vim_markdown_new_list_item_indent = 2
-    " }
-
-    " vim-pencil {
-      function! Prose()
-        " call pencil#init()
-        " call lexical#init()
-        " call litecorrect#init()
-        " call textobj#quote#init()
-        " call textobj#sentence#init()
-
-        " manual reformatting shortcuts
-        " nnoremap <buffer> <silent> Q gqap
-        " xnoremap <buffer> <silent> Q gq
-        " nnoremap <buffer> <silent> <leader>Q vapJgqap
-
-        " force top correction on most recent misspelling
-        " nnoremap <buffer> <c-s> [s1z=<c-o>
-        " inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
-
-        " replace common punctuation
-        " iabbrev <buffer> -- –
-        " iabbrev <buffer> --- —
-        " iabbrev <buffer> << «
-        " iabbrev <buffer> >> »
-
-        " open most folds
-        setlocal foldlevel=6
-
-        " replace typographical quotes (reedes/vim-textobj-quote)
-        " map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
-        " map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
-
-        " highlight words (reedes/vim-wordy)
-        noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
-        xnoremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
-        inoremap <silent> <buffer> <F8> <C-o>:NextWordy<cr>
-
-      endfunction
-
-      " automatically initialize buffer by file type
-      autocmd FileType markdown,mkd,text call Prose()
-
-      " invoke manually by command for other file types
-      command! -nargs=0 Prose call Prose()
-
-      " let g:airline_section_x = '%{PencilMode()}'
     " }
 
 " #################################### Run other Vim setup files
