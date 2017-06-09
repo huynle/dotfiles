@@ -76,7 +76,14 @@ if count(g:plug_groups, 'programming')
   endif
 endif
 
+if count(g:plug_groups, 'snippets')
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'garbas/vim-snipmate'
 
+  " Optional:
+  Plug 'honza/vim-snippets'
+endif
 " ################## Language Plugins
 
 if count(g:plug_groups, 'go')
@@ -85,7 +92,7 @@ endif
 
 if count(g:plug_groups, 'python')
 	Plug 'yssource/python.vim'
-	Plug 'klen/python-mode' " comprehensive python plugin
+	" Plug 'klen/python-mode' " comprehensive python plugin
 endif
 
 "
@@ -116,7 +123,7 @@ endif
 
 " ######### Vim as a text writer
 if count(g:plug_groups, 'writing')
-  Plug 'mattly/iterm-colors-pencil'
+  " Plug 'mattly/iterm-colors-pencil'
   Plug 'reedes/vim-wordy'
   Plug 'reedes/vim-litecorrect'
   Plug 'reedes/vim-textobj-sentence'
@@ -124,6 +131,7 @@ if count(g:plug_groups, 'writing')
   " Plug 'plasticboy/vim-markdown'
   " Plug 'reedes/vim-pencil'              " settings to allow vim to be used as a writer
   Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+  Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 endif
 
 " ################################

@@ -8,7 +8,7 @@ end
 if !exists('g:plug_groups')
 	" let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
 
-  let g:plug_groups=['general', 'visual', 'programming', 'autocomplete', 'go']
+  let g:plug_groups=['general', 'visual', 'programming', 'autocomplete', 'go', 'snippets', 'markdown', 'writing']
 endif
 
 if filereadable(expand("~/.vim/plug.vim"))
@@ -24,7 +24,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
 filetype plugin indent on
 
-let mapleader = " "
+let mapleader = ","
 
 " ################################# General Settings
 " {
@@ -68,6 +68,11 @@ let mapleader = " "
   " shell for syntax highlighting purposes.
   let g:is_posix = 1
 " }
+
+
+" helpers for dealing with other people's code
+nmap \t :set ts=4 sts=4 sw=4 noet<cr>
+nmap \s :set ts=4 sts=4 sw=4 et<cr>
 
 " ################################### Vim Behavior on command
 " Open new split panes to right and bottom, which feels more natural
@@ -124,7 +129,76 @@ if has('clipboard')
     endif
 endif
 
+
+" ######################### Niknisi copy
+" Section AutoGroups {{{
+" file type specific settings
+augroup configgroup
+    autocmd!
+
+    " automatically resize panes on resize
+    autocmd VimResized * exe 'normal! \<c-w>='
+    autocmd BufWritePost .vimrc,.vimrc.local,init.vim source %
+    autocmd BufWritePost .vimrc.local source %
+    " save all files on focus lost, ignoring warnings about untitled buffers
+    autocmd FocusLost * silent! wa
+
+    " make quickfix windows take all the lower section of the screen
+    " when there are multiple windows open
+    autocmd FileType qf wincmd J
+    autocmd FileType qf nmap q :q<cr>
+
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
+
+    " autocmd! BufEnter * call functions#ApplyLocalSettings(expand('<afile>:p:h'))
+
+    autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
+
+    autocmd! BufWritePost * Neomake
+augroup END
+
+
+" ######################### Normal mode mapping
 nmap <F8> :TagbarToggle<CR>
+nmap <leader>w :w!<cr>
+
+" search highlighting
+map <space> /
+map <c-space> ?
+map <silent> <leader><cr> :noh<cr>          " clear search highlighting
+
+
+" Close current buffer
+map <leader>bd :Bclose<cr>
+
+" Close all buffers
+map <leader>ba :1,1000 bd!<cr>
+
+" working with tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch current directory
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" open buffer for scribling
+map <leader>q :e ~/buffer<cr>
+
+" paste mode, useful for pasting other chunk of code
+map <leader>pp :setlocal paste!<cr>
+
+" wipout buffer
+nmap <silent> <leader>b :bw<cr>
+
+
+" ############################ Visual Mode Mapping
 
 
 " #################################### Vim visual

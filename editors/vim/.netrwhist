@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/hle/.dotfiles/terminals/tmuxinator'
 let g:netrw_dirhist_2='/home/hle/.dotfiles/editors/vim'
 let g:netrw_dirhist_3='/home/hle/Projects/pyplay'
+let g:netrw_dirhist_4='/home/hle/Projects/pyplay/.cache'
+let g:netrw_dirhist_5='/home/hle/Projects/pyplay/.cache/v'
+let g:netrw_dirhist_6='/home/hle/Projects/pyplay/.cache/v/cache'
