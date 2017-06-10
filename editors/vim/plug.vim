@@ -35,7 +35,8 @@ if count(g:plug_groups, 'general')
 
   " EasyMotion - Allows <leader><leader>(b|e) to jump to (b)eginning or (end)
   " of words.
-  Plug 'easymotion/vim-easymotion'
+  Plug 'easymotion/vim-easymotion'  " use <leader><leader>e or b to invoke
+  Plug 'justinmk/vim-sneak'  " use s{char}{char} to invoke, remapped to f
 
 	" Plug 'mattn/webapi-vim'
 	" Plug 'mattn/gist-vim'
@@ -51,12 +52,8 @@ endif
 
 " ######################## Formatting
 if count(g:plug_groups, 'formatting')
-	" Plug 'sbdchd/neoformat'
+	Plug 'sbdchd/neoformat'
 	Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
-	"{{{
-	  autocmd! BufWritePost * Neomake
-	  let g:neomake_open_list = 2
-	"}}}
 	" Plug 'tomtom/tlib_vim' " utility functions for vim
 endif
 
@@ -65,11 +62,8 @@ if count(g:plug_groups, 'programming')
   " Pick one of the checksyntax, jslint, or syntastic
   Plug 'tpope/vim-fugitive'
   Plug 'mattn/gist-vim'
-  " Plug 'scrooloose/nerdcommenter'
-  Plug 'tpope/vim-commentary'
+  Plug 'tomtom/tcomment_vim'
   Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
-  " Plug 'godlygeek/tabular'
-  " Plug 'vim-scripts/tComment'
   Plug 'luochen1990/rainbow'
   if executable('ctags')
     Plug 'majutsushi/tagbar'
@@ -88,6 +82,7 @@ endif
 
 if count(g:plug_groups, 'go')
 	Plug 'fatih/vim-go'
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
 endif
 
 if count(g:plug_groups, 'python')

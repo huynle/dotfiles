@@ -8,12 +8,244 @@ end
 if !exists('g:plug_groups')
 	" let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
 
-  let g:plug_groups=['general', 'visual', 'programming', 'autocomplete', 'go', 'snippets', 'markdown', 'writing']
+  let g:plug_groups=['general', 'visual', 'formatting', 'programming', 'autocomplete', 'go', 'snippets', 'markdown', 'writing']
 endif
 
 if filereadable(expand("~/.vim/plug.vim"))
   source ~/.vim/plug.vim
 endif
+
+" System Settings  ----------------------------------------------------------{{{
+  set list listchars=tab:»·,trail:·,nbsp:·
+  set ignorecase                      " Ignorecasspf13_no_restore_cursore searches
+  set noswapfile
+  set autoread                        " detect when a file is changed
+  " set autoindent
+  set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+  set virtualedit=onemore             " Allow for cursor beyond last character
+  set history=1000                    " Store a ton of history (default is 20)
+  set ignorecase                      " Case insensitive search
+  set smartcase                       " Case sensitive when uc present
+  set wildmenu                        " Show list instead of just completing
+  set wildmode=list:longest,full      " Command <Tab> completion, list matches, then longest common part, then all.
+  set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell                               " Spell checking on
+  set number                          " setting line numbers
+  set numberwidth=2                   " setting width of line
+
+" Reduce the wait time for vim to switch from insert to normal to visual
+  set timeoutlen=1000 ttimeoutlen=10
+
+" Setting up the directories
+  set backup                      " Backups are nice ...
+  if has('persistent_undo')
+      set undofile                " So is persistent undo ...
+      set undolevels=1000         " Maximum number of changes that can be undone
+      set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+  endif
+
+" When the type of shell script is /bin/sh, assume a POSIX-compatible
+" shell for syntax highlighting purposes.
+  let g:is_posix = 1
+
+" set for truecolors
+  set termguicolors
+
+"}}}"
+
+" System mappings  ----------------------------------------------------------{{{
+
+" No need for ex mode
+  nnoremap Q <nop>
+  vnoremap // y/<C-R>"<CR>
+" exit insert, dd line, enter insert
+  inoremap <c-d> <esc>ddi
+" Navigate between display lines
+  noremap  <silent> <Up>   gk
+  noremap  <silent> <Down> gj
+  noremap  <silent> k gk
+  noremap  <silent> j gj
+  noremap  <silent> <Home> g<Home>
+  noremap  <silent> <End>  g<End>
+  inoremap <silent> <Home> <C-o>g<Home>
+  inoremap <silent> <End>  <C-o>g<End>
+" force to use homerow instead of arrow for navi
+  nnoremap <Left> :echoe "Use h"<CR>
+  nnoremap <Right> :echoe "Use l"<CR>
+  nnoremap <Up> :echoe "Use k"<CR>
+  nnoremap <Down> :echoe "Use j"<CR>
+" exit insert, dd line, enter insert
+  inoremap <c-d> <esc>ddi
+  noremap H ^
+  noremap L g_
+  noremap J 5j
+  noremap K 5k
+" Quicker window movement
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-l> <C-w>l
+" Wrapped lines goes down/up to next row, rather than next line in file.
+  noremap j gj
+  noremap k gk
+" Visual shifting (does not exit Visual mode)
+  vnoremap < <gv
+  vnoremap > >gv
+
+" fast saving
+  nmap <leader>w :w!<cr>
+
+" search highlighting
+  map <space> /
+  map <c-space> ?
+  nnoremap <silent> <esc> :noh<cr>                " clear search highlighting
+
+" working with tabs
+  map <leader>tn :tabnew<cr>
+  map <leader>to :tabonly<cr>
+  map <leader>tc :tabclose<cr>
+  map <leader>tm :tabmove
+
+" Neovim terminal mapping
+" terminal 'normal mode'
+  tmap <esc> <c-\><c-n><esc><cr>
+
+" Switch current directory
+  map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" open buffer for scribling
+  map <leader>q :e ~/buffer<cr>
+
+" paste mode, useful for pasting other chunk of code
+  map <leader>pp :setlocal paste!<cr>
+
+" wipout buffer
+  nmap <silent> <leader>b :bw<cr>
+
+" Close current buffer
+  map <leader>bd :Bclose<cr>
+
+" Close all buffers
+  map <leader>ba :1,1000 bd!<cr>
+
+" Allow using the repeat operator with a visual selection (!)
+" http://stackoverflow.com/a/8064607/127816
+  vnoremap . :normal .<CR>
+
+" For when you forget to sudo.. Really Write the file.
+  cmap w!! w !sudo tee % >/dev/null
+
+" swapping ; to allow command to enter
+  nnoremap ; :
+"}}}"
+
+
+" Themes, Commands, etc  ----------------------------------------------------{{{
+  syntax on
+  execute "set background=".$BACKGROUND
+  execute "colorscheme ".$THEME
+"}}}
+
+" Code formatting -----------------------------------------------------------{{{
+
+" ,f to format code, requires formatters: read the docs
+  noremap <silent> <leader>f :Neoformat<CR>
+
+" typical comment mapping
+  vnoremap <c-/> :TComment<cr>
+
+" }}}
+
+" Linting -------------------------------------------------------------------{{{
+
+  autocmd! BufWritePost * Neomake
+  let g:neomake_warning_sign = {'text': '•'}
+  let g:neomake_error_sign = {'text': '•'}
+  let g:neomake_open_list = 2
+
+"}}}
+
+" ######################### Normal mode mapping
+  nmap <F8> :TagbarToggle<CR>
+
+  " Opens a new tab with the current buffer's path
+  " Super useful when editing files in the same directory
+  map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+
+  " vim-sneak for moving around, defaul use 's{char}{char}"', use `;` to go next and and `` or ctrl-o to go back to starting
+  map f <Plug>Sneak_s
+  map F <Plug>Sneak_S
+
+
+" ############################ Visual Mode Mapping
+
+
+" ################################ General  Vim Custom Mapping
+
+  nnoremap <leader><leader> <c-^>           " Switch between the last two files
+  imap <C-\> <C-w>
+  set backspace=indent,eol,start            " Backspace for dummies
+  nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
+
+
+
+  " Code folding options
+  nmap <leader>f0 :set foldlevel=0<CR>
+  nmap <leader>f1 :set foldlevel=1<CR>
+  nmap <leader>f2 :set foldlevel=2<CR>
+  nmap <leader>f3 :set foldlevel=3<CR>
+  nmap <leader>f4 :set foldlevel=4<CR>
+  nmap <leader>f5 :set foldlevel=5<CR>
+  nmap <leader>f6 :set foldlevel=6<CR>
+  nmap <leader>f7 :set foldlevel=7<CR>
+  nmap <leader>f8 :set foldlevel=8<CR>
+  nmap <leader>f9 :set foldlevel=9<CR>
+
+
+
+
+  let g:spf13_no_wrapRelMotion = 1
+  if !exists('g:spf13_no_wrapRelMotion')
+     " Same for 0, home, end, etc
+     function! WrapRelativeMotion(key, ...)
+         let vis_sel=""
+         if a:0
+             let vis_sel="gv"
+         endif
+         if &wrap
+             execute "normal!" vis_sel . "g" . a:key
+         else
+             execute "normal!" vis_sel . a:key
+         endif
+     endfunction
+
+     " Map g* keys in Normal, Operator-pending, and Visual+select
+     noremap $ :call WrapRelativeMotion("$")<CR>
+     noremap <End> :call WrapRelativeMotion("$")<CR>
+     noremap 0 :call WrapRelativeMotion("0")<CR>
+     noremap <Home> :call WrapRelativeMotion("0")<CR>
+     noremap ^ :call WrapRelativeMotion("^")<CR>
+     " Overwrite the operator pending $/<End> mappings from above
+     " to force inclusive motion with :execute normal!
+     onoremap $ v:call WrapRelativeMotion("$")<CR>
+     onoremap <End> v:call WrapRelativeMotion("$")<CR>
+     " Overwrite the Visual+select mode mappings from above
+     " to ensure the correct vis_sel flag is passed to function
+     vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
+     vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
+     vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
+     vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
+     vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
+  endif
+
+
+
+  " Map <Leader>ff to display all lines with keyword under cursor
+  " and ask which one to jump to
+  nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+
+"}}}"
 
 " #############################
 set backup                  " Backups are nice ...
@@ -28,45 +260,7 @@ let mapleader = ","
 
 " ################################# General Settings
 " {
-  " Display extra whitespace
-  set list listchars=tab:»·,trail:·,nbsp:·
-  set ignorecase                      " Ignorecasspf13_no_restore_cursore searches
-  " set swapfile
-  set autoread                " detect when a file is changed
-  " set autoindent
-  set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-  set virtualedit=onemore             " Allow for cursor beyond last character
-  set history=1000                    " Store a ton of history (default is 20)
-  set ignorecase                  " Case insensitive search
-  set smartcase                   " Case sensitive when uc present
-  set wildmenu                    " Show list instead of just completing
-  set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
-  set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too set spell                           " Spell checking on
-  set number                      " setting line numbers
-  set numberwidth=2               " setting width of line
 
-  " Reduce the wait time for vim to switch from insert to normal to visual
-  set timeoutlen=1000 ttimeoutlen=10
-
-
-  " Setting up the directories
-  set backup                      " Backups are nice ...
-  if has('persistent_undo')
-      set undofile                " So is persistent undo ...
-      set undolevels=1000         " Maximum number of changes that can be undone
-      set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-  endif
-
-  " Switch syntax highlighting on, when the terminal has colors
-  " Also switch on highlighting the last used search pattern.
-  if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-    syntax on
-  endif
-
-  " When the type of shell script is /bin/sh, assume a POSIX-compatible
-  " shell for syntax highlighting purposes.
-  let g:is_posix = 1
 " }
 
 
@@ -159,47 +353,6 @@ augroup configgroup
 augroup END
 
 
-" ######################### Normal mode mapping
-nmap <F8> :TagbarToggle<CR>
-nmap <leader>w :w!<cr>
-
-" search highlighting
-map <space> /
-map <c-space> ?
-map <silent> <leader><cr> :noh<cr>          " clear search highlighting
-
-
-" Close current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all buffers
-map <leader>ba :1,1000 bd!<cr>
-
-" working with tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch current directory
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" open buffer for scribling
-map <leader>q :e ~/buffer<cr>
-
-" paste mode, useful for pasting other chunk of code
-map <leader>pp :setlocal paste!<cr>
-
-" wipout buffer
-nmap <silent> <leader>b :bw<cr>
-
-
-" ############################ Visual Mode Mapping
-
 
 " #################################### Vim visual
 function! ToggleBG()                    " Allow to trigger background
@@ -213,101 +366,10 @@ function! ToggleBG()                    " Allow to trigger background
 endfunction
 noremap <leader>bg :call ToggleBG()<CR>
 
-set termguicolors                       " set for truecolors
 
-execute "set background=".$BACKGROUND
-execute "colorscheme ".$THEME
 
 " ############################### Editor
 
-
-" ################################ General  Vim Custom Mapping
-
-nnoremap <leader><leader> <c-^>           " Switch between the last two files
-imap <C-\> <C-w>
-set backspace=indent,eol,start            " Backspace for dummies
-nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
-
-" Get off my lawn
-" {{{
-  nnoremap <Left> :echoe "Use h"<CR>
-  nnoremap <Right> :echoe "Use l"<CR>
-  nnoremap <Up> :echoe "Use k"<CR>
-  nnoremap <Down> :echoe "Use j"<CR>
-" }}}
-
-" Code folding options
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
-
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
-
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
-
-let g:spf13_no_wrapRelMotion = 1
-if !exists('g:spf13_no_wrapRelMotion')
-   " Same for 0, home, end, etc
-   function! WrapRelativeMotion(key, ...)
-       let vis_sel=""
-       if a:0
-           let vis_sel="gv"
-       endif
-       if &wrap
-           execute "normal!" vis_sel . "g" . a:key
-       else
-           execute "normal!" vis_sel . a:key
-       endif
-   endfunction
-
-   " Map g* keys in Normal, Operator-pending, and Visual+select
-   noremap $ :call WrapRelativeMotion("$")<CR>
-   noremap <End> :call WrapRelativeMotion("$")<CR>
-   noremap 0 :call WrapRelativeMotion("0")<CR>
-   noremap <Home> :call WrapRelativeMotion("0")<CR>
-   noremap ^ :call WrapRelativeMotion("^")<CR>
-   " Overwrite the operator pending $/<End> mappings from above
-   " to force inclusive motion with :execute normal!
-   onoremap $ v:call WrapRelativeMotion("$")<CR>
-   onoremap <End> v:call WrapRelativeMotion("$")<CR>
-   " Overwrite the Visual+select mode mappings from above
-   " to ensure the correct vis_sel flag is passed to function
-   vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-   vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-   vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-   vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-   vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
-endif
-
-
-" Allow using the repeat operator with a visual selection (!)
-" http://stackoverflow.com/a/8064607/127816
-vnoremap . :normal .<CR>
-
-" For when you forget to sudo.. Really Write the file.
-cmap w!! w !sudo tee % >/dev/null
-
-" Map <Leader>ff to display all lines with keyword under cursor
-" and ask which one to jump to
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 
 
@@ -488,11 +550,11 @@ set autochdir
 
 
       " " deoplete-go
-      " let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-      " let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-      " let g:deoplete#sources#go#use_cache = 1
-      " let g:go_fmt_command = 'goimports'
-      " let g:deoplete#sources#go = 'vim-go'
+      let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+      let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+      let g:deoplete#sources#go#use_cache = 1
+      let g:go_fmt_command = 'goimports'
+      let g:deoplete#sources#go = 'vim-go'
 
     " }
 
@@ -510,8 +572,8 @@ set autochdir
       nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
       nnoremap <silent> <leader>. :AgIn
 
-      nnoremap <silent> K :call SearchWordWithAg()<CR>
-      vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+      nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
+      vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
       nnoremap <silent> <leader>gl :Commits<CR>
       nnoremap <silent> <leader>ga :BCommits<CR>
       nnoremap <silent> <leader>ft :Filetypes<CR>
