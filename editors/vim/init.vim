@@ -31,18 +31,23 @@ endif
   set wildmode=list:longest,full      " Command <Tab> completion, list matches, then longest common part, then all.
   set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell                               " Spell checking on
   set number                          " setting line numbers
-  set numberwidth=2                   " setting width of line
+  set numberwidth=1                   " setting width of line
+
+" helpers for dealing with other people's code
+  nmap \t :set ts=2 sts=2 sw=2 noet<cr>
+  nmap \s :set ts=2 sts=2 sw=2 et<cr>
+  set tabstop=2 shiftwidth=2 expandtab
+
 
 " Reduce the wait time for vim to switch from insert to normal to visual
   set timeoutlen=1000 ttimeoutlen=10
 
 " Setting up the directories
   set backup                      " Backups are nice ...
-  if has('persistent_undo')
-      set undofile                " So is persistent undo ...
-      set undolevels=1000         " Maximum number of changes that can be undone
-      set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-  endif
+  set undofile                " So is persistent undo ...
+  set undolevels=1000         " Maximum number of changes that can be undone
+  set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+  set undodir="$HOME/.VIM_UNDO_FILES"
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
@@ -50,6 +55,14 @@ endif
 
 " set for truecolors
   set termguicolors
+
+" Remember cursor position between vim sessions
+autocmd BufReadPost *
+          \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+          \   exe "normal! g'\"" |
+          \ endif
+          " center buffer around cursor when opening files
+autocmd BufRead * normal zz
 
 "}}}"
 
@@ -137,8 +150,19 @@ endif
 
 " swapping ; to allow command to enter
   nnoremap ; :
-"}}}"
 
+" Switch between the last two files
+  nnoremap <leader><leader> <c-^>
+  imap <C-\> <C-w>                          " Delete a word, sub for ctrl+bs
+
+  set backspace=indent,eol,start            " Backspace for dummies
+  nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
+
+" Open new split panes to right and bottom, which feels more natural
+  set splitbelow
+  set splitright
+
+"}}}"
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
@@ -156,6 +180,105 @@ endif
 
 " }}}
 
+" Deoplete ------------------------------------------------------------------{{{
+
+" enable deoplete
+  let g:deoplete#enable_at_startup = 1
+  let g:echodoc_enable_at_startup=1
+
+  " if !exists('g:deoplete#omni#input_patterns')
+  "   let g:deoplete#omni#input_patterns = {}
+  " endif
+
+  " let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
+
+" Close the documentation window when completion is done
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+  autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+  autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+
+" close the preview window when you're not using it
+  " let g:SuperTabClosePreviewOnPopupClose = 1
+
+
+  " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+  " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  " function! s:my_cr_function()
+  "   return pumvisible() ? deoplete#mappings#close_popup() : "\n"
+  "endfunction
+
+" " deoplete-clang
+  " let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+  " let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+
+" deoplete-jedi
+  let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+  let g:deoplete#sources#jedi#enable_cache = 1
+  let g:deoplete#auto_completion_start_length = 1
+
+" deoplete-go
+  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+  let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+  let g:deoplete#sources#go#use_cache = 1
+  let g:go_fmt_command = 'goimports'
+  let g:deoplete#sources#go = 'vim-go'
+
+"}}}"
+
+" Denite --------------------------------------------------------------------{{{
+
+nnoremap <silent> <leader>c :Denite colorscheme<CR>
+
+"}}}"
+
+" Fold, gets it's own section  ----------------------------------------------{{{
+
+" Custom folding function
+  function! MyFoldText() " {{{
+      let line = getline(v:foldstart)
+      let nucolwidth = &fdc + &number * &numberwidth
+      let windowwidth = winwidth(0) - nucolwidth - 3
+      let foldedlinecount = v:foldend - v:foldstart
+
+      " expand tabs into spaces
+      let onetab = strpart('          ', 0, &tabstop)
+      let line = substitute(line, '\t', onetab, 'g')
+
+      let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
+      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
+      let fillcharcount = windowwidth - len(line)
+      " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
+      return line . '…' . repeat(" ",fillcharcount)
+  endfunction " }}}
+
+  set foldtext=MyFoldText()
+
+" Saving spot for folding
+  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+  set foldlevel=99                                " Dont fold if not specified for filetype below
+
+" Space to toggle folds.
+  nnoremap <Space> za
+  vnoremap <Space> za
+
+" Working with vim file
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal fdc=1
+  autocmd FileType vim setlocal foldlevel=0
+
+" Setting automatic folder per file type
+  autocmd FileType python setl foldmethod=syntax
+
+
+"}}}"
+
 " Linting -------------------------------------------------------------------{{{
 
   autocmd! BufWritePost * Neomake
@@ -164,6 +287,8 @@ endif
   let g:neomake_open_list = 2
 
 "}}}
+
+" Need Fixing ---------------------------------------------------------------{{{
 
 " ######################### Normal mode mapping
   nmap <F8> :TagbarToggle<CR>
@@ -183,25 +308,18 @@ endif
 
 " ################################ General  Vim Custom Mapping
 
-  nnoremap <leader><leader> <c-^>           " Switch between the last two files
-  imap <C-\> <C-w>
-  set backspace=indent,eol,start            " Backspace for dummies
-  nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
-
-
 
   " Code folding options
-  nmap <leader>f0 :set foldlevel=0<CR>
-  nmap <leader>f1 :set foldlevel=1<CR>
-  nmap <leader>f2 :set foldlevel=2<CR>
-  nmap <leader>f3 :set foldlevel=3<CR>
-  nmap <leader>f4 :set foldlevel=4<CR>
-  nmap <leader>f5 :set foldlevel=5<CR>
-  nmap <leader>f6 :set foldlevel=6<CR>
-  nmap <leader>f7 :set foldlevel=7<CR>
-  nmap <leader>f8 :set foldlevel=8<CR>
-  nmap <leader>f9 :set foldlevel=9<CR>
-
+"   nmap <leader>0 :set foldlevel=0<CR>
+"   nmap <leader>1 :set foldlevel=1<CR>
+"   nmap <leader>2 :set foldlevel=2<CR>
+"   nmap <leader>3 :set foldlevel=3<CR>
+"   nmap <leader>4 :set foldlevel=4<CR>
+"   nmap <leader>5 :set foldlevel=5<CR>
+"   nmap <leader>6 :set foldlevel=6<CR>
+"   nmap <leader>7 :set foldlevel=7<CR>
+"   nmap <leader>8 :set foldlevel=8<CR>
+"   nmap <leader>9 :set foldlevel=9<CR>
 
 
 
@@ -239,13 +357,9 @@ endif
      vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
   endif
 
+  " Map <Leader>ff to display all lines with keyword under cursor, this may be done already?
+  nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
-
-  " Map <Leader>ff to display all lines with keyword under cursor
-  " and ask which one to jump to
-  nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-
-"}}}"
 
 " #############################
 set backup                  " Backups are nice ...
@@ -258,42 +372,13 @@ filetype plugin indent on
 
 let mapleader = ","
 
-" ################################# General Settings
-" {
-
-" }
-
-
-" helpers for dealing with other people's code
-nmap \t :set ts=4 sts=4 sw=4 noet<cr>
-nmap \s :set ts=4 sts=4 sw=4 et<cr>
 
 " ################################### Vim Behavior on command
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
-" To disable this, add the following to your .vimrc.before.local file:
-let g:spf13_no_restore_cursor = 1
-if !exists('g:spf13_no_restore_cursor')
-    function! ResCur()
-        if line("'\"") <= line("$")
-            silent! normal! g`"
-            return 1
-        endif
-    endfunction
-
-    augroup resCur
-        autocmd!
-        autocmd BufWinEnter * call ResCur()
-    augroup END
-endif
 
 
 
@@ -325,7 +410,6 @@ endif
 
 
 " ######################### Niknisi copy
-" Section AutoGroups {{{
 " file type specific settings
 augroup configgroup
     autocmd!
@@ -337,19 +421,10 @@ augroup configgroup
     " save all files on focus lost, ignoring warnings about untitled buffers
     autocmd FocusLost * silent! wa
 
-    " make quickfix windows take all the lower section of the screen
-    " when there are multiple windows open
-    autocmd FileType qf wincmd J
-    autocmd FileType qf nmap q :q<cr>
 
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
 
-    " autocmd! BufEnter * call functions#ApplyLocalSettings(expand('<afile>:p:h'))
-
-    autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
-
-    autocmd! BufWritePost * Neomake
 augroup END
 
 
@@ -503,58 +578,6 @@ set autochdir
 
     " Deoplete {
 
-      let g:deoplete#enable_at_startup = 1
-
-      " if !exists('g:deoplete#omni#input_patterns')
-      "   let g:deoplete#omni#input_patterns = {}
-      " endif
-
-      " let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
-
-      " Close the documentation window when completion is done
-      " If you prefer the Omni-Completion tip window to close when a selection is
-      " made, these lines close it on movement in insert mode or when leaving
-      " insert mode
-      autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-      autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-
-      " close the preview window when you're not using it
-      " let g:SuperTabClosePreviewOnPopupClose = 1
-
-      " omnifuncs
-      " augroup omnifuncs
-      "  autocmd!
-      "  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-      "  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-      "  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-      "  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-      "  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-      "augroup end
-
-      " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-      " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-      " function! s:my_cr_function()
-      "   return pumvisible() ? deoplete#mappings#close_popup() : "\n"
-      "endfunction
-
-      " " deoplete-clang
-      " let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
-      " let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
-
-      " deoplete-jedi
-      let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
-      let g:deoplete#sources#jedi#enable_cache = 1
-      let g:deoplete#auto_completion_start_length = 1
-
-
-      " " deoplete-go
-      let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-      let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-      let g:deoplete#sources#go#use_cache = 1
-      let g:go_fmt_command = 'goimports'
-      let g:deoplete#sources#go = 'vim-go'
 
     " }
 
@@ -646,3 +669,5 @@ endfor
 if filereadable($HOME . "~/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+" }}}

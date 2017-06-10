@@ -22,6 +22,8 @@ call plug#begin('~/.vim/plugged')
 
 " Deps {
     Plug 'tomtom/tlib_vim'
+    Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+
     if executable('ag')
         Plug 'mileszs/ack.vim'
         let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
@@ -37,9 +39,6 @@ if count(g:plug_groups, 'general')
   " of words.
   Plug 'easymotion/vim-easymotion'  " use <leader><leader>e or b to invoke
   Plug 'justinmk/vim-sneak'  " use s{char}{char} to invoke, remapped to f
-
-	" Plug 'mattn/webapi-vim'
-	" Plug 'mattn/gist-vim'
   Plug 'jiangmiao/auto-pairs'
 	" Plug 'tpope/vim-vinegar'
 	Plug 'tpope/vim-surround'
@@ -62,6 +61,7 @@ if count(g:plug_groups, 'programming')
   " Pick one of the checksyntax, jslint, or syntastic
   Plug 'tpope/vim-fugitive'
   Plug 'mattn/gist-vim'
+  Plug 'mattn/webapi-vim'
   Plug 'tomtom/tcomment_vim'
   Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
   Plug 'luochen1990/rainbow'
@@ -78,6 +78,7 @@ if count(g:plug_groups, 'snippets')
   " Optional:
   Plug 'honza/vim-snippets'
 endif
+
 " ################## Language Plugins
 
 if count(g:plug_groups, 'go')
@@ -111,10 +112,6 @@ endif
 
 " #################### Unit testings
 
-" markdown
-" Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>
-
-
 
 " ######### Vim as a text writer
 if count(g:plug_groups, 'writing')
@@ -123,9 +120,9 @@ if count(g:plug_groups, 'writing')
   Plug 'reedes/vim-litecorrect'
   Plug 'reedes/vim-textobj-sentence'
   Plug 'reedes/vim-textobj-quote'
-  " Plug 'plasticboy/vim-markdown'
-  " Plug 'reedes/vim-pencil'              " settings to allow vim to be used as a writer
-  Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+  Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown
+  Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
+
   Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 endif
 
