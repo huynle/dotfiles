@@ -87,6 +87,9 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 # settings FZF to have window height and go to bottom
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
+# getting z to work
+source ~/.zsh/z.sh
+
 light(){
     export THEME="one"
     export BACKGROUND="light"
@@ -99,5 +102,5 @@ dark(){
 
 bg(){
     # init vim and run to make sure that the tmuxline is set
-    [ -f ~/.vim/init.vim ] && vim +so ~/.vim/init.vim +qall 
+    [ -f ~/.vim/init.vim ] && vim +so ~/.vim/init.vim +qall
 }

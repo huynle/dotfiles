@@ -1,4 +1,3 @@
-
 " Install vim-plug if we don't already have it
 if empty(glob("~/.vim/autoload/plug.vim"))
     " Ensure all needed directories exist  (Thanks @kapadiamush)
@@ -22,7 +21,7 @@ call plug#begin('~/.vim/plugged')
 
 " Deps {
     Plug 'tomtom/tlib_vim'
-    Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
     if executable('ag')
         Plug 'mileszs/ack.vim'
@@ -51,7 +50,7 @@ endif
 
 " ######################## Formatting
 if count(g:plug_groups, 'formatting')
-	Plug 'sbdchd/neoformat'
+	" Plug 'sbdchd/neoformat'
 	Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
 	" Plug 'tomtom/tlib_vim' " utility functions for vim
 endif
@@ -59,10 +58,10 @@ endif
 " #################### General Programming
 if count(g:plug_groups, 'programming')
   " Pick one of the checksyntax, jslint, or syntastic
-  Plug 'tpope/vim-fugitive'
-  Plug 'mattn/gist-vim'
-  Plug 'mattn/webapi-vim'
-  Plug 'tomtom/tcomment_vim'
+  " Plug 'tpope/vim-fugitive'
+  " Plug 'mattn/gist-vim'
+  " Plug 'mattn/webapi-vim'
+  " Plug 'tomtom/tcomment_vim'
   Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
   Plug 'luochen1990/rainbow'
   if executable('ctags')
@@ -82,8 +81,8 @@ endif
 " ################## Language Plugins
 
 if count(g:plug_groups, 'go')
-	Plug 'fatih/vim-go'
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
+	" Plug 'fatih/vim-go'
+  " Plug 'zchee/deoplete-go', { 'do': 'make'}
 endif
 
 if count(g:plug_groups, 'python')
@@ -98,16 +97,16 @@ if count(g:plug_groups, 'autocomplete')
     Plug 'SirVer/ultisnips' " allow to include snippets
     " Plug 'honza/vim-snippets'
 
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'ervandew/supertab' " Perform all your vim insert mode completions with
-    Plug 'zchee/deoplete-jedi'      " python specific deoplete
+    " Plug 'zchee/deoplete-jedi'      " python specific deoplete
 
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    " Plug 'junegunn/fzf.vim'
 endif
 
 if count(g:plug_groups, 'programming')
-  Plug 'janko-m/vim-test'
+  " Plug 'janko-m/vim-test'
 endif
 
 " #################### Unit testings
@@ -130,9 +129,9 @@ endif
 
 if count(g:plug_groups, 'visual')
   " colorschemes
-  Plug 'joshdick/onedark.vim'
-  Plug 'chriskempson/base16-vim'
-  Plug 'rakr/vim-one'
+  " Plug 'joshdick/onedark.vim'
+  " Plug 'chriskempson/base16-vim'
+  " Plug 'rakr/vim-one'
 endif
 
 if filereadable(expand("~/.plug.vim.local"))

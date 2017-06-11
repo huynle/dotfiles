@@ -1,7 +1,10 @@
 # Ignore all plugins but vundle
 editors/vim/plugged/*
 editors/vim/autoload/*
-# !editors/vim/bundle/Vundle.vim
+
+editors/vim/dein/*
+!editors/vim/dein/repos/github.com/Shougo/dein.vim
+
 
 editors/vim/swapfiles/*
 editors/vim/undofiles/*

@@ -1,8 +1,8 @@
 if &compatible
   set nocompatible
-end
-" #############################
+endif
 
+" #############################
 " In your .vimrc.before.local file
 " list only the plugin groups you will use
 if !exists('g:plug_groups')
@@ -11,9 +11,83 @@ if !exists('g:plug_groups')
   let g:plug_groups=['general', 'visual', 'formatting', 'programming', 'autocomplete', 'go', 'snippets', 'markdown', 'writing']
 endif
 
+
 if filereadable(expand("~/.vim/plug.vim"))
   source ~/.vim/plug.vim
 endif
+
+
+" Setup dein  ---------------------------------------------------------------{{{
+  if (!isdirectory(expand("$HOME/.vim/dein/repos/github.com/Shougo/dein.vim")))
+    call system(expand("mkdir -p $HOME/.vim/dein/repos/github.com"))
+    call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.vim/dein/repos/github.com/Shougo/dein.vim"))
+  endif
+
+  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
+
+  call dein#begin(expand('~/.vim/dein')) " plugins' root path
+  call dein#add('Shougo/dein.vim')
+  call dein#add('haya14busa/dein-command.vim')
+  call dein#add('Shougo/unite.vim')
+
+  " General Programming ---------------------------------------------------{{{
+    call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
+    call dein#add('tomtom/tcomment_vim')
+    call dein#add('sbdchd/neoformat')
+    call dein#add('janko-m/vim-test')
+  " }}}
+
+  " Specific Lang Format/Linting --------------------------------------------{{{
+
+    " Python specific autocompletion
+    call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
+    call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
+    call dein#add('zchee/deoplete-jedi')
+
+    " Golang specific autocompletion
+    call dein#add('zchee/nvim-go', {'build': 'gb build', 'on_ft': 'go'})
+    call dein#add('zchee/deoplete-go')
+    call dein#add('fatih/vim-go')
+
+  " }}}
+
+  " Easier Editor ----------------------------------------------------------{{{
+    " use `cs'"` to 'change surround single qoute to double'
+    call dein#add('tpope/vim-surround')
+
+  " }}}
+
+  " Extra Features ----------------------------------------------------------{{{
+    call dein#add('mattn/webapi-vim')
+    call dein#add('mattn/gist-vim')
+    call dein#add('tpope/vim-fugitive')
+
+    call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
+    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  " }}}
+
+  " Deoplete Stuff ----------------------------------------------------------{{{
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/denite.nvim')
+  " }}}
+
+  " Color/themes/schemes-----------------------------------------------------{{{
+    call dein#add('rakr/vim-one')
+  " }}}
+
+  " dein closeout runs ------------------------------------------------------{{{
+  if dein#check_install()
+    call dein#install()
+    let pluginsExist=1
+  endif
+
+  call dein#end()
+  filetype plugin indent on
+  " }}}
+
+" }}}
+
+
 
 " System Settings  ----------------------------------------------------------{{{
   set list listchars=tab:»·,trail:·,nbsp:·
@@ -285,7 +359,6 @@ nnoremap <silent> <leader>c :Denite colorscheme<CR>
   let g:neomake_warning_sign = {'text': '•'}
   let g:neomake_error_sign = {'text': '•'}
   let g:neomake_open_list = 2
-
 "}}}
 
 " Need Fixing ---------------------------------------------------------------{{{
@@ -368,8 +441,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
-filetype plugin indent on
-
 let mapleader = ","
 
 
@@ -420,7 +491,6 @@ augroup configgroup
     autocmd BufWritePost .vimrc.local source %
     " save all files on focus lost, ignoring warnings about untitled buffers
     autocmd FocusLost * silent! wa
-
 
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']

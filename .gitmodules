@@ -2,3 +2,6 @@
 	path = meta/dotbot
 	url = https://github.com/anishathalye/dotbot
 	branch = master
+[submodule "shells/z"]
+	path = shells/z
+	url = https://github.com/rupa/z.git
