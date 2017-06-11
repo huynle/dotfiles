@@ -1,8 +1,8 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/hle/.dotfiles/meta/configs'
-let g:netrw_dirhist_2='/home/hle/.dotfiles/meta'
-let g:netrw_dirhist_3='/home/hle/.dotfiles'
-let g:netrw_dirhist_4='/home/hle/.dotfiles/meta'
-let g:netrw_dirhist_5='/home/hle/.dotfiles/meta/profiles'
-let g:netrw_dirhist_6='/home/hle/Documents/hizzle/content/private/journal'
+let g:netrw_dirhist_1='/home/hle/Documents/hizzle/content'
+let g:netrw_dirhist_2='/home/hle/Documents/hizzle/content/private'
+let g:netrw_dirhist_3='/home/hle/Documents/hizzle/content/private/journal'
+let g:netrw_dirhist_4='/home/hle/Documents/hizzle/content/private'
+let g:netrw_dirhist_5='/home/hle/Documents/hizzle/content/private/journal'
+let g:netrw_dirhist_6='/home/hle/adv_dotfiles'

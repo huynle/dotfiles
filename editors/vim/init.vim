@@ -17,6 +17,8 @@ if filereadable(expand("~/.vim/plug.vim"))
 endif
 
 
+let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
+
 " Setup dein  ---------------------------------------------------------------{{{
   if (!isdirectory(expand("$HOME/.vim/dein/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.vim/dein/repos/github.com"))
@@ -26,46 +28,82 @@ endif
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
 
   call dein#begin(expand('~/.vim/dein')) " plugins' root path
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
   call dein#add('Shougo/dein.vim')
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('Shougo/unite.vim')
+
+  " Utilities  ----------------------------------------------------{{{
+
+    call dein#add('tomtom/tlib_vim')
+    call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
+    call dein#add('sickill/vim-pasta') " context-aware pasting
+    
+    if executable('ag')
+      call dein#add('mileszs/ack.vim')
+      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    endif
+
+  "}}}
 
   " General Programming ---------------------------------------------------{{{
     call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
     call dein#add('tomtom/tcomment_vim')
     call dein#add('sbdchd/neoformat')
     call dein#add('janko-m/vim-test')
+
+    if executable('ctags')
+      call dein#add('majutsushi/tagbar')
+    endif
+
   " }}}
 
-  " Specific Lang Format/Linting --------------------------------------------{{{
+  " specific lang format/linting --------------------------------------------{{{
 
-    " Python specific autocompletion
-    call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
+    call dein#add('SirVer/ultisnips' ,  {'on_map' : { 'i' : ['<TAB>'] }})
+    
+    " python specific autocompletion
     call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
-    call dein#add('zchee/deoplete-jedi')
-
-    " Golang specific autocompletion
+    call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
+    call dein#add('yssource/python.vim', {'on_ft': 'python'})
+    
+    " golang specific autocompletion
     call dein#add('zchee/nvim-go', {'build': 'gb build', 'on_ft': 'go'})
-    call dein#add('zchee/deoplete-go')
-    call dein#add('fatih/vim-go')
+    call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
+    call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
+    " markdown
+    call dein#add('tpope/vim-markdown', { 'on_ft': 'markdown' })
+    call dein#add('wavded/vim-stylus', { 'on_ft': 'markdown'}) " markdown support
+  
   " }}}
 
   " Easier Editor ----------------------------------------------------------{{{
     " use `cs'"` to 'change surround single qoute to double'
-    call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
     call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
     call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
+
+    call dein#add('ervandew/supertab') " Perform all your vim insert mode completions with
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
     call dein#add('mattn/webapi-vim')
     call dein#add('mattn/gist-vim')
-    call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
+
+    call dein#add('jiangmiao/auto-pairs')
 
     call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
     call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   " }}}
+  
+  " Writing -----------------------------------------------------------------{{{
+    call dein#add('reedes/vim-wordy')
+    call dein#add('reedes/vim-litecorrect')
+    call dein#add('reedes/vim-textobj-sentence')
+    call dein#add('reedes/vim-textobj-quote')
+  "  }}}
 
   " Deoplete Stuff ----------------------------------------------------------{{{
     call dein#add('Shougo/deoplete.nvim')
@@ -110,6 +148,7 @@ endif
   set number                          " setting line numbers
   set numberwidth=1                   " setting width of line
 
+  set autochdir
 " helpers for dealing with other people's code
   nmap \t :set ts=2 sts=2 sw=2 noet<cr>
   nmap \s :set ts=2 sts=2 sw=2 et<cr>
@@ -125,6 +164,10 @@ endif
   set undolevels=1000         " Maximum number of changes that can be undone
   set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
   set undodir="$HOME/.VIM_UNDO_FILES"
+  
+  set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+  set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
@@ -134,16 +177,16 @@ endif
   set termguicolors
 
 " Remember cursor position between vim sessions
-autocmd BufReadPost *
-          \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-          \   exe "normal! g'\"" |
-          \ endif
-          " center buffer around cursor when opening files
-autocmd BufRead * normal zz
+  autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal! g'\"" |
+            \ endif
+" center buffer around cursor when opening files
+  autocmd BufRead * normal zz
 
 "}}}"
 
-" System mappings  ----------------------------------------------------------{{{
+" System Mappings  ----------------------------------------------------------{{{
 
 " No need for ex mode
   nnoremap Q <nop>
@@ -186,8 +229,8 @@ autocmd BufRead * normal zz
   nmap <leader>w :w!<cr>
 
 " search highlighting
-  map <space> /
-  map <c-space> ?
+  " map <space> 
+  map <c-space> /
   nnoremap <silent> <esc> :noh<cr>                " clear search highlighting
 
 " working with tabs
@@ -195,6 +238,10 @@ autocmd BufRead * normal zz
   map <leader>to :tabonly<cr>
   map <leader>tc :tabclose<cr>
   map <leader>tm :tabmove
+  " Opens a new tab with the current buffer's path
+  " Super useful when editing files in the same directory
+  map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
 
 " Neovim terminal mapping
 " terminal 'normal mode'
@@ -229,10 +276,16 @@ autocmd BufRead * normal zz
   nnoremap ; :
 
 " Switch between the last two files
-  nnoremap <leader><leader> <c-^>
-  imap <C-\> <C-w>                          " Delete a word, sub for ctrl+bs
+  imap <BS> <C-w>
+  imap <C-del> <C-w>
+  " noremap! <C-h> <C-w>
+  " inoremap <C-w> <C-\><C-o>dB
+  " inoremap <C-BS> <C-\><C-o>db
 
-  set backspace=indent,eol,start            " Backspace for dummies
+" famous ctrl-backspace
+  " nmap <C-BS> :echo "foo"
+
+  set backspace=indent,eol,start            " Allow backspace to delete through multiple lines
   nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
 
 " Open new split panes to right and bottom, which feels more natural
@@ -241,13 +294,171 @@ autocmd BufRead * normal zz
 
 "}}}"
 
-" Themes, Commands, etc  ----------------------------------------------------{{{
+" Editor Settings  ----------------------------------------------------------{{{
+
+  " UltiSnips ---------------------------------------------------------------{{{
+      let g:UltiSnipsExpandTrigger="<tab>"
+      let g:UltiSnipsJumpForwardTrigger="<tab>"
+      let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+      " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  " }}}
+
+  " Netrw -------------------------------------------------------------------{{{
+    " nnoremap <C-n> :e .<CR>
+    let g:netrw_banner = 0
+    let g:netrw_liststyle = 3
+    let g:netrw_browse_split = 4 "open files in the previous window
+    let g:netrw_altv = 1
+    let g:netrw_winsize = 20
+
+    " Netrw settings to looklike nerdtree
+    " Toggle Vexplore with Ctrl-E
+    function! ToggleVExplorer()
+      if exists("t:expl_buf_num")
+          let expl_win_num = bufwinnr(t:expl_buf_num)
+          if expl_win_num != -1
+              let cur_win_nr = winnr()
+              exec expl_win_num . 'wincmd w'
+              close
+              exec cur_win_nr . 'wincmd w'
+              unlet t:expl_buf_num
+          else
+              unlet t:expl_buf_num
+          endif
+      else
+          exec '1wincmd w'
+          Vexplore
+          let t:expl_buf_num = bufnr("%")
+      endif
+    endfunction
+    map <silent> <C-n> :call ToggleVExplorer()<CR>
+    let g:netrw_browse_split = 4
+    let g:netrw_altv = 1
+  "}}}
+
+  " Fugitive ----------------------------------------------------------------{{{
+      if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+        nnoremap <silent> <leader>gs :Gstatus<CR>
+        nnoremap <silent> <leader>gd :Gdiff<CR>
+        nnoremap <silent> <leader>gc :Gcommit<CR>
+        nnoremap <silent> <leader>gb :Gblame<CR>
+        nnoremap <silent> <leader>gl :Glog<CR>
+        nnoremap <silent> <leader>gp :Git push<CR>
+        nnoremap <silent> <leader>gr :Gread<CR>
+        nnoremap <silent> <leader>gw :Gwrite<CR>
+        nnoremap <silent> <leader>ge :Gedit<CR>
+        " Mnemonic _i_nteractive
+        nnoremap <silent> <leader>gi :Git add -p %<CR>
+        nnoremap <silent> <leader>gg :SignifyToggle<CR>
+      endif
+    "}}}
+
+  " Denite --------------------------------------------------------------------{{{
+    nnoremap <silent> <leader>c :Denite colorscheme<CR>
+  "}}}"
+  "
+  " Fold, gets it's own section  ----------------------------------------------{{{
+
+    call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
+    call dein#add('nelstrom/vim-markdown-folding', {'on_ft': 'markdown'})
+
+  " Custom folding function
+    function! MyFoldText() " {{{
+        let line = getline(v:foldstart)
+        let nucolwidth = &fdc + &number * &numberwidth
+        let windowwidth = winwidth(0) - nucolwidth - 3
+        let foldedlinecount = v:foldend - v:foldstart
+
+        " expand tabs into spaces
+        let onetab = strpart('          ', 0, &tabstop)
+        let line = substitute(line, '\t', onetab, 'g')
+
+        let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+        " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
+        " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
+        let fillcharcount = windowwidth - len(line)
+        " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
+        return line . '…' . repeat(" ",fillcharcount)
+    endfunction " }}}
+
+    set foldtext=MyFoldText()
+
+  " Saving spot for folding
+    autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+    autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+    set foldlevel=99                                " Dont fold if not specified for filetype below
+
+  " Space to toggle folds.
+    nnoremap <Space> za
+    vnoremap <Space> za
+
+  " Working with vim file
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal fdc=1
+    autocmd FileType vim setlocal foldlevel=0
+
+  " Setting automatic folder per file type
+    autocmd FileType python setl foldmethod=syntax
+  "}}}
+
+  " Ignore Files/Folders ----------------------------------------------------{{{
+    set wildignore+=node_modules
+    set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,*.beam
+    set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.ico
+    set wildignore+=.sass-cache,.DS_Store,.bundle
+    set wildignore+=.coffee.js
+    set wildignore+=*.rbc,*.scssc,*.sassc
+    set wildignore+=*/spec/dummy/*
+    set wildignore+=*/tmp/*
+  "  }}}
+"}}}
+
+" Extra Tools Settings ------------------------------------------------------{{{
+  " Vim-test {
+    nmap <silent> <leader>t :TestNearest<CR>
+    nmap <silent> <leader>T :TestFile<CR>
+    nmap <silent> <leader>a :TestSuite<CR>
+    nmap <silent> <leader>l :TestLast<CR>
+    nmap <silent> <leader>g :TestVisit<CR>
+  " }
+
+" }}}
+
+" Themes, Visual, etc  ------------------------------------------------------{{{
   syntax on
   execute "set background=".$BACKGROUND
   execute "colorscheme ".$THEME
+  
+  function! ToggleBG()                    " Allow to trigger background
+      let s:tbg = &background
+      " Inversion
+      if s:tbg == "dark"
+          set background=light
+      else
+          set background=dark
+      endif
+  endfunction
+  noremap <leader>bg :call ToggleBG()<CR>
+
+  if isdirectory(expand("~/.vim/dein/repos/github.com/vim-airline/vim-airline-themes"))
+      if !exists('g:airline_theme')
+          " let g:airline_theme = 'solarized'
+          execute "let g:airline_theme=""'".$THEME."'"
+          let g:airline#extensions#tabline#enabled = 1          " Leave this to show tab at the top
+          let g:airline#extensions#tabline#show_buffers = 0
+      endif
+      if !exists('g:airline_powerline_fonts')
+          " Use the default set of separators with a few customizations
+          let g:airline_left_sep='›'  " Slightly fancier than '>'
+          let g:airline_right_sep='‹' " Slightly fancier than '<'
+      endif
+  endif
+
 "}}}
 
 " Code formatting -----------------------------------------------------------{{{
+  " automatic pairing of bracket, quotes, etc...
 
 " ,f to format code, requires formatters: read the docs
   noremap <silent> <leader>f :Neoformat<CR>
@@ -304,63 +515,119 @@ autocmd BufRead * normal zz
   let g:go_fmt_command = 'goimports'
   let g:deoplete#sources#go = 'vim-go'
 
-"}}}"
+"}}}
 
-" Denite --------------------------------------------------------------------{{{
+" Language Specifics---------------------------------------------------------{{{
+  " Markdown ----------------------------------------------------------------{{{
+    " make frontmatter comment and do coloring
+    au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
+    au FileType markdown setlocal textwidth=100
 
-nnoremap <silent> <leader>c :Denite colorscheme<CR>
+    let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
+  " }}}
+  
+  " GoLang-------------------------------------------------------------------{{{
+    if count(g:plug_groups, 'go')
+        let g:go_highlight_functions = 1
+        let g:go_highlight_methods = 1
+        let g:go_highlight_structs = 1
+        let g:go_highlight_operators = 1
+        let g:go_highlight_build_constraints = 1
+        let g:go_fmt_command = "goimports"
+        let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+        let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+        au FileType go nmap <Leader>s <Plug>(go-implements)
+        au FileType go nmap <Leader>i <Plug>(go-info)
+        au FileType go nmap <Leader>e <Plug>(go-rename)
+        au FileType go nmap <leader>r <Plug>(go-run)
+        au FileType go nmap <leader>b <Plug>(go-build)
+        au FileType go nmap <leader>t <Plug>(go-test)
+        au FileType go nmap <Leader>gd <Plug>(go-doc)
+        au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+        au FileType go nmap <leader>co <Plug>(go-coverage)
+    endif
+  " }}}
 
-"}}}"
+  " Python ------------------------------------------------------------------{{{
+    if count(g:plug_groups, 'python')
+      let g:pymode_python = 'python3'
+      let g:pymode_doc = 0
+      let g:pymode_folding = 0          " disable code folding
+      let g:pymode_virtualenv = 1       " use virtualenvs
+      let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
 
-" Fold, gets it's own section  ----------------------------------------------{{{
-
-" Custom folding function
-  function! MyFoldText() " {{{
-      let line = getline(v:foldstart)
-      let nucolwidth = &fdc + &number * &numberwidth
-      let windowwidth = winwidth(0) - nucolwidth - 3
-      let foldedlinecount = v:foldend - v:foldstart
-
-      " expand tabs into spaces
-      let onetab = strpart('          ', 0, &tabstop)
-      let line = substitute(line, '\t', onetab, 'g')
-
-      let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
-      let fillcharcount = windowwidth - len(line)
-      " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
-      return line . '…' . repeat(" ",fillcharcount)
-  endfunction " }}}
-
-  set foldtext=MyFoldText()
-
-" Saving spot for folding
-  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-  set foldlevel=99                                " Dont fold if not specified for filetype below
-
-" Space to toggle folds.
-  nnoremap <Space> za
-  vnoremap <Space> za
-
-" Working with vim file
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim setlocal fdc=1
-  autocmd FileType vim setlocal foldlevel=0
-
-" Setting automatic folder per file type
-  autocmd FileType python setl foldmethod=syntax
-
-
-"}}}"
-
-" Writing -------------------------------------------------------------------{{{
-  call dein#add('tpope/vim-markdown', { 'on_ft': 'markdown' }) " markdown
-  call dein#add('nelstrom/vim-markdown-folding', {'on_ft': 'markdown'})
+    endif
+    " }}}
 
 "  }}}
+
+" Search --------------------------------------------------------------------{{{
+    
+  " vim-sneak for moving around, defaul use 's{char}{char}"', use `;` to go next and and `` or ctrl-o to go back to starting
+  map f <Plug>Sneak_s
+  map F <Plug>Sneak_S
+
+  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+  let g:fzf_layout = { 'down': '~15%' }
+
+  " Mapping selecting mappings
+  nmap <leader><tab> <plug>(fzf-maps-n)
+  xmap <leader><tab> <plug>(fzf-maps-x)
+  omap <leader><tab> <plug>(fzf-maps-o)
+
+  " Insert mode completion
+  " Useful for completing hard to spell words
+  " imap <c-x><c-k> <plug>(fzf-complete-word)
+  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '13%'})
+  " Useful to add folder path
+  imap <c-x><c-f> <plug>(fzf-complete-path)
+  " Useful to FILE path
+  imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+  " Useful to add line that has been written before
+  imap <c-x><c-l> <plug>(fzf-complete-line)
+
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+
+  function! SearchVisualSelectionWithAg() range
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Ag' selection
+  endfunction
+
+  function! SearchWithAgInDirectory(...)
+    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+  endfunction
+  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
+
+  " Special mapping for fzf
+  nnoremap <silent> <C-p> :Files<CR>
+  nnoremap <silent> <leader>b :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+  nnoremap <silent> <leader>; :BLines<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  nnoremap <silent> <leader>. :AgIn
+
+  nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
+  vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
+  nnoremap <silent> <leader>gl :Commits<CR>
+  nnoremap <silent> <leader>ga :BCommits<CR>
+  nnoremap <silent> <leader>ft :Filetypes<CR>
+
+
+  " }
+"}}}
 
 " Linting -------------------------------------------------------------------{{{
 
@@ -370,22 +637,10 @@ nnoremap <silent> <leader>c :Denite colorscheme<CR>
   let g:neomake_open_list = 2
 "}}}
 
-" Need Fixing ---------------------------------------------------------------{{{
+" Need Fixing --------------- ------------------------------------------------{{{
 
 " ######################### Normal mode mapping
   nmap <F8> :TagbarToggle<CR>
-
-  " Opens a new tab with the current buffer's path
-  " Super useful when editing files in the same directory
-  map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-
-  " vim-sneak for moving around, defaul use 's{char}{char}"', use `;` to go next and and `` or ctrl-o to go back to starting
-  map f <Plug>Sneak_s
-  map F <Plug>Sneak_S
-
-
-" ############################ Visual Mode Mapping
 
 
 " ################################ General  Vim Custom Mapping
@@ -443,14 +698,6 @@ nnoremap <silent> <leader>c :Denite colorscheme<CR>
   nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 
-" #############################
-set backup                  " Backups are nice ...
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
-
-
 
 " ################################### Vim Behavior on command
 
@@ -486,266 +733,3 @@ if has('clipboard')
         set clipboard=unnamed
     endif
 endif
-
-
-" ######################### Niknisi copy
-" file type specific settings
-augroup configgroup
-    autocmd!
-
-    " automatically resize panes on resize
-    autocmd VimResized * exe 'normal! \<c-w>='
-    autocmd BufWritePost .vimrc,.vimrc.local,init.vim source %
-    autocmd BufWritePost .vimrc.local source %
-    " save all files on focus lost, ignoring warnings about untitled buffers
-    autocmd FocusLost * silent! wa
-
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
-
-augroup END
-
-
-
-" #################################### Vim visual
-function! ToggleBG()                    " Allow to trigger background
-    let s:tbg = &background
-    " Inversion
-    if s:tbg == "dark"
-        set background=light
-    else
-        set background=dark
-    endif
-endfunction
-noremap <leader>bg :call ToggleBG()<CR>
-
-
-
-" ############################### Editor
-
-
-
-
-" ####################################### Navigation
-
-" nnoremap <C-n> :e .<CR>
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4 "open files in the previous window
-let g:netrw_altv = 1
-let g:netrw_winsize = 20
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-
-" Netrw settings to looklike nerdtree
-" Toggle Vexplore with Ctrl-E
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
-map <silent> <C-n> :call ToggleVExplorer()<CR>
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
-" Change directory to the current buffer when opening files.
-set autochdir
-
-" #################################### Plugin settings
-
-" Plugins {
-
-    " GoLang {
-      if count(g:plug_groups, 'go')
-          let g:go_highlight_functions = 1
-          let g:go_highlight_methods = 1
-          let g:go_highlight_structs = 1
-          let g:go_highlight_operators = 1
-          let g:go_highlight_build_constraints = 1
-          let g:go_fmt_command = "goimports"
-          let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-          let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-          au FileType go nmap <Leader>s <Plug>(go-implements)
-          au FileType go nmap <Leader>i <Plug>(go-info)
-          au FileType go nmap <Leader>e <Plug>(go-rename)
-          au FileType go nmap <leader>r <Plug>(go-run)
-          au FileType go nmap <leader>b <Plug>(go-build)
-          au FileType go nmap <leader>t <Plug>(go-test)
-          au FileType go nmap <Leader>gd <Plug>(go-doc)
-          au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-          au FileType go nmap <leader>co <Plug>(go-coverage)
-      endif
-    " }
-
-    " Python {
-      if count(g:plug_groups, 'python')
-        let g:pymode_python = 'python3'
-        let g:pymode_doc = 0
-        let g:pymode_folding = 0          " disable code folding
-        let g:pymode_virtualenv = 1       " use virtualenvs
-        let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
-
-      endif
-      " }
-
-    " Fugitive {
-        if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
-          nnoremap <silent> <leader>gs :Gstatus<CR>
-          nnoremap <silent> <leader>gd :Gdiff<CR>
-          nnoremap <silent> <leader>gc :Gcommit<CR>
-          nnoremap <silent> <leader>gb :Gblame<CR>
-          nnoremap <silent> <leader>gl :Glog<CR>
-          nnoremap <silent> <leader>gp :Git push<CR>
-          nnoremap <silent> <leader>gr :Gread<CR>
-          nnoremap <silent> <leader>gw :Gwrite<CR>
-          nnoremap <silent> <leader>ge :Gedit<CR>
-          " Mnemonic _i_nteractive
-          nnoremap <silent> <leader>gi :Git add -p %<CR>
-          nnoremap <silent> <leader>gg :SignifyToggle<CR>
-        endif
-      "}
-
-    " vim-airline {
-      " Set configuration options for the statusline plugin vim-airline.
-      " Use the powerline theme and optionally enable powerline symbols.
-      " To use the symbols , , , , , , and .in the statusline
-      " segments add the following to your .vimrc.before.local file:
-      "   let g:airline_powerline_fonts=1
-      " If the previous symbols do not render for you then install a
-      " powerline enabled font.
-
-      " See `:echo g:airline_theme_map` for some more choices
-      " Default in terminal vim is 'dark'
-
-      if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
-          if !exists('g:airline_theme')
-              " let g:airline_theme = 'solarized'
-              execute "let g:airline_theme=""'".$THEME."'"
-              let g:airline#extensions#tabline#enabled = 1          " Leave this to show tab at the top
-              let g:airline#extensions#tabline#show_buffers = 0
-          endif
-          if !exists('g:airline_powerline_fonts')
-              " Use the default set of separators with a few customizations
-              let g:airline_left_sep='›'  " Slightly fancier than '>'
-              let g:airline_right_sep='‹' " Slightly fancier than '<'
-          endif
-      endif
-
-    " }
-
-    " UltiSnips config {
-        let g:UltiSnipsExpandTrigger="<tab>"
-        let g:UltiSnipsJumpForwardTrigger="<tab>"
-        let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-        " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    " }
-
-    " Deoplete {
-
-
-    " }
-
-    " FZF {
-      let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-      let g:fzf_layout = { 'down': '~15%' }
-
-      nnoremap <silent> <C-p> :Files<CR>
-      nnoremap <silent> <leader>b :Buffers<CR>
-      nnoremap <silent> <leader>A :Windows<CR>
-      nnoremap <silent> <leader>; :BLines<CR>
-      nnoremap <silent> <leader>o :BTags<CR>
-      nnoremap <silent> <leader>O :Tags<CR>
-      nnoremap <silent> <leader>? :History<CR>
-      nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-      nnoremap <silent> <leader>. :AgIn
-
-      nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
-      vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
-      nnoremap <silent> <leader>gl :Commits<CR>
-      nnoremap <silent> <leader>ga :BCommits<CR>
-      nnoremap <silent> <leader>ft :Filetypes<CR>
-
-      " Mapping selecting mappings
-      nmap <leader><tab> <plug>(fzf-maps-n)
-      xmap <leader><tab> <plug>(fzf-maps-x)
-      omap <leader><tab> <plug>(fzf-maps-o)
-
-      " Insert mode completion
-      " Useful for completing hard to spell words
-      " imap <c-x><c-k> <plug>(fzf-complete-word)
-      inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '13%'})
-      " Useful to add folder path
-      imap <c-x><c-f> <plug>(fzf-complete-path)
-      " Useful to FILE path
-      imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-      " Useful to add line that has been written before
-      imap <c-x><c-l> <plug>(fzf-complete-line)
-
-
-      function! SearchWordWithAg()
-        execute 'Ag' expand('<cword>')
-      endfunction
-
-      function! SearchVisualSelectionWithAg() range
-        let old_reg = getreg('"')
-        let old_regtype = getregtype('"')
-        let old_clipboard = &clipboard
-        set clipboard&
-        normal! ""gvy
-        let selection = getreg('"')
-        call setreg('"', old_reg, old_regtype)
-        let &clipboard = old_clipboard
-        execute 'Ag' selection
-      endfunction
-
-      function! SearchWithAgInDirectory(...)
-        call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
-      endfunction
-      command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args
-    " }
-
-    " Vim-test {
-      nmap <silent> <leader>t :TestNearest<CR>
-      nmap <silent> <leader>T :TestFile<CR>
-      nmap <silent> <leader>a :TestSuite<CR>
-      nmap <silent> <leader>l :TestLast<CR>
-      nmap <silent> <leader>g :TestVisit<CR>
-    " }
-
-    " Vim-markdown {
-      " set conceallevel=2
-      " let g:vim_markdown_folding_disabled = 1
-      " let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
-      " let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
-      " let g:vim_markdown_frontmatter = 1
-      " let g:vim_markdown_toml_frontmatter = 1
-      " let g:vim_markdown_new_list_item_indent = 2
-    " }
-
-" #################################### Run other Vim setup files
-
-" source all .vimrc files inside of the zsh/ directory
-for f in split(glob('~/.dotfiles/editors/vim/**/*.vimrc'), '\n')
-    exe 'source' f
-endfor
-
-" Local config
-if filereadable($HOME . "~/.vimrc.local")
-  source ~/.vimrc.local
-endif
-
-" }}}
