@@ -54,7 +54,8 @@ endif
   " Easier Editor ----------------------------------------------------------{{{
     " use `cs'"` to 'change surround single qoute to double'
     call dein#add('tpope/vim-surround')
-
+    call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
+    call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
@@ -71,8 +72,10 @@ endif
     call dein#add('Shougo/denite.nvim')
   " }}}
 
-  " Color/themes/schemes-----------------------------------------------------{{{
+  " Color/visual/themes/schemes ---------------------------------------------{{{
     call dein#add('rakr/vim-one')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
   " }}}
 
   " dein closeout runs ------------------------------------------------------{{{
@@ -87,9 +90,9 @@ endif
 
 " }}}
 
-
-
 " System Settings  ----------------------------------------------------------{{{
+  let mapleader = ","
+
   set list listchars=tab:»·,trail:·,nbsp:·
   set ignorecase                      " Ignorecasspf13_no_restore_cursore searches
   set noswapfile
@@ -179,7 +182,7 @@ autocmd BufRead * normal zz
   vnoremap < <gv
   vnoremap > >gv
 
-" fast saving
+" fast save
   nmap <leader>w :w!<cr>
 
 " search highlighting
@@ -353,6 +356,12 @@ nnoremap <silent> <leader>c :Denite colorscheme<CR>
 
 "}}}"
 
+" Writing -------------------------------------------------------------------{{{
+  call dein#add('tpope/vim-markdown', { 'on_ft': 'markdown' }) " markdown
+  call dein#add('nelstrom/vim-markdown-folding', {'on_ft': 'markdown'})
+
+"  }}}
+
 " Linting -------------------------------------------------------------------{{{
 
   autocmd! BufWritePost * Neomake
@@ -441,7 +450,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
-let mapleader = ","
 
 
 " ################################### Vim Behavior on command

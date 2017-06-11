@@ -36,22 +36,22 @@ if count(g:plug_groups, 'general')
 
   " EasyMotion - Allows <leader><leader>(b|e) to jump to (b)eginning or (end)
   " of words.
-  Plug 'easymotion/vim-easymotion'  " use <leader><leader>e or b to invoke
-  Plug 'justinmk/vim-sneak'  " use s{char}{char} to invoke, remapped to f
+  " Plug 'easymotion/vim-easymotion'  " use <leader><leader>e or b to invoke
+  " Plug 'justinmk/vim-sneak'  " use s{char}{char} to invoke, remapped to f
   Plug 'jiangmiao/auto-pairs'
 	" Plug 'tpope/vim-vinegar'
-	Plug 'tpope/vim-surround'
+	" Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
 	Plug 'sickill/vim-pasta' " context-aware pasting
   " Plug 'powerline/fonts'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  " Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline-themes'
 endif
 
 " ######################## Formatting
 if count(g:plug_groups, 'formatting')
 	" Plug 'sbdchd/neoformat'
-	Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
+	" Plug 'neomake/neomake' " neovim replacement for syntastic using neovim's job control functonality
 	" Plug 'tomtom/tlib_vim' " utility functions for vim
 endif
 
@@ -119,8 +119,8 @@ if count(g:plug_groups, 'writing')
   Plug 'reedes/vim-litecorrect'
   Plug 'reedes/vim-textobj-sentence'
   Plug 'reedes/vim-textobj-quote'
-  Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown
-  Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
+  " Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown
+  " Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
   Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 endif
