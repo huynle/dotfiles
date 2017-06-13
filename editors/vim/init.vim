@@ -60,15 +60,19 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " specific lang format/linting --------------------------------------------{{{
 
-    call dein#add('SirVer/ultisnips' ,  {'on_map' : { 'i' : ['<TAB>'] }})
+    " call dein#add('SirVer/ultisnips' ,  {'on_map' : { 'i' : ['<TAB>'] }})
+    call dein#add('Shougo/neosnippet.vim')
+    call dein#add('Shougo/neosnippet-snippets')
+    call dein#add('honza/vim-snippets')
     
     " python specific autocompletion
-    call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
+    " call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
     call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
     call dein#add('yssource/python.vim', {'on_ft': 'python'})
     
     " golang specific autocompletion
-    call dein#add('zchee/nvim-go', {'build': 'gb build', 'on_ft': 'go'})
+    " call dein#add('zchee/nvim-go', {'build': 'gb build', 'on_ft': 'go'})
+    " call dein#add('zchee/nvim-go', {'build': 'make'})
     call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
     call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
@@ -84,7 +88,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
     call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
 
-    call dein#add('ervandew/supertab') " Perform all your vim insert mode completions with
+    " call dein#add('ervandew/supertab') " Perform all your vim insert mode completions with
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
@@ -107,7 +111,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Deoplete Stuff ----------------------------------------------------------{{{
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/denite.nvim')
+    " call dein#add('Shougo/denite.nvim')
   " }}}
 
   " Color/visual/themes/schemes ---------------------------------------------{{{
@@ -144,7 +148,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   set smartcase                       " Case sensitive when uc present
   set wildmenu                        " Show list instead of just completing
   set wildmode=list:longest,full      " Command <Tab> completion, list matches, then longest common part, then all.
-  set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell                               " Spell checking on
+  set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell
+  set spell                           " Spell checking on
   set number                          " setting line numbers
   set numberwidth=1                   " setting width of line
 
@@ -188,7 +193,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
 " System Mappings  ----------------------------------------------------------{{{
 
-" No need for ex mode
+" No need for ex mode  
   nnoremap Q <nop>
   vnoremap // y/<C-R>"<CR>
 " exit insert, dd line, enter insert
@@ -234,13 +239,17 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap <silent> <esc> :noh<cr>                " clear search highlighting
 
 " working with tabs
-  map <leader>tn :tabnew<cr>
-  map <leader>to :tabonly<cr>
-  map <leader>tc :tabclose<cr>
-  map <leader>tm :tabmove
+  nnoremap th  :tabfirst<CR>
+  nnoremap tj  :tabprev<CR>
+  nnoremap tk  :tabnext<CR>
+  nnoremap tl  :tablast<CR>
+  nnoremap tt  :tabedit<Space>
+  nnoremap tn  :tabnext<Space>
+  nnoremap tm  :tabm<Space>
+  nnoremap td  :tabclose<CR>
   " Opens a new tab with the current buffer's path
   " Super useful when editing files in the same directory
-  map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+  nnoremap te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 
 " Neovim terminal mapping
@@ -296,12 +305,12 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
 " Editor Settings  ----------------------------------------------------------{{{
 
-  " UltiSnips ---------------------------------------------------------------{{{
-      let g:UltiSnipsExpandTrigger="<tab>"
-      let g:UltiSnipsJumpForwardTrigger="<tab>"
-      let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-      " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  " }}}
+  " " UltiSnips ---------------------------------------------------------------{{{
+  "     let g:UltiSnipsExpandTrigger="<tab>"
+  "     let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  "     " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  " " }}}
 
   " Netrw -------------------------------------------------------------------{{{
     " nnoremap <C-n> :e .<CR>
@@ -354,7 +363,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     "}}}
 
   " Denite --------------------------------------------------------------------{{{
-    nnoremap <silent> <leader>c :Denite colorscheme<CR>
+    " nnoremap <silent> <leader>c :Denite colorscheme<CR>
   "}}}"
   "
   " Fold, gets it's own section  ----------------------------------------------{{{
@@ -515,6 +524,16 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:go_fmt_command = 'goimports'
   let g:deoplete#sources#go = 'vim-go'
 
+
+  " SuperTab like snippets behavior --------------------------------------------{{{
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: "\<TAB>" 
+  "}}}
+
 "}}}
 
 " Language Specifics---------------------------------------------------------{{{
@@ -523,7 +542,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
     au FileType markdown setlocal textwidth=100
 
-    let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'coffee', 'json', 'diff']
+    let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'json', 'diff']
   " }}}
   
   " GoLang-------------------------------------------------------------------{{{

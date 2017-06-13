@@ -14,7 +14,13 @@ fi
 JOURNAL_PATH="$BLOG_DIR/content/private/journal/$DATE.md"
 
 if [[ ! -f $JOURNAL_PATH ]]; then
-  hugo new -s $BLOG_DIR -k summary private/journal/$DATE.md
+
+  if [[ $(date +'%a') == 'Sun' ]]; then
+    hugo new -s $BLOG_DIR -k summary private/journal/$DATE.md
+  else
+    hugo new -s $BLOG_DIR -k journal private/journal/$DATE.md
+  fi
+
 fi
 
 $EDITOR $JOURNAL_PATH
