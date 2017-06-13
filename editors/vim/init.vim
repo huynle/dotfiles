@@ -98,8 +98,13 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
     call dein#add('jiangmiao/auto-pairs')
 
-    call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
-    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+    " call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
+    " call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  
+    call dein#add('Shougo/denite.nvim')
+    call dein#add('chemzqm/vim-easygit')
+    call dein#add('chemzqm/denite-git')
+    call dein#add('pocari/vim-denite-gists')
   " }}}
   
   " Writing -----------------------------------------------------------------{{{
@@ -111,7 +116,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Deoplete Stuff ----------------------------------------------------------{{{
     call dein#add('Shougo/deoplete.nvim')
-    " call dein#add('Shougo/denite.nvim')
   " }}}
 
   " Color/visual/themes/schemes ---------------------------------------------{{{
@@ -363,9 +367,88 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     "}}}
 
   " Denite --------------------------------------------------------------------{{{
-    " nnoremap <silent> <leader>c :Denite colorscheme<CR>
-  "}}}"
-  "
+
+    let g:webdevicons_enable_denite = 0
+    let s:menus = {}
+
+    call denite#custom#option('_', {
+          \ 'prompt': '❯',
+          \ 'winheight': 10,
+          \ 'reversed': 1,
+          \ 'highlight_matched_char': 'Underlined',
+          \ 'highlight_mode_normal': 'CursorLine',
+          \ 'updatetime': 1,
+          \ 'auto_resize': 1,
+          \})
+    call denite#custom#option('TSDocumentSymbol', {
+          \ 'prompt': ' @' ,
+          \ 'reversed': 0,
+          \})
+    call denite#custom#var('file_rec', 'command',['rg', '--threads', '2', '--files', '--glob', '!.git'])
+    " call denite#custom#source('file_rec', 'vars', {
+    "       \ 'command': [
+    "       \ 'ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png'
+    "       \] })
+    call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+    call denite#custom#source('grep', 'matchers', ['matcher_regexp'])
+    call denite#custom#var('grep', 'command', ['rg'])
+    call denite#custom#var('grep', 'default_opts',['--vimgrep'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+
+    nnoremap <silent> <c-p> :Denite file_rec<CR>
+    nnoremap <silent> <leader>h :Denite  help<CR>
+    nnoremap <silent> <leader>c :Denite colorscheme<CR>
+    nnoremap <silent> <leader>b :Denite buffer<CR>
+    nnoremap <silent> <leader>a :Denite grep:::!<CR>
+    nnoremap <silent> <leader>u :call dein#update()<CR>
+    nnoremap <silent> <Leader>i :Denite menu:ionic <CR>
+    call denite#custom#map('insert','<C-n>','<denite:move_to_next_line>','noremap')
+    call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
+    call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+    call denite#custom#var('menu', 'menus', s:menus)
+
+  "}}}
+
+  " Git from denite...ERMERGERD -----------------------------------------------{{{
+    let s:menus.git = {
+      \ 'description' : 'Fugitive interface',
+      \}
+    let s:menus.git.command_candidates = [
+      \[' git status', 'Gstatus'],
+      \[' git diff', 'Gvdiff'],
+      \[' git commit', 'Gcommit'],
+      \[' git stage/add', 'Gwrite'],
+      \[' git checkout', 'Gread'],
+      \[' git rm', 'Gremove'],
+      \[' git cd', 'Gcd'],
+      \[' git push', 'exe "Git! push " input("remote/branch: ")'],
+      \[' git pull', 'exe "Git! pull " input("remote/branch: ")'],
+      \[' git pull rebase', 'exe "Git! pull --rebase " input("branch: ")'],
+      \[' git checkout branch', 'exe "Git! checkout " input("branch: ")'],
+      \[' git fetch', 'Gfetch'],
+      \[' git merge', 'Gmerge'],
+      \[' git browse', 'Gbrowse'],
+      \[' git head', 'Gedit HEAD^'],
+      \[' git parent', 'edit %:h'],
+      \[' git log commit buffers', 'Glog --'],
+      \[' git log current file', 'Glog -- %'],
+      \[' git log last n commits', 'exe "Glog -" input("num: ")'],
+      \[' git log first n commits', 'exe "Glog --reverse -" input("num: ")'],
+      \[' git log until date', 'exe "Glog --until=" input("day: ")'],
+      \[' git log grep commits',  'exe "Glog --grep= " input("string: ")'],
+      \[' git log pickaxe',  'exe "Glog -S" input("string: ")'],
+      \[' git index', 'exe "Gedit " input("branchname\:filename: ")'],
+      \[' git mv', 'exe "Gmove " input("destination: ")'],
+      \[' git grep',  'exe "Ggrep " input("string: ")'],
+      \[' git prompt', 'exe "Git! " input("command: ")'],
+      \] " Append ' --' after log to get commit info commit buffers
+  "}}}
+      
   " Fold, gets it's own section  ----------------------------------------------{{{
 
     call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
@@ -525,14 +608,51 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:deoplete#sources#go = 'vim-go'
 
 
-  " SuperTab like snippets behavior --------------------------------------------{{{
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: "\<TAB>" 
-  "}}}
+
+" enable deoplete
+  set completeopt+=noselect
+  set completeopt-=preview
+  autocmd CompleteDone * pclose
+
+  function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete=2
+  endfunction
+  function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete=0
+  endfunction
+  let g:deoplete#file#enable_buffer_path=1
+
+  call deoplete#custom#set('buffer', 'mark', 'ℬ')
+  call deoplete#custom#set('omni', 'mark', '⌾')
+  call deoplete#custom#set('file', 'mark', 'file')
+  call deoplete#custom#set('jedi', 'mark', 'Ji')
+  call deoplete#custom#set('neosnippet', 'mark', '')
+
+  " let g:deoplete#omni_patterns = {}
+  " let g:deoplete#omni_patterns.html = ''
+  function! Preview_func()
+    if &pvw
+      setlocal nonumber norelativenumber
+     endif
+  endfunction
+  autocmd WinEnter * call Preview_func()
+  let g:deoplete#ignore_sources = {}
+  let g:deoplete#ignore_sources._ = ['around']
+
+  " let g:deoplete#enable_debug = 1
+  " call deoplete#enable_logging('DEBUG', 'deoplete.log')
+  " call deoplete#custom#set('typescript', 'debug_enabled', 1)
+"}}}
+
+
+" SuperTab like snippets behavior --------------------------------------------{{{
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>" 
+"}}}
 
 "}}}
 
@@ -575,6 +695,12 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
       let g:pymode_virtualenv = 1       " use virtualenvs
       let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
 
+      let g:python_host_prog = '/usr/local/bin/python2'
+      let g:python3_host_prog = '/usr/local/bin/python3'
+      " let $NVIM_PYTHON_LOG_FILE='nvim-python.log'
+      let g:jedi#auto_vim_configuration = 0
+      let g:jedi#documentation_command = "<leader>k"
+    
     endif
     " }}}
 
@@ -628,7 +754,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
 
   " Special mapping for fzf
-  nnoremap <silent> <C-p> :Files<CR>
+  " nnoremap <silent> <C-p> :Files<CR>
   nnoremap <silent> <leader>b :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
