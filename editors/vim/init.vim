@@ -39,11 +39,11 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
     call dein#add('sickill/vim-pasta') " context-aware pasting
     
-    if executable('ag')
-      call dein#add('mileszs/ack.vim')
-      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-    endif
-
+    " if executable('ag')
+    "   call dein#add('mileszs/ack.vim')
+    "   let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    " endif
+    "
   "}}}
 
   " General Programming ---------------------------------------------------{{{
@@ -58,21 +58,17 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " }}}
 
-  " specific lang format/linting --------------------------------------------{{{
+  " Specific Lang format/linting --------------------------------------------{{{
 
     " call dein#add('SirVer/ultisnips' ,  {'on_map' : { 'i' : ['<TAB>'] }})
     call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('honza/vim-snippets')
+    call dein#add('Shougo/neosnippet-snippets')  " Provide all the basic function generation snippets for lots of languages
     
     " python specific autocompletion
-    " call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
     call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
     call dein#add('yssource/python.vim', {'on_ft': 'python'})
     
     " golang specific autocompletion
-    " call dein#add('zchee/nvim-go', {'build': 'gb build', 'on_ft': 'go'})
-    " call dein#add('zchee/nvim-go', {'build': 'make'})
     call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
     call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
@@ -87,24 +83,23 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
     call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
     call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
-
-    " call dein#add('ervandew/supertab') " Perform all your vim insert mode completions with
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
     call dein#add('mattn/webapi-vim')
-    call dein#add('mattn/gist-vim')
+    call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
     call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
 
     call dein#add('jiangmiao/auto-pairs')
 
-    " call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
-    " call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+    call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
+    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   
-    call dein#add('Shougo/denite.nvim')
+    " call dein#add('Shougo/denite.nvim')
     call dein#add('chemzqm/vim-easygit')
     call dein#add('chemzqm/denite-git')
     call dein#add('pocari/vim-denite-gists')
+    call dein#add('chemzqm/denite-extra')
   " }}}
   
   " Writing -----------------------------------------------------------------{{{
@@ -366,88 +361,88 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
       endif
     "}}}
 
-  " Denite --------------------------------------------------------------------{{{
-
-    let g:webdevicons_enable_denite = 0
-    let s:menus = {}
-
-    call denite#custom#option('_', {
-          \ 'prompt': '❯',
-          \ 'winheight': 10,
-          \ 'reversed': 1,
-          \ 'highlight_matched_char': 'Underlined',
-          \ 'highlight_mode_normal': 'CursorLine',
-          \ 'updatetime': 1,
-          \ 'auto_resize': 1,
-          \})
-    call denite#custom#option('TSDocumentSymbol', {
-          \ 'prompt': ' @' ,
-          \ 'reversed': 0,
-          \})
-    call denite#custom#var('file_rec', 'command',['rg', '--threads', '2', '--files', '--glob', '!.git'])
-    " call denite#custom#source('file_rec', 'vars', {
-    "       \ 'command': [
-    "       \ 'ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png'
-    "       \] })
-    call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
-    call denite#custom#source('grep', 'matchers', ['matcher_regexp'])
-    call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts',['--vimgrep'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-
-    nnoremap <silent> <c-p> :Denite file_rec<CR>
-    nnoremap <silent> <leader>h :Denite  help<CR>
-    nnoremap <silent> <leader>c :Denite colorscheme<CR>
-    nnoremap <silent> <leader>b :Denite buffer<CR>
-    nnoremap <silent> <leader>a :Denite grep:::!<CR>
-    nnoremap <silent> <leader>u :call dein#update()<CR>
-    nnoremap <silent> <Leader>i :Denite menu:ionic <CR>
-    call denite#custom#map('insert','<C-n>','<denite:move_to_next_line>','noremap')
-    call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
-    call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-      \ [ '.git/', '.ropeproject/', '__pycache__/',
-      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-    call denite#custom#var('menu', 'menus', s:menus)
-
-  "}}}
-
-  " Git from denite...ERMERGERD -----------------------------------------------{{{
-    let s:menus.git = {
-      \ 'description' : 'Fugitive interface',
-      \}
-    let s:menus.git.command_candidates = [
-      \[' git status', 'Gstatus'],
-      \[' git diff', 'Gvdiff'],
-      \[' git commit', 'Gcommit'],
-      \[' git stage/add', 'Gwrite'],
-      \[' git checkout', 'Gread'],
-      \[' git rm', 'Gremove'],
-      \[' git cd', 'Gcd'],
-      \[' git push', 'exe "Git! push " input("remote/branch: ")'],
-      \[' git pull', 'exe "Git! pull " input("remote/branch: ")'],
-      \[' git pull rebase', 'exe "Git! pull --rebase " input("branch: ")'],
-      \[' git checkout branch', 'exe "Git! checkout " input("branch: ")'],
-      \[' git fetch', 'Gfetch'],
-      \[' git merge', 'Gmerge'],
-      \[' git browse', 'Gbrowse'],
-      \[' git head', 'Gedit HEAD^'],
-      \[' git parent', 'edit %:h'],
-      \[' git log commit buffers', 'Glog --'],
-      \[' git log current file', 'Glog -- %'],
-      \[' git log last n commits', 'exe "Glog -" input("num: ")'],
-      \[' git log first n commits', 'exe "Glog --reverse -" input("num: ")'],
-      \[' git log until date', 'exe "Glog --until=" input("day: ")'],
-      \[' git log grep commits',  'exe "Glog --grep= " input("string: ")'],
-      \[' git log pickaxe',  'exe "Glog -S" input("string: ")'],
-      \[' git index', 'exe "Gedit " input("branchname\:filename: ")'],
-      \[' git mv', 'exe "Gmove " input("destination: ")'],
-      \[' git grep',  'exe "Ggrep " input("string: ")'],
-      \[' git prompt', 'exe "Git! " input("command: ")'],
-      \] " Append ' --' after log to get commit info commit buffers
-  "}}}
+  " " Denite --------------------------------------------------------------------{{{
+  "
+  "   let g:webdevicons_enable_denite = 0
+  "   let s:menus = {}
+  "
+  "   call denite#custom#option('_', {
+  "         \ 'prompt': '❯',
+  "         \ 'winheight': 10,
+  "         \ 'reversed': 1,
+  "         \ 'highlight_matched_char': 'Underlined',
+  "         \ 'highlight_mode_normal': 'CursorLine',
+  "         \ 'updatetime': 1,
+  "         \ 'auto_resize': 1,
+  "         \})
+  "   call denite#custom#option('TSDocumentSymbol', {
+  "         \ 'prompt': ' @' ,
+  "         \ 'reversed': 0,
+  "         \})
+  "   " call denite#custom#var('file_rec', 'command',['rg', '--threads', '2', '--files', '--glob', '!.git'])
+  "   call denite#custom#source('file_rec', 'vars', {
+  "         \ 'command': [
+  "         \ 'ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png'
+  "         \] })
+  "   call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+  "   call denite#custom#source('grep', 'matchers', ['matcher_regexp'])
+  "   call denite#custom#var('grep', 'command', ['rg'])
+  "   call denite#custom#var('grep', 'default_opts',['--vimgrep'])
+  "   call denite#custom#var('grep', 'recursive_opts', [])
+  "   call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  "   call denite#custom#var('grep', 'separator', ['--'])
+  "   call denite#custom#var('grep', 'final_opts', [])
+  "
+  "   " nnoremap <silent> <c-p> :Denite file_rec<CR>
+  "   nnoremap <silent> <leader>h :Denite  help<CR>
+  "   nnoremap <silent> <leader>c :Denite colorscheme<CR>
+  "   nnoremap <silent> <leader>b :Denite buffer<CR>
+  "   nnoremap <silent> <leader>a :Denite grep:::!<CR>
+  "   nnoremap <silent> <leader>u :call dein#update()<CR>
+  "   nnoremap <silent> <Leader>i :Denite menu:ionic <CR>
+  "   call denite#custom#map('insert','<C-n>','<denite:move_to_next_line>','noremap')
+  "   call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
+  "   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+  "     \ [ '.git/', '.ropeproject/', '__pycache__/',
+  "     \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+  "   call denite#custom#var('menu', 'menus', s:menus)
+  "
+  " "}}}
+  "
+  " " Git from denite...ERMERGERD -----------------------------------------------{{{
+  "   let s:menus.git = {
+  "     \ 'description' : 'Fugitive interface',
+  "     \}
+  "   let s:menus.git.command_candidates = [
+  "     \[' git status', 'Gstatus'],
+  "     \[' git diff', 'Gvdiff'],
+  "     \[' git commit', 'Gcommit'],
+  "     \[' git stage/add', 'Gwrite'],
+  "     \[' git checkout', 'Gread'],
+  "     \[' git rm', 'Gremove'],
+  "     \[' git cd', 'Gcd'],
+  "     \[' git push', 'exe "Git! push " input("remote/branch: ")'],
+  "     \[' git pull', 'exe "Git! pull " input("remote/branch: ")'],
+  "     \[' git pull rebase', 'exe "Git! pull --rebase " input("branch: ")'],
+  "     \[' git checkout branch', 'exe "Git! checkout " input("branch: ")'],
+  "     \[' git fetch', 'Gfetch'],
+  "     \[' git merge', 'Gmerge'],
+  "     \[' git browse', 'Gbrowse'],
+  "     \[' git head', 'Gedit HEAD^'],
+  "     \[' git parent', 'edit %:h'],
+  "     \[' git log commit buffers', 'Glog --'],
+  "     \[' git log current file', 'Glog -- %'],
+  "     \[' git log last n commits', 'exe "Glog -" input("num: ")'],
+  "     \[' git log first n commits', 'exe "Glog --reverse -" input("num: ")'],
+  "     \[' git log until date', 'exe "Glog --until=" input("day: ")'],
+  "     \[' git log grep commits',  'exe "Glog --grep= " input("string: ")'],
+  "     \[' git log pickaxe',  'exe "Glog -S" input("string: ")'],
+  "     \[' git index', 'exe "Gedit " input("branchname\:filename: ")'],
+  "     \[' git mv', 'exe "Gmove " input("destination: ")'],
+  "     \[' git grep',  'exe "Ggrep " input("string: ")'],
+  "     \[' git prompt', 'exe "Git! " input("command: ")'],
+  "     \] " Append ' --' after log to get commit info commit buffers
+  " "}}}
       
   " Fold, gets it's own section  ----------------------------------------------{{{
 
@@ -507,17 +502,32 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 "}}}
 
 " Extra Tools Settings ------------------------------------------------------{{{
-  " Vim-test {
+  
+  " Vim-test ---------------------------------------------------------____---{{{
     nmap <silent> <leader>t :TestNearest<CR>
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
     nmap <silent> <leader>l :TestLast<CR>
     nmap <silent> <leader>g :TestVisit<CR>
-  " }
+  " }}}
 
+  " Nvim terminal -------------------------------------------------------------{{{
+
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    autocmd BufEnter term://* startinsert
+    autocmd TermOpen * set bufhidden=hide
+
+  " }}}
+  "
 " }}}
 
-" Themes, Visual, etc  ------------------------------------------------------{{{
+" Themes," Nvim terminal -------------------------------------------------------------{{{
+
+  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufEnter term://* startinsert
+  autocmd TermOpen * set bufhidden=hide
+
+" }}} Visual, etc  ------------------------------------------------------{{{
   syntax on
   execute "set background=".$BACKGROUND
   execute "colorscheme ".$THEME
@@ -644,7 +654,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " call deoplete#custom#set('typescript', 'debug_enabled', 1)
 "}}}
 
-
 " SuperTab like snippets behavior --------------------------------------------{{{
   imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
   \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -654,9 +663,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   \: "\<TAB>" 
 "}}}
 
-"}}}
-
 " Language Specifics---------------------------------------------------------{{{
+  
   " Markdown ----------------------------------------------------------------{{{
     " make frontmatter comment and do coloring
     au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
@@ -723,7 +731,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " Insert mode completion
   " Useful for completing hard to spell words
   " imap <c-x><c-k> <plug>(fzf-complete-word)
-  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '13%'})
+  inoremap <expr> <c-x><c-k> fzf#vm#complete#word({'left': '13%'})
   " Useful to add folder path
   imap <c-x><c-f> <plug>(fzf-complete-path)
   " Useful to FILE path
@@ -754,7 +762,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
 
   " Special mapping for fzf
-  " nnoremap <silent> <C-p> :Files<CR>
+  nnoremap <silent> <C-p> :Files<CR>
   nnoremap <silent> <leader>b :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
@@ -762,7 +770,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-  nnoremap <silent> <leader>. :AgIn
+  " nnoremap <silent> <leader>. :AgIn
 
   nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
   vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
