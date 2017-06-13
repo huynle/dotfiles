@@ -33,17 +33,11 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('Shougo/unite.vim')
 
-  " Utilities  ----------------------------------------------------{{{
+  " Utilities  --------------------------------------------------------------{{{
 
     call dein#add('tomtom/tlib_vim')
     call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
     call dein#add('sickill/vim-pasta') " context-aware pasting
-    
-    " if executable('ag')
-    "   call dein#add('mileszs/ack.vim')
-    "   let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-    " endif
-    "
   "}}}
 
   " General Programming ---------------------------------------------------{{{
@@ -60,9 +54,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Specific Lang format/linting --------------------------------------------{{{
 
-    " call dein#add('SirVer/ultisnips' ,  {'on_map' : { 'i' : ['<TAB>'] }})
     call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/neosnippet-snippets')  " Provide all the basic function generation snippets for lots of languages
+    call dein#add('Shougo/neosnippet-snippets', {'depends': 'neosnippet'})  " Provide all the basic function generation snippets for lots of languages
+    call dein#add('honza/vim-snippets')
     
     " python specific autocompletion
     call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
@@ -284,14 +278,11 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap ; :
 
 " Switch between the last two files
-  imap <BS> <C-w>
+  " imap <BS> <C-w>
   imap <C-del> <C-w>
   " noremap! <C-h> <C-w>
   " inoremap <C-w> <C-\><C-o>dB
   " inoremap <C-BS> <C-\><C-o>db
-
-" famous ctrl-backspace
-  " nmap <C-BS> :echo "foo"
 
   set backspace=indent,eol,start            " Allow backspace to delete through multiple lines
   nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
@@ -489,6 +480,18 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     autocmd FileType python setl foldmethod=syntax
   "}}}
 
+  " SuperTab like snippets behavior --------------------------------------------{{{
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: "\<TAB>" 
+
+
+    let g:neosnippet#snippets_directory='~/.vim/snippets'
+  "}}}
+
   " Ignore Files/Folders ----------------------------------------------------{{{
     set wildignore+=node_modules
     set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,*.beam
@@ -499,6 +502,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     set wildignore+=*/spec/dummy/*
     set wildignore+=*/tmp/*
   "  }}}
+
 "}}}
 
 " Extra Tools Settings ------------------------------------------------------{{{
@@ -654,15 +658,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " call deoplete#custom#set('typescript', 'debug_enabled', 1)
 "}}}
 
-" SuperTab like snippets behavior --------------------------------------------{{{
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: "\<TAB>" 
-"}}}
-
 " Language Specifics---------------------------------------------------------{{{
   
   " Markdown ----------------------------------------------------------------{{{
@@ -731,7 +726,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " Insert mode completion
   " Useful for completing hard to spell words
   " imap <c-x><c-k> <plug>(fzf-complete-word)
-  inoremap <expr> <c-x><c-k> fzf#vm#complete#word({'left': '13%'})
+  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '13%'})
   " Useful to add folder path
   imap <c-x><c-f> <plug>(fzf-complete-path)
   " Useful to FILE path
