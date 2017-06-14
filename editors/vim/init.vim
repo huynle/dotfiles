@@ -38,13 +38,14 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('tomtom/tlib_vim')
     call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
     call dein#add('sickill/vim-pasta') " context-aware pasting
+    call dein#add('kassio/neoterm')
   "}}}
 
   " General Programming ---------------------------------------------------{{{
     call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
     call dein#add('tomtom/tcomment_vim')
     call dein#add('sbdchd/neoformat')
-    call dein#add('janko-m/vim-test')
+    call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
 
     if executable('ctags')
       call dein#add('majutsushi/tagbar')
@@ -75,7 +76,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " Easier Editor ----------------------------------------------------------{{{
     " use `cs'"` to 'change surround single qoute to double'
     call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-    call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
+    " call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
     call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
   " }}}
 
@@ -91,9 +92,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   
     " call dein#add('Shougo/denite.nvim')
     call dein#add('chemzqm/vim-easygit')
-    call dein#add('chemzqm/denite-git')
-    call dein#add('pocari/vim-denite-gists')
-    call dein#add('chemzqm/denite-extra')
+    " call dein#add('chemzqm/denite-git')
+    " call dein#add('pocari/vim-denite-gists')
+    " call dein#add('chemzqm/denite-extra')
   " }}}
   
   " Writing -----------------------------------------------------------------{{{
@@ -146,7 +147,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   set number                          " setting line numbers
   set numberwidth=1                   " setting width of line
 
-  set autochdir
+  " set autochdir
 " helpers for dealing with other people's code
   nmap \t :set ts=2 sts=2 sw=2 noet<cr>
   nmap \s :set ts=2 sts=2 sw=2 et<cr>
@@ -219,6 +220,11 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 " Wrapped lines goes down/up to next row, rather than next line in file.
   noremap j gj
   noremap k gk
+" provide hjkl movements in Insert mode via the <Alt> modifier key
+  inoremap <A-h> <C-o>h
+  inoremap <A-j> <C-o>j
+  inoremap <A-k> <C-o>k
+  inoremap <A-l> <C-o>l
 " Visual shifting (does not exit Visual mode)
   vnoremap < <gv
   vnoremap > >gv
@@ -228,7 +234,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
 " search highlighting
   " map <space> 
-  map <c-space> /
+  " map <c-space> /
   nnoremap <silent> <esc> :noh<cr>                " clear search highlighting
 
 " working with tabs
@@ -245,11 +251,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 
-" Neovim terminal mapping
-" terminal 'normal mode'
-  tmap <esc> <c-\><c-n><esc><cr>
-
-" Switch current directory
+  " Switch current directory
   map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " open buffer for scribling
@@ -274,12 +276,18 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 " For when you forget to sudo.. Really Write the file.
   cmap w!! w !sudo tee % >/dev/null
 
-" swapping ; to allow command to enter
-  nnoremap ; :
+" getting out of insert mode fast!
+  imap jk <Esc>l
 
+" delete whole word in insert mode
+  inoremap <c-h> <c-w>
+
+" These create newlines like o and O but stay in normal mode
+  nnoremap zj o<Esc>k
+  nnoremap zk O<Esc>j
 " Switch between the last two files
   " imap <BS> <C-w>
-  imap <C-del> <C-w>
+  " imap <C-del> <C-w>
   " noremap! <C-h> <C-w>
   " inoremap <C-w> <C-\><C-o>dB
   " inoremap <C-BS> <C-\><C-o>db
@@ -303,12 +311,13 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " " }}}
 
   " Netrw -------------------------------------------------------------------{{{
+    
     " nnoremap <C-n> :e .<CR>
     let g:netrw_banner = 0
     let g:netrw_liststyle = 3
     let g:netrw_browse_split = 4 "open files in the previous window
     let g:netrw_altv = 1
-    let g:netrw_winsize = 20
+    let g:netrw_winsize = 15
 
     " Netrw settings to looklike nerdtree
     " Toggle Vexplore with Ctrl-E
@@ -330,7 +339,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
           let t:expl_buf_num = bufnr("%")
       endif
     endfunction
-    map <silent> <C-n> :call ToggleVExplorer()<CR>
+    map <silent> <C-\> :call ToggleVExplorer()<CR>
     let g:netrw_browse_split = 4
     let g:netrw_altv = 1
   "}}}
@@ -503,11 +512,18 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     set wildignore+=*/tmp/*
   "  }}}
 
+  " Tagbars -----------------------------------------------------------------{{{
+  nmap <F8> :TagbarToggle<CR>
+  let g:tagbar_width = 20
+  "  }}}
 "}}}
 
 " Extra Tools Settings ------------------------------------------------------{{{
   
   " Vim-test ---------------------------------------------------------____---{{{
+    
+    let test#strategy = "neoterm"
+    
     nmap <silent> <leader>t :TestNearest<CR>
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
@@ -517,21 +533,42 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Nvim terminal -------------------------------------------------------------{{{
 
+
+    " Neovim terminal mapping
+    tnoremap <Esc> <C-\><C-n>
+    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " autocmd BufEnter term://* startinsert
+    " autocmd TermOpen * set bufhidden=hide
+    
+    " setting buffer for fzf to use
     au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    autocmd BufEnter term://* startinsert
-    autocmd TermOpen * set bufhidden=hide
+    
+    " change cursor to bar in insert mode
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+    
+    nnoremap <A-\> :Ttoggle<CR>
+    let g:neoterm_autoinsert = 1
+    let g:neoterm_size=10
+
+
+    " useful (re)-maps
+    nnoremap <silent> ,th :call neoterm#close()<cr>  "hide/close terminal
+    nnoremap <silent> ,tl :call neoterm#clear()<cr>  "clear terminal
+    nnoremap <silent> ,tc :call neoterm#kill()<cr>   "kill current job <Ctrl-c>
+    
+    " Neoterm
+    " nnoremap <silent> <C-c> :T/ 
+    " hide/close terminal
+    " nnoremap <silent> <C-l> :call neoterm#clear()<cr>
+
+    " nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
+
 
   " }}}
   "
 " }}}
 
-" Themes," Nvim terminal -------------------------------------------------------------{{{
-
-  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-  autocmd BufEnter term://* startinsert
-  autocmd TermOpen * set bufhidden=hide
-
-" }}} Visual, etc  ------------------------------------------------------{{{
+" Themes, Visual, etc  ------------------------------------------------------{{{
   syntax on
   execute "set background=".$BACKGROUND
   execute "colorscheme ".$THEME
@@ -570,8 +607,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   noremap <silent> <leader>f :Neoformat<CR>
 
 " typical comment mapping
-  vnoremap <c-/> :TComment<cr>
-
+  vnoremap <c-/> :tcomment<cr>
+  nnoremap <c-/> :tcomment<cr>
+  inoremap <c-/> :tcomment<cr>
 " }}}
 
 " Deoplete ------------------------------------------------------------------{{{
@@ -610,7 +648,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
 
 " deoplete-jedi
-  let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+  " let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+  let g:deoplete#sources#jedi#python_path = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:deoplete#sources#jedi#enable_cache = 1
   let g:deoplete#auto_completion_start_length = 1
 
@@ -669,42 +708,41 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " }}}
   
   " GoLang-------------------------------------------------------------------{{{
-    if count(g:plug_groups, 'go')
-        let g:go_highlight_functions = 1
-        let g:go_highlight_methods = 1
-        let g:go_highlight_structs = 1
-        let g:go_highlight_operators = 1
-        let g:go_highlight_build_constraints = 1
-        let g:go_fmt_command = "goimports"
-        let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-        let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-        au FileType go nmap <Leader>s <Plug>(go-implements)
-        au FileType go nmap <Leader>i <Plug>(go-info)
-        au FileType go nmap <Leader>e <Plug>(go-rename)
-        au FileType go nmap <leader>r <Plug>(go-run)
-        au FileType go nmap <leader>b <Plug>(go-build)
-        au FileType go nmap <leader>t <Plug>(go-test)
-        au FileType go nmap <Leader>gd <Plug>(go-doc)
-        au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-        au FileType go nmap <leader>co <Plug>(go-coverage)
-    endif
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_fmt_command = "goimports"
+    " let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    au FileType go nmap <Leader>] <Plug>(go-implements)
+    au FileType go nmap <Leader>i <Plug>(go-info)
+    au FileType go nmap <Leader>h <Plug>(go-rename)
+    au FileType go nmap <leader>r <Plug>(go-run)
+    au FileType go nmap <leader>b <Plug>(go-build)
+    au FileType go nmap <leader>t <Plug>(go-test)
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    au FileType go nmap <leader>co <Plug>(go-coverage)
   " }}}
 
   " Python ------------------------------------------------------------------{{{
-    if count(g:plug_groups, 'python')
-      let g:pymode_python = 'python3'
-      let g:pymode_doc = 0
-      let g:pymode_folding = 0          " disable code folding
-      let g:pymode_virtualenv = 1       " use virtualenvs
-      let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
+    let g:pymode_python = 'python3'
+    let g:pymode_doc = 0
+    let g:pymode_folding = 0          " disable code folding
+    let g:pymode_virtualenv = 1       " use virtualenvs
+    let g:pymode_virtualenv_path = $VIRTUAL_ENV    " use tmuxinator to set the enviornment
 
-      let g:python_host_prog = '/usr/local/bin/python2'
-      let g:python3_host_prog = '/usr/local/bin/python3'
-      " let $NVIM_PYTHON_LOG_FILE='nvim-python.log'
-      let g:jedi#auto_vim_configuration = 0
-      let g:jedi#documentation_command = "<leader>k"
-    
-    endif
+    " let g:python_host_prog = '/usr/local/bin/python2'
+    " let g:python3_host_prog = '/usr/local/bin/python3'
+    " let $NVIM_PYTHON_LOG_FILE='nvim-python.log'
+    let g:jedi#auto_vim_configuration = 0
+    " let g:jedi#documentation_command = "<leader>k"
+
+    " settin the test runner for vim-test
+    let test#python#runner = 'pytest'
+
     " }}}
 
 "  }}}
@@ -712,9 +750,11 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 " Search --------------------------------------------------------------------{{{
     
   " vim-sneak for moving around, defaul use 's{char}{char}"', use `;` to go next and and `` or ctrl-o to go back to starting
-  map f <Plug>Sneak_s
-  map F <Plug>Sneak_S
+  " map f <Plug>Sneak_s
+  " map F <Plug>Sneak_S
 
+  let g:fzf_tags_command = 'ctags -R'
+  let g:fzf_buffers_jump = 1
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
   let g:fzf_layout = { 'down': '~15%' }
 
@@ -726,7 +766,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " Insert mode completion
   " Useful for completing hard to spell words
   " imap <c-x><c-k> <plug>(fzf-complete-word)
-  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '13%'})
+  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'options': '-q '.shellescape(expand('<cword>')),'left': '13%'})
+  
   " Useful to add folder path
   imap <c-x><c-f> <plug>(fzf-complete-path)
   " Useful to FILE path
@@ -761,7 +802,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap <silent> <leader>b :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
-  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>e :BTags<CR>
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
@@ -786,10 +827,32 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 "}}}
 
 " Need Fixing --------------- ------------------------------------------------{{{
+" Workspace Setup
+" ----------------
+function! DefaultWorkspace()
+    " Rough num columns to decide between laptop and big monitor screens
+    let numcol = 2
+    if winwidth(0) >= 220
+        let numcol = 3
+    endif
+
+    if numcol == 3
+        e term://zsh
+        file Shell\ Two
+        vnew
+    endif
+
+    vsp term://~/Programs/golang/context
+    file Context
+    sp term://zsh
+    file Shell\ One
+    wincmd k
+    resize 4
+    wincmd h
+endfunction
+command! -register DefaultWorkspace call DefaultWorkspace()
 
 " ######################### Normal mode mapping
-  nmap <F8> :TagbarToggle<CR>
-
 
 " ################################ General  Vim Custom Mapping
 

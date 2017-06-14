@@ -43,9 +43,6 @@ root: ~/
 #   - logs: tail -f log/development.log
 
 windows:
-  - status_things:
-      layout: main-horizontal
-      panes:
-        - top
-        - uptime
-        - whoami
+  - shell:
+  - journal:
+    - journal
