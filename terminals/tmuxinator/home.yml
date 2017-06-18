@@ -43,6 +43,14 @@ root: ~/
 #   - logs: tail -f log/development.log
 
 windows:
-  - shell:
+  - autoxiu:
+    - light
+    - z autoxiu
+    - vim
   - journal:
+    - light
     - journal
+  - dotfiles:
+    - light
+    - cd ~/.dotfiles
+    - vim

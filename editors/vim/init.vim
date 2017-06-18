@@ -2,6 +2,11 @@ if &compatible
   set nocompatible
 endif
 
+" ################## Global settings
+
+let g:elite_mode=1
+
+
 " #############################
 " In your .vimrc.before.local file
 " list only the plugin groups you will use
@@ -49,6 +54,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
     if executable('ctags')
       call dein#add('majutsushi/tagbar')
+      " call dein#add('craigemery/vim-autotag')
+      " call dein#add('xolox/vim-misc')
+      " call dein#add('xolox/vim-easytags', { 'depends': 'xolox/vim-misc'  })
     endif
 
   " }}}
@@ -60,8 +68,19 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('honza/vim-snippets')
     
     " python specific autocompletion
+    " A Python plugin
+    call dein#add('klen/python-mode', {'on_ft': ['python']})
+    " Admin virtualenvs
+    call dein#add('jmcantrell/vim-virtualenv')
+    " Show indent lines
+    call dein#add('Yggdroot/indentLine', {'on_ft': ['python']})
+    " Show reports from coverage.py
+    call dein#add('alfredodeza/coveragepy.vim', {'on_ft': ['python']})
+    " Sort imports
+    call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
+
     call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
-    call dein#add('yssource/python.vim', {'on_ft': 'python'})
+    " call dein#add('yssource/python.vim', {'on_ft': 'python'})
     
     " golang specific autocompletion
     call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
@@ -146,6 +165,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   set spell                           " Spell checking on
   set number                          " setting line numbers
   set numberwidth=1                   " setting width of line
+
+  set guitablabel=\[%N\]\ %t\ %M 
 
   " set autochdir
 " helpers for dealing with other people's code
@@ -649,17 +670,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
 " deoplete-jedi
   " let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
-  let g:deoplete#sources#jedi#python_path = '/home/hle/.virtualenvs/nvim/bin/python3'
+  " let g:deoplete#sources#jedi#python_path = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:deoplete#sources#jedi#enable_cache = 1
   let g:deoplete#auto_completion_start_length = 1
-
-" deoplete-go
-  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-  let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-  let g:deoplete#sources#go#use_cache = 1
-  let g:go_fmt_command = 'goimports'
-  let g:deoplete#sources#go = 'vim-go'
-
 
 
 " enable deoplete
@@ -678,11 +691,9 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   call deoplete#custom#set('buffer', 'mark', 'ℬ')
   call deoplete#custom#set('omni', 'mark', '⌾')
   call deoplete#custom#set('file', 'mark', 'file')
-  call deoplete#custom#set('jedi', 'mark', 'Ji')
+  call deoplete#custom#set('jedi', 'mark', 'J')
   call deoplete#custom#set('neosnippet', 'mark', '')
 
-  " let g:deoplete#omni_patterns = {}
-  " let g:deoplete#omni_patterns.html = ''
   function! Preview_func()
     if &pvw
       setlocal nonumber norelativenumber
@@ -692,9 +703,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:deoplete#ignore_sources = {}
   let g:deoplete#ignore_sources._ = ['around']
 
-  " let g:deoplete#enable_debug = 1
-  " call deoplete#enable_logging('DEBUG', 'deoplete.log')
-  " call deoplete#custom#set('typescript', 'debug_enabled', 1)
 "}}}
 
 " Language Specifics---------------------------------------------------------{{{
@@ -714,8 +722,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
     let g:go_fmt_command = "goimports"
-    " let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
     au FileType go nmap <Leader>] <Plug>(go-implements)
     au FileType go nmap <Leader>i <Plug>(go-info)
     au FileType go nmap <Leader>h <Plug>(go-rename)
@@ -725,9 +732,23 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     au FileType go nmap <Leader>gd <Plug>(go-doc)
     au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
     au FileType go nmap <leader>co <Plug>(go-coverage)
+    
+    " deoplete-go
+    let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+    let g:deoplete#sources#go#use_cache = 1
+    let g:go_fmt_command = 'goimports'
+    let g:deoplete#sources#go = 'vim-go'
+
+
   " }}}
 
   " Python ------------------------------------------------------------------{{{
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+		let g:deoplete#omni_patterns = {}
+		let g:deoplete#omni_patterns.python = '[^. *\t]\.\w*'
+
     let g:pymode_python = 'python3'
     let g:pymode_doc = 0
     let g:pymode_folding = 0          " disable code folding
@@ -753,6 +774,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " map f <Plug>Sneak_s
   " map F <Plug>Sneak_S
 
+  
   let g:fzf_tags_command = 'ctags -R'
   let g:fzf_buffers_jump = 1
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
@@ -802,8 +824,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap <silent> <leader>b :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
-  nnoremap <silent> <leader>e :BTags<CR>
-  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>e :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   " nnoremap <silent> <leader>. :AgIn
@@ -814,6 +836,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   nnoremap <silent> <leader>ga :BCommits<CR>
   nnoremap <silent> <leader>ft :Filetypes<CR>
 
+  " use to look for the same words under, this should be switched over to fzf
+  nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
   " }
 "}}}
@@ -825,6 +849,16 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   let g:neomake_error_sign = {'text': '•'}
   let g:neomake_open_list = 2
 "}}}
+
+" Extra
+  if get(g:, 'elite_mode')
+      nnoremap <Up>    :resize +2<CR>
+      nnoremap <Down>  :resize -2<CR>
+      nnoremap <Left>  :vertical resize +2<CR>
+      nnoremap <Right> :vertical resize -2<CR>
+  endif
+
+
 
 " Need Fixing --------------- ------------------------------------------------{{{
 " Workspace Setup
@@ -904,9 +938,6 @@ command! -register DefaultWorkspace call DefaultWorkspace()
      vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
      vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
   endif
-
-  " Map <Leader>ff to display all lines with keyword under cursor, this may be done already?
-  nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 
 

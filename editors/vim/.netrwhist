@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/hle/.dotfiles/meta'
-let g:netrw_dirhist_2='/home/hle/.dotfiles/meta/configs'
-let g:netrw_dirhist_3='/home/hle/.dotfiles'
-let g:netrw_dirhist_4='/home/hle/.dotfiles/editors'
-let g:netrw_dirhist_5='/home/hle/.dotfiles/editors/vim'
-let g:netrw_dirhist_6='/home/hle/GoProjects/src/github.com/huynle/learn-golang'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/hle/GoProjects/src/github.com/huynle/learn-golang'
+let g:netrw_dirhist_2='/home/hle/GoProjects/src/github.com/huynle/learn-golang/shape'
+let g:netrw_dirhist_3='/home/hle/GoProjects/src/github.com/huynle/learn-golang'
+let g:netrw_dirhist_4='/home/hle/GoProjects/src/github.com/huynle'
+let g:netrw_dirhist_5='/home/hle/GoProjects/src/github.com/huynle/learn-golang'
+let g:netrw_dirhist_6='/home/hle/.dotfiles/backup'
+let g:netrw_dirhist_7='/home/hle/.dotfiles'
