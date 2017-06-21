@@ -44,13 +44,10 @@ root: ~/
 
 windows:
   - autoxiu:
-    - light
     - z autoxiu
     - vim
   - journal:
-    - light
     - journal
   - dotfiles:
-    - light
     - cd ~/.dotfiles
     - vim
