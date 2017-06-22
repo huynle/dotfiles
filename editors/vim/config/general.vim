@@ -1,38 +1,5 @@
 
-" ################## Global settings
-
-let g:elite_mode=1
-
-" #############################
-" In your .vimrc.before.local file
-" list only the plugin groups you will use
-" " if !exists('g:plug_groups')
-" 	" let g:plug_groups=['general', 'writing', 'formatting', 'programming', 'python', 'go', 'autocomplete', 'visual']
-"
-"   let g:plug_groups=['general', 'visual', 'formatting', 'programming', 'autocomplete', 'go', 'snippets', 'markdown', 'writing']
-" endif
-"
-"
-" if filereadable(expand("~/.vim/plug.vim"))
-"   source ~/.vim/plug.vim
-" endif
-"
-
 let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
-
-" Setup dein  ---------------------------------------------------------------{{{
-"   if (!isdirectory(expand("$HOME/.vim/dein/repos/github.com/Shougo/dein.vim")))
-"     call system(expand("mkdir -p $HOME/.vim/dein/repos/github.com"))
-"     call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.vim/dein/repos/github.com/Shougo/dein.vim"))
-"   endif
-"
-"   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
-
-"   call dein#begin(expand('~/.vim/dein')) " plugins' root path
-"   call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-"   call dein#add('Shougo/dein.vim')
-  call dein#add('haya14busa/dein-command.vim')
-  call dein#add('Shougo/" .vim')
 
   " Utilities  --------------------------------------------------------------{{{
 
@@ -43,9 +10,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   "}}}
 
   " General Programming ---------------------------------------------------{{{
-"    call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
-    " call dein#add('tomtom/tcomment_vim')
-    " call dein#add('sbdchd/neoformat')
     call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
 
     if executable('ctags')
@@ -58,41 +22,17 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " }}}
 
   " Specific Lang format/linting --------------------------------------------{{{
-
-"    call dein#add('Shougo/neosnippet.vim')
-"    call dein#add('Shougo/neosnippet-snippets', {'depends': 'neosnippet'})  " Provide all the basic function generation snippets for lots of languages
     call dein#add('honza/vim-snippets')
 
-    " python specific autocompletion
-    " A Python plugin
     call dein#add('klen/python-mode', {'on_ft': ['python']})
-    " Admin virtualenvs
     call dein#add('jmcantrell/vim-virtualenv')
-    " Show indent lines
-    " call dein#add('Yggdroot/indentLine', {'on_ft': ['python']})
-    " Show reports from coverage.py
-    " call dein#add('alfredodeza/coveragepy.vim', {'on_ft': ['python']})
-    " Sort imports
     call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
-
-    " call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
-    " call dein#add('yssource/python.vim', {'on_ft': 'python'})
-
-    " golang specific autocompletion
-    " call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
-    " call dein#add('fatih/vim-go', {'on_ft': 'go'})
-
-    " markdown
-"    call dein#add('tpope/vim-markdown', { 'on_ft': 'markdown' })
-"    call dein#add('wavded/vim-stylus', { 'on_ft': 'markdown'}) " markdown support
-
   " }}}
 
   " Easier Editor ----------------------------------------------------------{{{
-    " use `cs'"` to 'change surround single qoute to double'
     call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-    " call dein#add('easymotion/vim-easymotion')  " use <leader><leader>e or b to invoke
-    call dein#add('justinmk/vim-sneak')  " use s{char}{char} to invoke, remapped to f
+    call dein#add('justinmk/vim-sneak')
+    " use s{char}{char} to invoke, remapped to f
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
@@ -104,29 +44,16 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
     call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
     call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-
-    " call dein#add('Shougo/denite.nvim')
-    " call dein#add('chemzqm/vim-easygit')
-    " call dein#add('chemzqm/denite-git')
-    " call dein#add('pocari/vim-denite-gists')
-    " call dein#add('chemzqm/denite-extra')
   " }}}
 
   " Writing -----------------------------------------------------------------{{{
-    " call dein#add('reedes/vim-wordy')
     call dein#add('reedes/vim-litecorrect')
     call dein#add('reedes/vim-textobj-sentence')
     call dein#add('reedes/vim-textobj-quote')
   "  }}}
 
-  " Deoplete Stuff ----------------------------------------------------------{{{
-    " call dein#add('Shougo/deoplete.nvim')
-  " }}}
-
   " Color/visual/themes/schemes ---------------------------------------------{{{
     call dein#add('rakr/vim-one')
-    " call dein#add('vim-airline/vim-airline')
-    " call dein#add('vim-airline/vim-airline-themes')
   " }}}
 
   " dein closeout runs ------------------------------------------------------{{{
@@ -379,105 +306,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     let g:netrw_altv = 1
   "}}}
 
-  " Fugitive ----------------------------------------------------------------{{{
-      if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
-        nnoremap <silent> <leader>gs :Gstatus<CR>
-        nnoremap <silent> <leader>gd :Gdiff<CR>
-        nnoremap <silent> <leader>gc :Gcommit<CR>
-        nnoremap <silent> <leader>gb :Gblame<CR>
-        nnoremap <silent> <leader>gl :Glog<CR>
-        nnoremap <silent> <leader>gp :Git push<CR>
-        nnoremap <silent> <leader>gr :Gread<CR>
-        nnoremap <silent> <leader>gw :Gwrite<CR>
-        nnoremap <silent> <leader>ge :Gedit<CR>
-        " Mnemonic _i_nteractive
-        nnoremap <silent> <leader>gi :Git add -p %<CR>
-        nnoremap <silent> <leader>gg :SignifyToggle<CR>
-      endif
-    "}}}
-
-  " " Denite --------------------------------------------------------------------{{{
-  "
-  "   let g:webdevicons_enable_denite = 0
-  "   let s:menus = {}
-  "
-  "   call denite#custom#option('_', {
-  "         \ 'prompt': '❯',
-  "         \ 'winheight': 10,
-  "         \ 'reversed': 1,
-  "         \ 'highlight_matched_char': 'Underlined',
-  "         \ 'highlight_mode_normal': 'CursorLine',
-  "         \ 'updatetime': 1,
-  "         \ 'auto_resize': 1,
-  "         \})
-  "   call denite#custom#option('TSDocumentSymbol', {
-  "         \ 'prompt': ' @' ,
-  "         \ 'reversed': 0,
-  "         \})
-  "   " call denite#custom#var('file_rec', 'command',['rg', '--threads', '2', '--files', '--glob', '!.git'])
-  "   call denite#custom#source('file_rec', 'vars', {
-  "         \ 'command': [
-  "         \ 'ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png'
-  "         \] })
-  "   call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
-  "   call denite#custom#source('grep', 'matchers', ['matcher_regexp'])
-  "   call denite#custom#var('grep', 'command', ['rg'])
-  "   call denite#custom#var('grep', 'default_opts',['--vimgrep'])
-  "   call denite#custom#var('grep', 'recursive_opts', [])
-  "   call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  "   call denite#custom#var('grep', 'separator', ['--'])
-  "   call denite#custom#var('grep', 'final_opts', [])
-  "
-  "   " nnoremap <silent> <c-p> :Denite file_rec<CR>
-  "   nnoremap <silent> <leader>h :Denite  help<CR>
-  "   nnoremap <silent> <leader>c :Denite colorscheme<CR>
-  "   nnoremap <silent> <leader>b :Denite buffer<CR>
-  "   nnoremap <silent> <leader>a :Denite grep:::!<CR>
-  "   nnoremap <silent> <leader>u :call dein#update()<CR>
-  "   nnoremap <silent> <Leader>i :Denite menu:ionic <CR>
-  "   call denite#custom#map('insert','<C-n>','<denite:move_to_next_line>','noremap')
-  "   call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
-  "   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-  "     \ [ '.git/', '.ropeproject/', '__pycache__/',
-  "     \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-  "   call denite#custom#var('menu', 'menus', s:menus)
-  "
-  " "}}}
-  "
-  " " Git from denite...ERMERGERD -----------------------------------------------{{{
-  "   let s:menus.git = {
-  "     \ 'description' : 'Fugitive interface',
-  "     \}
-  "   let s:menus.git.command_candidates = [
-  "     \[' git status', 'Gstatus'],
-  "     \[' git diff', 'Gvdiff'],
-  "     \[' git commit', 'Gcommit'],
-  "     \[' git stage/add', 'Gwrite'],
-  "     \[' git checkout', 'Gread'],
-  "     \[' git rm', 'Gremove'],
-  "     \[' git cd', 'Gcd'],
-  "     \[' git push', 'exe "Git! push " input("remote/branch: ")'],
-  "     \[' git pull', 'exe "Git! pull " input("remote/branch: ")'],
-  "     \[' git pull rebase', 'exe "Git! pull --rebase " input("branch: ")'],
-  "     \[' git checkout branch', 'exe "Git! checkout " input("branch: ")'],
-  "     \[' git fetch', 'Gfetch'],
-  "     \[' git merge', 'Gmerge'],
-  "     \[' git browse', 'Gbrowse'],
-  "     \[' git head', 'Gedit HEAD^'],
-  "     \[' git parent', 'edit %:h'],
-  "     \[' git log commit buffers', 'Glog --'],
-  "     \[' git log current file', 'Glog -- %'],
-  "     \[' git log last n commits', 'exe "Glog -" input("num: ")'],
-  "     \[' git log first n commits', 'exe "Glog --reverse -" input("num: ")'],
-  "     \[' git log until date', 'exe "Glog --until=" input("day: ")'],
-  "     \[' git log grep commits',  'exe "Glog --grep= " input("string: ")'],
-  "     \[' git log pickaxe',  'exe "Glog -S" input("string: ")'],
-  "     \[' git index', 'exe "Gedit " input("branchname\:filename: ")'],
-  "     \[' git mv', 'exe "Gmove " input("destination: ")'],
-  "     \[' git grep',  'exe "Ggrep " input("string: ")'],
-  "     \[' git prompt', 'exe "Git! " input("command: ")'],
-  "     \] " Append ' --' after log to get commit info commit buffers
-  " "}}}
 
   " Fold, gets it's own section  ----------------------------------------------{{{
 
@@ -512,8 +340,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     set foldlevel=99                                " Dont fold if not specified for filetype below
 
   " Space to toggle folds.
-    nnoremap <Space> za
-    vnoremap <Space> za
+    " nnoremap <Space> za
+    " vnoremap <Space> za
 
   " Working with vim file
     autocmd FileType vim setlocal foldmethod=marker
