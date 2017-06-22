@@ -44,12 +44,12 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " General Programming ---------------------------------------------------{{{
 "    call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
-    call dein#add('tomtom/tcomment_vim')
-    call dein#add('sbdchd/neoformat')
+    " call dein#add('tomtom/tcomment_vim')
+    " call dein#add('sbdchd/neoformat')
     call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
 
     if executable('ctags')
-      call dein#add('majutsushi/tagbar')
+      " call dein#add('majutsushi/tagbar')
 "      call dein#add('craigemery/vim-autotag')
       " call dein#add('xolox/vim-misc')
       " call dein#add('xolox/vim-easytags', { 'depends': 'xolox/vim-misc'  })
@@ -69,18 +69,18 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     " Admin virtualenvs
     call dein#add('jmcantrell/vim-virtualenv')
     " Show indent lines
-    call dein#add('Yggdroot/indentLine', {'on_ft': ['python']})
+    " call dein#add('Yggdroot/indentLine', {'on_ft': ['python']})
     " Show reports from coverage.py
-    call dein#add('alfredodeza/coveragepy.vim', {'on_ft': ['python']})
+    " call dein#add('alfredodeza/coveragepy.vim', {'on_ft': ['python']})
     " Sort imports
     call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
 
-    call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
+    " call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
     " call dein#add('yssource/python.vim', {'on_ft': 'python'})
 
     " golang specific autocompletion
-    call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
-    call dein#add('fatih/vim-go', {'on_ft': 'go'})
+    " call dein#add('zchee/deoplete-go', {'on_ft': 'go'})
+    " call dein#add('fatih/vim-go', {'on_ft': 'go'})
 
     " markdown
 "    call dein#add('tpope/vim-markdown', { 'on_ft': 'markdown' })
@@ -125,8 +125,8 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Color/visual/themes/schemes ---------------------------------------------{{{
     call dein#add('rakr/vim-one')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
+    " call dein#add('vim-airline/vim-airline')
+    " call dein#add('vim-airline/vim-airline-themes')
   " }}}
 
   " dein closeout runs ------------------------------------------------------{{{
@@ -209,9 +209,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
   let g:is_posix = 1
-
-" set for truecolors
-  set termguicolors
 
 " Remember cursor position between vim sessions
   autocmd BufReadPost *
@@ -542,7 +539,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Tagbars -----------------------------------------------------------------{{{
   nmap <F8> :TagbarToggle<CR>
-  let g:tagbar_width = 20
+  " let g:tagbar_width = 20
   "  }}}
 "}}}
 
