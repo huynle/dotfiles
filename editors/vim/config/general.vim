@@ -410,15 +410,14 @@ endfunction
 
 " System Settings  ----------------------------------------------------------{{{
 
-  set list listchars=tab:»·,trail:·,nbsp:·
   set noswapfile
   set autoread                        " detect when a file is changed
   set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
   set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
   set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell
-  set spell                           " Spell checking on
-  set number                          " setting line numbers
-  set numberwidth=1                   " setting width of line
+  " set spell                           " Spell checking on
+  " set number                          " setting line numbers
+  " set numberwidth=1                   " setting width of line
 
   set guitablabel=\[%N\]\ %t\ %M
 
@@ -774,171 +773,6 @@ endfunction
   inoremap <c-/> :tcomment<cr>
 " }}}
 
-" Deoplete ------------------------------------------------------------------{{{
-
-  " General Settings {{{
-  let g:deoplete#file#enable_buffer_path=1
-  let g:deoplete#enable_at_startup = 1
-  let g:echodoc_enable_at_startup=1
-  let g:deoplete#tag#cache_limit_size = 800000
-  let g:deoplete#skip_chars = ['(', ')', '<', '>']
-  let g:deoplete#auto_completion_start_length = 1
-
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ['around']
-
-  " call deoplete#custom#set('buffer', 'mark', 'ℬ')
-  " call deoplete#custom#set('omni', 'mark', 'O')
-  " call deoplete#custom#set('file', 'mark', 'file')
-  " call deoplete#custom#set('jedi', 'mark', 'J')
-  " call deoplete#custom#set('neosnippet', 'mark', '')
-  " }}}
-
-
-
-  " if !exists('g:deoplete#omni#input_patterns')
-  "   let g:deoplete#omni#input_patterns = {}
-  " endif
-
-  " let g:deoplete#disable_auto_complete = 0 " dropdown autocomplete
-
-" Close the documentation window when completion is done
-" If you prefer the Omni-Completion tip window to close when a selection is
-" made, these lines close it on movement in insert mode or when leaving
-" insert mode
-  autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-  autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-
-" close the preview window when you're not using it
-  " let g:SuperTabClosePreviewOnPopupClose = 1
-
-
-  " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-  " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  " function! s:my_cr_function()
-  "   return pumvisible() ? deoplete#mappings#close_popup() : "\n"
-  "endfunction
-
-" " deoplete-clang
-  " let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
-  " let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
-
-" deoplete-jedi
-  " let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
-  " let g:deoplete#sources#jedi#python_path = '/home/hle/.virtualenvs/nvim/bin/python3'
-  let g:deoplete#sources#jedi#enable_cache = 1
-  let g:deoplete#sources#jedi#statement_length = 30
-  let g:deoplete#sources#jedi#show_docstring = 1
-  let g:deoplete#sources#jedi#short_types = 1
-
-
-" enable deoplete
-  set completeopt+=noselect
-  set completeopt-=preview
-  autocmd CompleteDone * pclose
-
-  function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete=2
-  endfunction
-  function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete=0
-  endfunction
-  function! Preview_func()
-    if &pvw
-      setlocal nonumber norelativenumber
-     endif
-  endfunction
-  autocmd WinEnter * call Preview_func()
-
-  " Omni functions and patterns " {{{
-  " ---
-  " let g:deoplete#keyword_patterns = {}
-  " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
-
-  let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-  let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
-  let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
-  let g:deoplete#omni#functions.markdown = 'htmlcomplete#CompleteTags'
-  " let g:deoplete#omni#functions.javascript =
-  "	\ [ 'tern#Complete', 'jspc#omni', 'javascriptcomplete#CompleteJS' ]
-
-  let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-  let g:deoplete#omni_patterns.html = '<[^>]*'
-  " let g:deoplete#omni_patterns.javascript = '[^. *\t]\.\w*'
-  " let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%\(\h\w*\)\?'
-  let g:deoplete#omni_patterns.php =
-    \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-  let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
-  let g:deoplete#omni#input_patterns.xml = '<[^>]*'
-  let g:deoplete#omni#input_patterns.md = '<[^>]*'
-  let g:deoplete#omni#input_patterns.css  = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-  let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-  let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-  let g:deoplete#omni#input_patterns.python = ''
-  let g:deoplete#omni#input_patterns.javascript = ''
-
-  " }}}
-
-  " Ranking and Marks " {{{
-    " Default rank is 100, higher is better.
-"     call deoplete#custom#set('omni',          'mark', '⌾')
-"     call deoplete#custom#set('ternjs',        'mark', '⌁')
-"     call deoplete#custom#set('jedi',          'mark', '⌁')
-"     call deoplete#custom#set('vim',           'mark', '⌁')
-"     call deoplete#custom#set('neosnippet',    'mark', '⌘')
-"     call deoplete#custom#set('tag',           'mark', '⌦')
-"     call deoplete#custom#set('around',        'mark', '↻')
-"     call deoplete#custom#set('buffer',        'mark', 'ℬ')
-"     call deoplete#custom#set('tmux-complete', 'mark', '⊶')
-"     call deoplete#custom#set('syntax',        'mark', '♯')
-"
-"     call deoplete#custom#set('vim',           'rank', 630)
-"     call deoplete#custom#set('ternjs',        'rank', 620)
-"     call deoplete#custom#set('jedi',          'rank', 610)
-"     call deoplete#custom#set('omni',          'rank', 600)
-"     call deoplete#custom#set('neosnippet',    'rank', 510)
-"     call deoplete#custom#set('member',        'rank', 500)
-"     call deoplete#custom#set('file_include',  'rank', 420)
-"     call deoplete#custom#set('file',          'rank', 410)
-"     call deoplete#custom#set('tag',           'rank', 400)
-"     call deoplete#custom#set('around',        'rank', 330)
-"     call deoplete#custom#set('buffer',        'rank', 320)
-"     call deoplete#custom#set('dictionary',    'rank', 310)
-"     call deoplete#custom#set('tmux-complete', 'rank', 300)
-"     call deoplete#custom#set('syntax',        'rank', 200)
-
-  " }}}
-
-  " " Matchers and Converters " {{{
-  " " Default sorters: ['sorter_rank']
-  " " Default matchers: ['matcher_length', 'matcher_fuzzy']
-  "
-  " call deoplete#custom#set('_', 'converters', ['converter_auto_paren'])
-  "
-  " call deoplete#custom#set('_', 'converters', [
-  "   \ 'converter_remove_paren',
-  "   \ 'converter_remove_overlap',
-  "   \ 'converter_truncate_abbr',
-  "   \ 'converter_truncate_menu',
-  "   \ 'converter_auto_delimiter',
-  "   \ ])
-  "
-  " " }}}
-  "
-  " " Key-mapping and Events {{{
-  "
-  " " <CR>: If popup menu visible, expand snippet or close popup with selection,
-  " "       Otherwise, check if within empty pair and use delimitMate.
-  " inoremap <silent><expr><CR> pumvisible() ?
-  "   \ (neosnippet#expandable() ? neosnippet#mappings#expand_impl() : deoplete#close_popup())
-  "     \ : (delimitMate#WithinEmptyPair() ? "\<C-R>=delimitMate#ExpandReturn()\<CR>" : "\<CR>")
-  "
-  " " }}}
-
-"}}}
 
 " Language Specifics---------------------------------------------------------{{{
 
@@ -980,12 +814,6 @@ endfunction
   " }}}
 
   " Python ------------------------------------------------------------------{{{
-    " au FileType python
-    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-
-		" let g:deoplete#omni_patterns = {}
-    " let g:deoplete#omni#input_patterns = {}
-		" let g:deoplete#omni#input_patterns.python = '[^. *\t]\.\w*'
 
     let g:pymode_rope_rename_bind = '<C-c>rr'
 
@@ -1023,32 +851,28 @@ endfunction
 
 " Search --------------------------------------------------------------------{{{
 
-  " vim-sneak for moving around, defaul use 's{char}{char}"', use `;` to go next and and `` or ctrl-o to go back to starting
-  " map f <Plug>Sneak_s
-  " map F <Plug>Sneak_S
 
-
-  let g:fzf_tags_command = 'ctags -R'
-  let g:fzf_buffers_jump = 1
-  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-  let g:fzf_layout = { 'down': '~15%' }
+  " let g:fzf_tags_command = 'ctags -R'
+  " let g:fzf_buffers_jump = 1
+  " let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+  " let g:fzf_layout = { 'down': '~15%' }
 
   " Mapping selecting mappings
-  nmap <leader><tab> <plug>(fzf-maps-n)
-  xmap <leader><tab> <plug>(fzf-maps-x)
-  omap <leader><tab> <plug>(fzf-maps-o)
+  " nmap <leader><tab> <plug>(fzf-maps-n)
+  " xmap <leader><tab> <plug>(fzf-maps-x)
+  " omap <leader><tab> <plug>(fzf-maps-o)
 
   " Insert mode completion
   " Useful for completing hard to spell words
   " imap <c-x><c-k> <plug>(fzf-complete-word)
-  inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'options': '-q '.shellescape(expand('<cword>')),'left': '13%'})
+  " inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'options': '-q '.shellescape(expand('<cword>')),'left': '13%'})
 
   " Useful to add folder path
-  imap <c-x><c-f> <plug>(fzf-complete-path)
+  " imap <c-x><c-f> <plug>(fzf-complete-path)
   " Useful to FILE path
-  imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+  " imap <c-x><c-j> <plug>(fzf-complete-file-ag)
   " Useful to add line that has been written before
-  imap <c-x><c-l> <plug>(fzf-complete-line)
+  " imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
   function! SearchWordWithAg()
@@ -1070,27 +894,27 @@ endfunction
   function! SearchWithAgInDirectory(...)
     call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
   endfunction
-  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
+  " command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
 
   " Special mapping for fzf
-  nnoremap <silent> <C-p> :Files<CR>
-  nnoremap <silent> <leader>b :Buffers<CR>
-  nnoremap <silent> <leader>A :Windows<CR>
-  nnoremap <silent> <leader>; :BLines<CR>
-  nnoremap <silent> <leader>o :BTags<CR>
-  nnoremap <silent> <leader>e :Tags<CR>
-  nnoremap <silent> <leader>? :History<CR>
-  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  " nnoremap <silent> <C-p> :Files<CR>
+  " nnoremap <silent> <leader>b :Buffers<CR>
+  " nnoremap <silent> <leader>A :Windows<CR>
+  " nnoremap <silent> <leader>; :BLines<CR>
+  " nnoremap <silent> <leader>o :BTags<CR>
+  " nnoremap <silent> <leader>e :Tags<CR>
+  " nnoremap <silent> <leader>? :History<CR>
+  " nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   " nnoremap <silent> <leader>. :AgIn
 
-  nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
-  vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
-  nnoremap <silent> <leader>gl :Commits<CR>
-  nnoremap <silent> <leader>ga :BCommits<CR>
-  nnoremap <silent> <leader>ft :Filetypes<CR>
+  " nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
+  " vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
+  " nnoremap <silent> <leader>gl :Commits<CR>
+  " nnoremap <silent> <leader>ga :BCommits<CR>
+  " nnoremap <silent> <leader>ft :Filetypes<CR>
 
   " use to look for the same words under, this should be switched over to fzf
-  nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+  " nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
   " }
 "}}}
