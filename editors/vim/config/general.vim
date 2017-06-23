@@ -40,10 +40,10 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
     call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
 
-    call dein#add('jiangmiao/auto-pairs')
+    " call dein#add('jiangmiao/auto-pairs')
 
-    call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
-    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+    " call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
+    " call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   " }}}
 
   " Writing -----------------------------------------------------------------{{{
@@ -53,7 +53,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   "  }}}
 
   " Color/visual/themes/schemes ---------------------------------------------{{{
-    call dein#add('rakr/vim-one')
+    " call dein#add('rakr/vim-one'" )
   " }}}
 
   " dein closeout runs ------------------------------------------------------{{{
@@ -410,43 +410,16 @@ endfunction
 
 " System Settings  ----------------------------------------------------------{{{
 
-  " set noswapfile
-  " set autoread                        " detect when a file is changed
-  " set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-  " set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-  " set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell
-  " set spell                           " Spell checking on
-  " set number                          " setting line numbers
-  " set numberwidth=1                   " setting width of line
-
-  " set guitablabel=\[%N\]\ %t\ %M
-
-" helpers for dealing with other people's code
-  set tabstop=2 shiftwidth=2 expandtab
-
-
 " Reduce the wait time for vim to switch from insert to normal to visual
   " set timeoutlen=1000 ttimeoutlen=10
 
 " Setting up the directories
   set undolevels=1000         " Maximum number of changes that can be undone
   set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-  set undodir="$HOME/.VIM_UNDO_FILES"
-
-  set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-  set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
   let g:is_posix = 1
-
-" Remember cursor position between vim sessions
-  " autocmd BufReadPost *
-  "           \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  "           \   exe "normal! g'\"" |
-  "           \ endif
-" center buffer around cursor when opening files
-  " autocmd BufRead * normal zz
 
 "}}}"
 
@@ -457,28 +430,25 @@ endfunction
   vnoremap // y/<C-R>"<CR>
 " exit insert, dd line, enter insert
   inoremap <c-d> <esc>ddi
-" Navigate between display lines
-  noremap  <silent> <Up>   gk
-  noremap  <silent> <Down> gj
-  noremap  <silent> k gk
-  noremap  <silent> j gj
+
 " exit insert, dd line, enter insert
   inoremap <c-d> <esc>ddi
   noremap H ^
   noremap L g_
-  noremap J 5j
-  noremap K 5k
+
 " Quicker window movement
   nnoremap <C-j> <C-w>j
   nnoremap <C-k> <C-w>k
   nnoremap <C-h> <C-w>h
   nnoremap <C-l> <C-w>l
+
 " Wrapped lines goes down/up to next row, rather than next line in file.
 " provide hjkl movements in Insert mode via the <Alt> modifier key
   inoremap <A-h> <C-o>h
   inoremap <A-j> <C-o>j
   inoremap <A-k> <C-o>k
   inoremap <A-l> <C-o>l
+
 " Visual shifting (does not exit Visual mode)
   vnoremap < <gv
   vnoremap > >gv
