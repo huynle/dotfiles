@@ -31,14 +31,14 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Easier Editor ----------------------------------------------------------{{{
     call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-    call dein#add('justinmk/vim-sneak')
+    " call dein#add('justinmk/vim-sneak')
     " use s{char}{char} to invoke, remapped to f
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
     call dein#add('mattn/webapi-vim')
     call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
-    call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
+    " call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
 
     " call dein#add('jiangmiao/auto-pairs')
 
@@ -51,20 +51,6 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
     call dein#add('reedes/vim-textobj-sentence')
     call dein#add('reedes/vim-textobj-quote')
   "  }}}
-
-  " Color/visual/themes/schemes ---------------------------------------------{{{
-    " call dein#add('rakr/vim-one'" )
-  " }}}
-
-  " dein closeout runs ------------------------------------------------------{{{
-  " if dein#check_install()
-  "  call dein#install()
-  "  let pluginsExist=1
-  " endif
-
-  " call dein#end()
-  " filetype plugin indent on
-  " }}}
 
 " }}}
 
@@ -469,11 +455,14 @@ endfunction
 " getting out of insert mode fast!
   imap jk <Esc>l
 
+" delete whole word in insert mode
+  inoremap <c-h> <c-w>
+
+
 " These create newlines like o and O but stay in normal mode
   nnoremap zj o<Esc>k
   nnoremap zk O<Esc>j
 
-  set backspace=indent,eol,start            " Allow backspace to delete through multiple lines
   nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
 
 " Open new split panes to right and bottom, which feels more natural
