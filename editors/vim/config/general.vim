@@ -1,44 +1,35 @@
 
 let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
-  " Utilities  --------------------------------------------------------------{{{
+" Utilities  --------------------------------------------------------------{{{
 
-    " call dein#add('tomtom/tlib_vim')
-    call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
-    call dein#add('sickill/vim-pasta') " context-aware pasting
-    call dein#add('kassio/neoterm')
-  "}}}
+  " call dein#add('tomtom/tlib_vim')
+  call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
+  call dein#add('sickill/vim-pasta') " context-aware pasting
+  call dein#add('kassio/neoterm')
+"}}}
 
-  " General Programming ---------------------------------------------------{{{
-    call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
-
-  " }}}
-
-  " Specific Lang format/linting --------------------------------------------{{{
-    " call dein#add('honza/vim-snippets')
-    call dein#add('klen/python-mode', {'on_ft': ['python']})
-    call dein#add('jmcantrell/vim-virtualenv')
-    call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
-  " }}}
-
-  " Easier Editor ----------------------------------------------------------{{{
-    call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-  " }}}
-
-  " Extra Features ----------------------------------------------------------{{{
-    call dein#add('mattn/webapi-vim')
-    call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
-
-  " }}}
+" General Programming ---------------------------------------------------{{{
+  call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
 
 " }}}
 
+" Specific Lang format/linting --------------------------------------------{{{
+  " call dein#add('honza/vim-snippets')
+  call dein#add('klen/python-mode', {'on_ft': ['python']})
+  call dein#add('jmcantrell/vim-virtualenv')
+  call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
+" }}}
 
+" Easier Editor ----------------------------------------------------------{{{
+  call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
+" }}}
 
+" Extra Features ----------------------------------------------------------{{{
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
 
-
-
-
+" }}}
 
 
 
