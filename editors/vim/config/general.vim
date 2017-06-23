@@ -372,8 +372,6 @@ endfunction
 " No need for ex mode
   nnoremap Q <nop>
   vnoremap // y/<C-R>"<CR>
-" exit insert, dd line, enter insert
-  inoremap <c-d> <esc>ddi
 
 " exit insert, dd line, enter insert
   inoremap <c-d> <esc>ddi
@@ -482,6 +480,7 @@ endfunction
 
     " Neovim terminal mapping
     tnoremap <Esc> <C-\><C-n>
+
     " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
     " autocmd BufEnter term://* startinsert
     " autocmd TermOpen * set bufhidden=hide
