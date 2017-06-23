@@ -3,7 +3,7 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Utilities  --------------------------------------------------------------{{{
 
-    call dein#add('tomtom/tlib_vim')
+    " call dein#add('tomtom/tlib_vim')
     call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
     call dein#add('sickill/vim-pasta') " context-aware pasting
     call dein#add('kassio/neoterm')
@@ -12,18 +12,10 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
   " General Programming ---------------------------------------------------{{{
     call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
 
-    if executable('ctags')
-      " call dein#add('majutsushi/tagbar')
-"      call dein#add('craigemery/vim-autotag')
-      " call dein#add('xolox/vim-misc')
-      " call dein#add('xolox/vim-easytags', { 'depends': 'xolox/vim-misc'  })
-    endif
-
   " }}}
 
   " Specific Lang format/linting --------------------------------------------{{{
-    call dein#add('honza/vim-snippets')
-
+    " call dein#add('honza/vim-snippets')
     call dein#add('klen/python-mode', {'on_ft': ['python']})
     call dein#add('jmcantrell/vim-virtualenv')
     call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
@@ -31,26 +23,13 @@ let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
 
   " Easier Editor ----------------------------------------------------------{{{
     call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-    " call dein#add('justinmk/vim-sneak')
-    " use s{char}{char} to invoke, remapped to f
   " }}}
 
   " Extra Features ----------------------------------------------------------{{{
     call dein#add('mattn/webapi-vim')
     call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
-    " call dein#add('tpope/vim-fugitive', { 'on_cmd': [ 'Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff', ] })
 
-    " call dein#add('jiangmiao/auto-pairs')
-
-    " call dein#add('junegunn/fzf', { 'build': '~/.fzf/install --all', 'merged': 0 })
-    " call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   " }}}
-
-  " Writing -----------------------------------------------------------------{{{
-    call dein#add('reedes/vim-litecorrect')
-    call dein#add('reedes/vim-textobj-sentence')
-    call dein#add('reedes/vim-textobj-quote')
-  "  }}}
 
 " }}}
 
@@ -373,27 +352,6 @@ endfunction
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 " System Settings  ----------------------------------------------------------{{{
 
 " Reduce the wait time for vim to switch from insert to normal to visual
@@ -474,41 +432,6 @@ endfunction
 " Editor Settings  ----------------------------------------------------------{{{
 
 
-  " Netrw -------------------------------------------------------------------{{{
-"
-"     " nnoremap <C-n> :e .<CR>
-"     let g:netrw_banner = 0
-"     let g:netrw_liststyle = 3
-"     let g:netrw_browse_split = 4 "open files in the previous window
-"     let g:netrw_altv = 1
-"     let g:netrw_winsize = 15
-"
-"     " Netrw settings to looklike nerdtree
-"     " Toggle Vexplore with Ctrl-E
-"     function! ToggleVExplorer()
-"       if exists("t:expl_buf_num")
-"           let expl_win_num = bufwinnr(t:expl_buf_num)
-"           if expl_win_num != -1
-"               let cur_win_nr = winnr()
-"               exec expl_win_num . 'wincmd w'
-"               close
-"               exec cur_win_nr . 'wincmd w'
-"               unlet t:expl_buf_num
-"           else
-"               unlet t:expl_buf_num
-"           endif
-"       else
-"           exec '1wincmd w'
-"           Vexplore
-"           let t:expl_buf_num = bufnr("%")
-"       endif
-"     endfunction
-"     map <silent> <C-\> :call ToggleVExplorer()<CR>
-"     let g:netrw_browse_split = 4
-"     let g:netrw_altv = 1
-"   "}}}
-"
-
   " Fold, gets it's own section  ----------------------------------------------{{{
 
     call dein#add('nelstrom/vim-markdown-folding', {'on_ft': 'markdown'})
@@ -536,15 +459,9 @@ endfunction
     \ "\<Plug>(neosnippet_expand_or_jump)"
     \: "\<TAB>"
 
-
     let g:neosnippet#snippets_directory='~/.vim/snippets'
   "}}}
 
-
-  " Tagbars -----------------------------------------------------------------{{{
-  nmap <F8> :TagbarToggle<CR>
-  " let g:tagbar_width = 20
-  "  }}}
 "}}}
 
 " Extra Tools Settings ------------------------------------------------------{{{
@@ -604,13 +521,6 @@ endfunction
 
 " Language Specifics---------------------------------------------------------{{{
 
-  " Markdown ----------------------------------------------------------------{{{
-    " Auto command specific to markdown
-    au BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
-    au FileType markdown setlocal textwidth=100
-
-    let g:markdown_fenced_languages = ['javascript', 'ruby', 'sh', 'yaml', 'javascript', 'html', 'vim', 'json', 'diff']
-  " }}}
 
   " GoLang-------------------------------------------------------------------{{{
     let g:go_highlight_functions = 1
@@ -643,36 +553,32 @@ endfunction
 
   " Python ------------------------------------------------------------------{{{
 
-    let g:pymode_rope_rename_bind = '<C-c>rr'
+"     let g:pymode_rope_rename_bind = '<C-c>rr'
 
     " PythonMode {{{ -------------------------------------------------------------
-      nmap <silent><Leader>n :PymodeLint<CR>
+"       nmap <silent><Leader>n :PymodeLint<CR>
 
-      let g:pymode_python = 'python3'
-      let g:pymode_breakpoint_bind = '<Leader>B'
-      let g:pymode_lint = 1
-      let g:pymode_lint_on_write = 0
-      let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe', 'pep257']
-      let g:pymode_lint_ignore = ''
-      let g:pymode_virtualenv = 0
-      " Code assist op, completion, refactoring
-      let g:pymode_rope = 1
-
-
-      let g:pymode_rope_completion = 0
-      let g:pymode_rope_complete_on_dot = 1
-
-      " }}}
-
-      " let g:python_host_prog = '/usr/local/bin/python2'
-      " let g:python3_host_prog = '/usr/local/bin/python3'
-      " let $NVIM_PYTHON_LOG_FILE='nvim-python.log'
-      let g:jedi#auto_vim_configuration = 0
-      " let g:jedi#documentation_command = "<leader>k"
-
-      " settin the test runner for vim-test
-      let test#python#runner = 'pytest'
-
+"       let g:pymode_python = 'python3'
+"       let g:pymode_breakpoint_bind = '<Leader>B'
+"       let g:pymode_lint = 1
+"       let g:pymode_lint_on_write = 0
+"       let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe', 'pep257']
+"       let g:pymode_lint_ignore = ''
+"       let g:pymode_virtualenv = 0
+"       " Code assist op, completion, refactoring
+"       let g:pymode_rope = 1
+"
+"
+"       let g:pymode_rope_completion = 0
+"       let g:pymode_rope_complete_on_dot = 1
+"
+"       " }}}
+"
+"       let g:jedi#auto_vim_configuration = 0
+"
+"       " settin the test runner for vim-test
+"       let test#python#runner = 'pytest'
+"
   " }}}
 
 "  }}}
@@ -703,25 +609,25 @@ endfunction
   " imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
-  function! SearchWordWithAg()
-    execute 'Ag' expand('<cword>')
-  endfunction
-
-  function! SearchVisualSelectionWithAg() range
-    let old_reg = getreg('"')
-    let old_regtype = getregtype('"')
-    let old_clipboard = &clipboard
-    set clipboard&
-    normal! ""gvy
-    let selection = getreg('"')
-    call setreg('"', old_reg, old_regtype)
-    let &clipboard = old_clipboard
-    execute 'Ag' selection
-  endfunction
-
-  function! SearchWithAgInDirectory(...)
-    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
-  endfunction
+"  function! SearchWordWithAg()
+"     execute 'Ag' expand('<cword>')
+"   endfunction
+"
+"   function! SearchVisualSelectionWithAg() range
+"     let old_reg = getreg('"')
+"     let old_regtype = getregtype('"')
+"     let old_clipboard = &clipboard
+"     set clipboard&
+"     normal! ""gvy
+"     let selection = getreg('"')
+"     call setreg('"', old_reg, old_regtype)
+"     let &clipboard = old_clipboard
+"     execute 'Ag' selection
+"   endfunction
+" "
+  " function! SearchWithAgInDirectory(...)
+  "   call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+  " endfunction
   " command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args)
 
   " Special mapping for fzf
@@ -754,6 +660,20 @@ endfunction
       nnoremap <Left>  :vertical resize -2<CR>
       nnoremap <Right> :vertical resize +2<CR>
   endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
