@@ -410,30 +410,25 @@ endfunction
 
 " System Settings  ----------------------------------------------------------{{{
 
-  set noswapfile
-  set autoread                        " detect when a file is changed
-  set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-  set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell
+  " set noswapfile
+  " set autoread                        " detect when a file is changed
+  " set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+  " set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+  " set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursor keys wrap too set spell
   " set spell                           " Spell checking on
   " set number                          " setting line numbers
   " set numberwidth=1                   " setting width of line
 
-  set guitablabel=\[%N\]\ %t\ %M
+  " set guitablabel=\[%N\]\ %t\ %M
 
-  " set autochdir
 " helpers for dealing with other people's code
-  nmap \t :set ts=2 sts=2 sw=2 noet<cr>
-  nmap \s :set ts=2 sts=2 sw=2 et<cr>
   set tabstop=2 shiftwidth=2 expandtab
 
 
 " Reduce the wait time for vim to switch from insert to normal to visual
-  set timeoutlen=1000 ttimeoutlen=10
+  " set timeoutlen=1000 ttimeoutlen=10
 
 " Setting up the directories
-  set backup                      " Backups are nice ...
-  set undofile                " So is persistent undo ...
   set undolevels=1000         " Maximum number of changes that can be undone
   set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
   set undodir="$HOME/.VIM_UNDO_FILES"
@@ -446,12 +441,12 @@ endfunction
   let g:is_posix = 1
 
 " Remember cursor position between vim sessions
-  autocmd BufReadPost *
-            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-            \   exe "normal! g'\"" |
-            \ endif
+  " autocmd BufReadPost *
+  "           \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  "           \   exe "normal! g'\"" |
+  "           \ endif
 " center buffer around cursor when opening files
-  autocmd BufRead * normal zz
+  " autocmd BufRead * normal zz
 
 "}}}"
 
@@ -467,15 +462,6 @@ endfunction
   noremap  <silent> <Down> gj
   noremap  <silent> k gk
   noremap  <silent> j gj
-  noremap  <silent> <Home> g<Home>
-  noremap  <silent> <End>  g<End>
-  inoremap <silent> <Home> <C-o>g<Home>
-  inoremap <silent> <End>  <C-o>g<End>
-" force to use homerow instead of arrow for navi
-  nnoremap <Left> :echoe "Use h"<CR>
-  nnoremap <Right> :echoe "Use l"<CR>
-  nnoremap <Up> :echoe "Use k"<CR>
-  nnoremap <Down> :echoe "Use j"<CR>
 " exit insert, dd line, enter insert
   inoremap <c-d> <esc>ddi
   noremap H ^
@@ -488,8 +474,6 @@ endfunction
   nnoremap <C-h> <C-w>h
   nnoremap <C-l> <C-w>l
 " Wrapped lines goes down/up to next row, rather than next line in file.
-  noremap j gj
-  noremap k gk
 " provide hjkl movements in Insert mode via the <Alt> modifier key
   inoremap <A-h> <C-o>h
   inoremap <A-j> <C-o>j
@@ -507,60 +491,17 @@ endfunction
   " map <c-space> /
   nnoremap <silent> <esc> :noh<cr>                " clear search highlighting
 
-" working with tabs
-  nnoremap th  :tabfirst<CR>
-  nnoremap tj  :tabprev<CR>
-  nnoremap tk  :tabnext<CR>
-  nnoremap tl  :tablast<CR>
-  nnoremap tt  :tabedit<Space>
-  nnoremap tn  :tabnext<Space>
-  nnoremap tm  :tabm<Space>
-  nnoremap td  :tabclose<CR>
-  " Opens a new tab with the current buffer's path
-  " Super useful when editing files in the same directory
-  nnoremap te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-
-  " Switch current directory
-  map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" open buffer for scribling
-  map <leader>q :e ~/buffer<cr>
-
-" paste mode, useful for pasting other chunk of code
-  map <leader>pp :setlocal paste!<cr>
-
-" wipout buffer
-  nmap <silent> <leader>b :bw<cr>
-
-" Close current buffer
-  map <leader>bd :Bclose<cr>
-
-" Close all buffers
-  map <leader>ba :1,1000 bd!<cr>
 
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
   vnoremap . :normal .<CR>
 
-" For when you forget to sudo.. Really Write the file.
-  cmap w!! w !sudo tee % >/dev/null
-
 " getting out of insert mode fast!
   imap jk <Esc>l
-
-" delete whole word in insert mode
-  inoremap <c-h> <c-w>
 
 " These create newlines like o and O but stay in normal mode
   nnoremap zj o<Esc>k
   nnoremap zk O<Esc>j
-" Switch between the last two files
-  " imap <BS> <C-w>
-  " imap <C-del> <C-w>
-  " noremap! <C-h> <C-w>
-  " inoremap <C-w> <C-\><C-o>dB
-  " inoremap <C-BS> <C-\><C-o>db
 
   set backspace=indent,eol,start            " Allow backspace to delete through multiple lines
   nnoremap <F5> :source ~/.vim/init.vim<CR> " reload vimrc file
@@ -573,83 +514,51 @@ endfunction
 
 " Editor Settings  ----------------------------------------------------------{{{
 
-  " " UltiSnips ---------------------------------------------------------------{{{
-  "     let g:UltiSnipsExpandTrigger="<tab>"
-  "     let g:UltiSnipsJumpForwardTrigger="<tab>"
-  "     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  "     " inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  " " }}}
 
   " Netrw -------------------------------------------------------------------{{{
-
-    " nnoremap <C-n> :e .<CR>
-    let g:netrw_banner = 0
-    let g:netrw_liststyle = 3
-    let g:netrw_browse_split = 4 "open files in the previous window
-    let g:netrw_altv = 1
-    let g:netrw_winsize = 15
-
-    " Netrw settings to looklike nerdtree
-    " Toggle Vexplore with Ctrl-E
-    function! ToggleVExplorer()
-      if exists("t:expl_buf_num")
-          let expl_win_num = bufwinnr(t:expl_buf_num)
-          if expl_win_num != -1
-              let cur_win_nr = winnr()
-              exec expl_win_num . 'wincmd w'
-              close
-              exec cur_win_nr . 'wincmd w'
-              unlet t:expl_buf_num
-          else
-              unlet t:expl_buf_num
-          endif
-      else
-          exec '1wincmd w'
-          Vexplore
-          let t:expl_buf_num = bufnr("%")
-      endif
-    endfunction
-    map <silent> <C-\> :call ToggleVExplorer()<CR>
-    let g:netrw_browse_split = 4
-    let g:netrw_altv = 1
-  "}}}
-
+"
+"     " nnoremap <C-n> :e .<CR>
+"     let g:netrw_banner = 0
+"     let g:netrw_liststyle = 3
+"     let g:netrw_browse_split = 4 "open files in the previous window
+"     let g:netrw_altv = 1
+"     let g:netrw_winsize = 15
+"
+"     " Netrw settings to looklike nerdtree
+"     " Toggle Vexplore with Ctrl-E
+"     function! ToggleVExplorer()
+"       if exists("t:expl_buf_num")
+"           let expl_win_num = bufwinnr(t:expl_buf_num)
+"           if expl_win_num != -1
+"               let cur_win_nr = winnr()
+"               exec expl_win_num . 'wincmd w'
+"               close
+"               exec cur_win_nr . 'wincmd w'
+"               unlet t:expl_buf_num
+"           else
+"               unlet t:expl_buf_num
+"           endif
+"       else
+"           exec '1wincmd w'
+"           Vexplore
+"           let t:expl_buf_num = bufnr("%")
+"       endif
+"     endfunction
+"     map <silent> <C-\> :call ToggleVExplorer()<CR>
+"     let g:netrw_browse_split = 4
+"     let g:netrw_altv = 1
+"   "}}}
+"
 
   " Fold, gets it's own section  ----------------------------------------------{{{
 
-    call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
     call dein#add('nelstrom/vim-markdown-folding', {'on_ft': 'markdown'})
 
-  " Custom folding function
-    function! MyFoldText() " {{{
-        let line = getline(v:foldstart)
-        let nucolwidth = &fdc + &number * &numberwidth
-        let windowwidth = winwidth(0) - nucolwidth - 3
-        let foldedlinecount = v:foldend - v:foldstart
-
-        " expand tabs into spaces
-        let onetab = strpart('          ', 0, &tabstop)
-        let line = substitute(line, '\t', onetab, 'g')
-
-        let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-        " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-        " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
-        let fillcharcount = windowwidth - len(line)
-        " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
-        return line . '…' . repeat(" ",fillcharcount)
-    endfunction " }}}
-
-    set foldtext=MyFoldText()
 
   " Saving spot for folding
     autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
     autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-    set foldlevel=99                                " Dont fold if not specified for filetype below
-
-  " Space to toggle folds.
-    " nnoremap <Space> za
-    " vnoremap <Space> za
 
   " Working with vim file
     autocmd FileType vim setlocal foldmethod=marker
@@ -729,49 +638,9 @@ endfunction
   "
 " }}}
 
-" Themes, Visual, etc  ------------------------------------------------------{{{
-  syntax on
-  execute "set background=".$BACKGROUND
-  execute "colorscheme ".$THEME
-
-  function! ToggleBG()                    " Allow to trigger background
-      let s:tbg = &background
-      " Inversion
-      if s:tbg == "dark"
-          set background=light
-      else
-          set background=dark
-      endif
-  endfunction
-  noremap <leader>bg :call ToggleBG()<CR>
-
-  if isdirectory(expand("~/.vim/dein/repos/github.com/vim-airline/vim-airline-themes"))
-      if !exists('g:airline_theme')
-          " let g:airline_theme = 'solarized'
-          execute "let g:airline_theme=""'".$THEME."'"
-          let g:airline#extensions#tabline#enabled = 1          " Leave this to show tab at the top
-          let g:airline#extensions#tabline#show_buffers = 0
-      endif
-      if !exists('g:airline_powerline_fonts')
-          " Use the default set of separators with a few customizations
-          let g:airline_left_sep='›'  " Slightly fancier than '>'
-          let g:airline_right_sep='‹' " Slightly fancier than '<'
-      endif
-  endif
-
-"}}}
 
 " Code formatting -----------------------------------------------------------{{{
   " automatic pairing of bracket, quotes, etc...
-
-" ,f to format code, requires formatters: read the docs
-  noremap <silent> <leader>f :Neoformat<CR>
-
-" typical comment mapping
-  vnoremap <c-/> :tcomment<cr>
-  nnoremap <c-/> :tcomment<cr>
-  inoremap <c-/> :tcomment<cr>
-" }}}
 
 
 " Language Specifics---------------------------------------------------------{{{
@@ -919,27 +788,6 @@ endfunction
   " }
 "}}}
 
-" Linting -------------------------------------------------------------------{{{
-
-  autocmd! BufWritePost * Neomake
-  " let g:neomake_open_list = 2
-
-  " Neomake
-  " ---------
-  let g:neomake_warning_sign = {'text': '•'}
-  let g:neomake_error_sign = {'text': '•'}
-  let g:neomake_open_list = 0
-  let g:neomake_verbose = 1
-  let g:airline#extensions#neomake#enabled = 0
-
-  if ! empty(g:python3_host_prog)
-    let g:neomake_python_python_exe = g:python3_host_prog
-  endif
-
-
-
-"}}}
-
 " Extra
   if get(g:, 'elite_mode')
       nnoremap <Up>    :resize -2<CR>
@@ -977,76 +825,3 @@ endfunction
 command! -register DefaultWorkspace call DefaultWorkspace()
 
 " ######################### Normal mode mapping
-
-" ################################ General  Vim Custom Mapping
-
-
-  let g:spf13_no_wrapRelMotion = 1
-  if !exists('g:spf13_no_wrapRelMotion')
-     " Same for 0, home, end, etc
-     function! WrapRelativeMotion(key, ...)
-         let vis_sel=""
-         if a:0
-             let vis_sel="gv"
-         endif
-         if &wrap
-             execute "normal!" vis_sel . "g" . a:key
-         else
-             execute "normal!" vis_sel . a:key
-         endif
-     endfunction
-
-     " Map g* keys in Normal, Operator-pending, and Visual+select
-     noremap $ :call WrapRelativeMotion("$")<CR>
-     noremap <End> :call WrapRelativeMotion("$")<CR>
-     noremap 0 :call WrapRelativeMotion("0")<CR>
-     noremap <Home> :call WrapRelativeMotion("0")<CR>
-     noremap ^ :call WrapRelativeMotion("^")<CR>
-     " Overwrite the operator pending $/<End> mappings from above
-     " to force inclusive motion with :execute normal!
-     onoremap $ v:call WrapRelativeMotion("$")<CR>
-     onoremap <End> v:call WrapRelativeMotion("$")<CR>
-     " Overwrite the Visual+select mode mappings from above
-     " to ensure the correct vis_sel flag is passed to function
-     vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-     vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-     vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-     vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-     vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
-  endif
-
-
-
-" ################################### Vim Behavior on command
-
-
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
-endif
-
-
-if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
-endif
