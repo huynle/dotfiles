@@ -203,12 +203,20 @@ if dein#tap('vim-go')
 		\ | nmap <Leader>goe  <Plug>(go-referrers)
 		\ | nmap <Leader>gor  <Plug>(go-run)
 		\ | nmap <Leader>gov  <Plug>(go-vet)
+    \ | nmap <Leader>got  <Plug>(go-test)
 endif
 
 if dein#tap('python-mode')
-  
+
 endif
 
+if dein#tap('vim-test')
+  nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>T :TestFile<CR>
+  nmap <silent> <leader>a :TestSuite<CR>
+  nmap <silent> <leader>l :TestLast<CR>
+  nmap <silent> <leader>g :TestVisit<CR>
+endif
 
 if dein#tap('phpcomplete-extended')
 	autocmd MyAutoCmd FileType php

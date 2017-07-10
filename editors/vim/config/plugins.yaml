@@ -93,6 +93,8 @@
     let g:pymode=1
     let g:pymode_motion=1
 
+- { repo: janko-m/vim-test, on_ft: [ python, go ]}
+
 - { repo: vim-python/python-syntax, on_ft: python }
 - { repo: Vimjas/vim-python-pep8-indent, on_ft: python }
 - { repo: vim-scripts/python_match.vim, on_ft: python }
@@ -175,8 +177,8 @@
 # ---------
 - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> }}
 - { repo: rhysd/accelerated-jk, on_map: { n: <Plug> }}
-- { repo: vim-airline/vim-airline }
-- { repo: vim-airline/vim-airline-themes }
+# - { repo: vim-airline/vim-airline }
+# - { repo: vim-airline/vim-airline-themes }
 
 - repo: airblade/vim-gitgutter
   on_path: .*
