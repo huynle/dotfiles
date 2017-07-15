@@ -48,6 +48,3 @@ windows:
     - vim
   - journal:
     - journal
-  - dotfiles:
-    - cd ~/.dotfiles
-    - vim
