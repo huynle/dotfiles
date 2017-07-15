@@ -1,9 +1,10 @@
-# Dotfiles
+# Dotfiles Features
 
-These dotfiles use [Dotbot](https://github.com/anishathalye/dotbot) for installation.
-
-# Inspiration
-- https://github.com/mhartington/dotfiles
+- Dotfiles are install with setup script based on profiles
+    - Credit and inspiration from [mhartington](https://github.com/mhartington/dotfiles)
+- Extensive Vim configuration based off [rafi](https://github.com/rafi/vim-config)
+- Hugo is used to write "journal" entries
+    - type "journal" and automatic creation of Hugo blog entry is created in folder
 
 
 ## Dependencies
@@ -11,11 +12,12 @@ These dotfiles use [Dotbot](https://github.com/anishathalye/dotbot) for installa
 * general
     * `python`
     * `git`
+    * `hugo`
 
 ## Installation
 
 ```bash
-~$ git clone --recursive https://github.com/vsund/dotfiles .dotfiles
+~$ git clone --recursive https://github.com/huynle/dotfiles.git .dotfiles
 ```
 
 For installing a predefined profile:
@@ -50,20 +52,6 @@ meta/profiles/
 ```
 meta/configs/
 ├── bash.yaml
-├── dunst.yaml
-├── fonts.yaml
 ├── git.yaml
-├── gnupg.yaml
-├── gtk.yaml
-├── i3.yaml
-├── icons.yaml
-├── parcellite.yaml
-├── profile.yaml
-├── qt.yaml
-├── teiler.yaml
-├── terminal-colors.yaml
-├── termite.yaml
 ├── vim.yaml
-├── x11.yaml
-└── youtube-dl.yaml
 ```
