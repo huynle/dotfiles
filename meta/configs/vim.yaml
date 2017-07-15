@@ -1,7 +1,7 @@
 - link:
     ~/.vim:   editors/vim
     ~/.config/nvim: editors/vim
-    ~/.vimrc: editors/vim/init.vim
+    ~/.vimrc: editors/vim/vimrc
     # ~/.: editors/vim/vimrv.bundles
 
 # - shell:

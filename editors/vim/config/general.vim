@@ -1,52 +1,36 @@
-
-let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
-
-  " Utilities  --------------------------------------------------------------{{{
-
-    " call dein#add('tomtom/tlib_vim')
-    call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
-    call dein#add('sickill/vim-pasta') " context-aware pasting
-    call dein#add('kassio/neoterm')
-  "}}}
-
-  " General Programming ---------------------------------------------------{{{
-    call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
-
-  " }}}
-
-  " Specific Lang format/linting --------------------------------------------{{{
-    " call dein#add('honza/vim-snippets')
-    call dein#add('klen/python-mode', {'on_ft': ['python']})
-    call dein#add('jmcantrell/vim-virtualenv')
-    call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
-  " }}}
-
-  " Easier Editor ----------------------------------------------------------{{{
-    call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-  " }}}
-
-  " Extra Features ----------------------------------------------------------{{{
-    call dein#add('mattn/webapi-vim')
-    call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
-
-  " }}}
-
-" }}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"
+"
+" " Utilities  --------------------------------------------------------------{{{
+"
+"   " call dein#add('tomtom/tlib_vim')
+"   call dein#add('tpope/vim-repeat') " enables repeating other supported plugins with the . command
+"   call dein#add('sickill/vim-pasta') " context-aware pasting
+"   call dein#add('kassio/neoterm')
+" "}}}
+"
+" " General Programming ---------------------------------------------------{{{
+"   " call dein#add('janko-m/vim-test', { 'depends': "neoterm"})
+"
+" " }}}
+"
+" " Specific Lang format/linting --------------------------------------------{{{
+"   " call dein#add('honza/vim-snippets')
+"   call dein#add('klen/python-mode', {'on_ft': ['python']})
+"   call dein#add('jmcantrell/vim-virtualenv')
+"   call dein#add('fisadev/vim-isort', {'autoload': {'filetypes': ['python']}})
+" " }}}
+"
+" " Easier Editor ----------------------------------------------------------{{{
+"   call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
+" " }}}
+"
+" " Extra Features ----------------------------------------------------------{{{
+"   call dein#add('mattn/webapi-vim')
+"   call dein#add('mattn/gist-vim', { 'depends': 'webapi-vim' })
+"
+" " }}}
+"
+"
 
 
 
@@ -196,7 +180,7 @@ if has('nvim')
 	" https://github.com/neovim/neovim/issues/2017
 	set ttimeoutlen=-1
 else
-	set ttimeoutlen=250
+	set ttimeoutlen=10
 endif
 
 " }}}
@@ -468,25 +452,25 @@ endfunction
 
     " let test#strategy = "neoterm"
 
-    nmap <silent> <leader>t :TestNearest<CR>
-    nmap <silent> <leader>T :TestFile<CR>
-    nmap <silent> <leader>a :TestSuite<CR>
-    nmap <silent> <leader>l :TestLast<CR>
-    nmap <silent> <leader>g :TestVisit<CR>
+"     nmap <silent> <leader>t :TestNearest<CR>
+"     nmap <silent> <leader>T :TestFile<CR>
+"     nmap <silent> <leader>a :TestSuite<CR>
+"     nmap <silent> <leader>l :TestLast<CR>
+"     nmap <silent> <leader>g :TestVisit<CR>
   " }}}
 
   " Nvim terminal -------------------------------------------------------------{{{
 
 
     " Neovim terminal mapping
-    tnoremap <Esc> <C-\><C-n>
+    " tnoremap <Esc> <C-\><C-n>
 
     " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
     " autocmd BufEnter term://* startinsert
     " autocmd TermOpen * set bufhidden=hide
 
     " setting buffer for fzf to use
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
     " change cursor to bar in insert mode
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -529,16 +513,16 @@ endfunction
     let g:go_highlight_build_constraints = 1
     let g:go_fmt_command = "goimports"
 
-    " autocommand for golang specifics
-    au FileType go nmap <Leader>] <Plug>(go-implements)
-    au FileType go nmap <Leader>i <Plug>(go-info)
-    au FileType go nmap <Leader>h <Plug>(go-rename)
-    au FileType go nmap <leader>r <Plug>(go-run)
-    au FileType go nmap <leader>b <Plug>(go-build)
-    au FileType go nmap <leader>t <Plug>(go-test)
-    au FileType go nmap <Leader>gd <Plug>(go-doc)
-    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-    au FileType go nmap <leader>co <Plug>(go-coverage)
+"     " autocommand for golang specifics
+"     au FileType go nmap <Leader>] <Plug>(go-implements)
+"     au FileType go nmap <Leader>i <Plug>(go-info)
+"     au FileType go nmap <Leader>h <Plug>(go-rename)
+"     au FileType go nmap <leader>r <Plug>(go-run)
+"     au FileType go nmap <leader>b <Plug>(go-build)
+"     au FileType go nmap <leader>t <Plug>(go-test)
+"     au FileType go nmap <Leader>gd <Plug>(go-doc)
+"     au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+"     au FileType go nmap <leader>co <Plug>(go-coverage)
 
     " deoplete-go
     let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'

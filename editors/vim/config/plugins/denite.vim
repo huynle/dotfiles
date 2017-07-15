@@ -92,6 +92,7 @@ let normal_mode_mappings = [
 for m in insert_mode_mappings
 	call denite#custom#map('insert', m[0], m[1], m[2])
 endfor
+
 for m in normal_mode_mappings
 	call denite#custom#map('normal', m[0], m[1], m[2])
 endfor
