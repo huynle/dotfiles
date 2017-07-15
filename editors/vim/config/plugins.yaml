@@ -138,7 +138,7 @@
 - { repo: Shougo/vinarise.vim, on_cmd: Vinarise }
 - { repo: kana/vim-niceblock, on_map: { x: <Plug> }}
 - { repo: guns/xterm-color-table.vim, on_cmd: XtermColorTable }
-- { repo: mbbill/undotree, on_cmdt: UndotreeToggle }
+- { repo: mbbill/undotree, on_cmd: UndotreeToggle }
 - { repo: metakirby5/codi.vim, on_cmd: Codi, if: empty($VIM_MINIMAL) }
 - { repo: Shougo/vimproc.vim, build: make, on_func: vimproc# }
 - { repo: reedes/vim-wordy, on_cmd: [ Wordy, NextWordy, PrevWordy ]}

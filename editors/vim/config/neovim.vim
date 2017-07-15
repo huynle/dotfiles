@@ -1,4 +1,3 @@
-
 " Write history on idle
 autocmd MyAutoCmd CursorHold * if exists(':rshada') | rshada | wshada | endif
 
@@ -8,6 +7,5 @@ if isdirectory($VARPATH.'/venv/neovim2')
 endif
 
 if isdirectory($VARPATH.'/venv/neovim3')
-	" let g:python3_host_prog = $VARPATH.'/venv/neovim3/bin/python'
-  let g:python3_host_prog = '/home/hle/.virtualenvs/nvim/bin/python3'
+	let g:python3_host_prog = $VARPATH.'/venv/neovim3/bin/python'
 endif
