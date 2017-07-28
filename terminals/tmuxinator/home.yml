@@ -43,8 +43,7 @@ root: ~/
 #   - logs: tail -f log/development.log
 
 windows:
-  - autoxiu:
-    - z autoxiu
-    - vim
+  - home:
+    - cd ~
   - journal:
     - journal

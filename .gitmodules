@@ -5,3 +5,6 @@
 [submodule "shells/z"]
 	path = shells/z
 	url = https://github.com/rupa/z.git
+[submodule "editors/vim"]
+	path = editors/vim
+	url = https://github.com/huynle/vim-config.git
