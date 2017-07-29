@@ -1,9 +1,9 @@
 bash
 git
 ssh
-terminator
 remmina
 zsh
 vim
 tmux
 tmuxinator
+ninja
