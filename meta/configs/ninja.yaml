@@ -1,6 +1,7 @@
-- shell:
-    - cd ~/.ninja && ./configure.py --bootstrap
-
 - link:
     ~/.ninja: src/dev/ninja
     ~/bin/ninja: src/dev/ninja/ninja
+
+- shell:
+    - cd ~/.ninja && ./configure.py --bootstrap
+

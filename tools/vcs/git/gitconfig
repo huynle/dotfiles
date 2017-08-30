@@ -1,18 +1,27 @@
 [user]
-	email = dacrazyazn@gmail.com
-	name = Huy Le
+  email = dacrazyazn@gmail.com
+  name = Huy Le
+
 [merge]
-	ff = only
+  ff = only
+
 [mergetool]
-	keepBackup = false
+  keepBackup = false
+
+[difftool]
+  keepBackup = false
+  tool = kdiff3
+
 [push]
-	default = current
+  default = current
+
 [core]
-	editor = vim
-	excludesfile = /home/hle/.gitignore
+  editor = vim
+  excludesfile = /home/hle/.gitignore
   autocrlf = input
 
 [fetch]
   prune = true
+
 [rebase]
   autosquash = true

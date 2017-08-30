@@ -12,12 +12,15 @@ PROFILES_DIR="profiles"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
+BIN="~/bin"
+
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
 cd "${BASE_DIR}"
 git submodule update --init --recursive --remote
 
+mkdir -p "${BIN}"
 
 while IFS= read -r config; do
     CONFIGS+=" ${config}"
