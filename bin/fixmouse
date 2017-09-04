@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# This usually happens when you disable your touchpad and then suspend your computer. To fix this just run this command:
+
+gconftool-2 --set --type boolean /desktop/gnome/peripherals/touchpad/touchpad_enabled true

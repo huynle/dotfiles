@@ -1,0 +1,8 @@
+name: mcu
+
+windows:
+  - home:
+      layout: main-vertical
+      panes:
+        - #empty
+        - vim README.md

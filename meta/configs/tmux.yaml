@@ -1,5 +1,6 @@
 - shell:
    - cd ~/.dotfiles/src/dev/tmux && sh autogen.sh && ./configure && make
+   # - ./.dotfiles/scripts/tmux_install.sh
 
 - link:
    ~/bin/tmux: src/dev/tmux/tmux

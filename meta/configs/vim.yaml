@@ -4,6 +4,8 @@
     ~/.vimrc: editors/vim/vimrc
     # ~/.: editors/vim/vimrv.bundles
 
+- shell:
+    - source editors/vim/venv.sh
 # - shell:
 #     - [vim -c 'PluginInstall' +qall, Installing vim plugins]
 # - shell:

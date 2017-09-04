@@ -1,15 +1,11 @@
-# ~/.tmuxinator/monitor.yml
-
 name: px4
-root: ~/src/Firmware
-# pre-window: source ~/Projects/build-qgroundcontrol-Desktop_Qt_5_7_1_GCC_64bit-Debug/debug/qgroundcontrol-start.sh
 
 windows:
   - groundstation:
       layout: tiled
       panes:
         - qgroundcontrol:
-          - source ~/Projects/build-qgroundcontrol-Desktop_Qt_5_7_1_GCC_64bit-Debug/debug/qgroundcontrol-start.sh
+          - z qgroundcontrol && source qgroundcontrol-start.sh
         - #empty
   - journal:
       - journal
