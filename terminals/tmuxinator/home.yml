@@ -1,7 +1,7 @@
 # ~/.tmuxinator/monitor.yml
 
 name: home
-root: ~/
+# root: ~/
 
 # Optional tmux socket
 # socket_name: foo
@@ -30,24 +30,14 @@ root: ~/
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t monitor
 
-# windows:
-#   - editor:
-#       layout: main-vertical
-#       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-#       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-#       # synchronize: after
-#       panes:
-#         - vim
-#         - guard
-#   - server: bundle exec rails s
-#   - logs: tail -f log/development.log
-
 windows:
   - home:
-    - #empty
+      - #empty
   - journal:
     - journal
   - hizzle:
-    layout: main-vertical
-    panes:
-      - vim
+      layout: main-vertical
+      panes:
+        - z hizzle && vim
+        - z hizzle && hugo server -D
+        - #empty
