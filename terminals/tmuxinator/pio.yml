@@ -1,0 +1,16 @@
+name: pio
+
+pre:
+  - mkdir -p <%= @args[0] %>
+
+windows:
+  - src:
+      layout: 53b4,212x61,0,0{143x61,0,0[143x55,0,0,0,143x5,0,56,1],68x61,144,0[68x38,144,0,2,68x22,144,39,3]}
+      pre: cd <%= @args[0] %>
+      panes:
+        - vim
+        -
+        - vim README.md
+        - vim platformio.ini
+  - journal:
+      - journal

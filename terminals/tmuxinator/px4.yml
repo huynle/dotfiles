@@ -2,10 +2,11 @@ name: px4
 
 windows:
   - groundstation:
-      layout: tiled
+      layout: main-vertical
       panes:
-        - qgroundcontrol:
-          - z qgroundcontrol && source qgroundcontrol-start.sh
+        - #empty
+        - z qgroundcontrol && source qgroundcontrol-start.sh
+        - #empty
         - #empty
   - journal:
       - journal

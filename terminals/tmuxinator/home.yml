@@ -1,4 +1,4 @@
-# ~/.tmuxinator/monitor.yml
+# ~/.tmuxinaz itor/monitor.yml
 
 name: home
 # root: ~/
@@ -30,17 +30,17 @@ name: home
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t monitor
 
-
+pre_window: z hizzle
 windows:
   - home:
       layout: main-vertical
       panes:
         - #empty
         - journal
-        - z essentials && vim vim.md
+        - cd content/essentials && vim vim.md
   - hizzle:
       layout: main-vertical
       panes:
-        - z hizzle && vim
-        - z hizzle && hugo server -D
+        - vim
+        - hugo server -D
         - #empty
