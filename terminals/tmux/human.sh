@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tm_icon="♟"
+tm_icon="☼"
 tm_color_background=colour234
 tm_color_active=colour118
 tm_color_inactive=colour241
