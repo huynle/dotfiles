@@ -1,2 +1,7 @@
+- shell:
+   - cd ~/.dotfiles/src/dev/tmux && sh autogen.sh && ./configure && make
+
 - link:
-    ~/.tmux.conf: terminals/tmux/tmux.conf
+   ~/bin/tmux: src/dev/tmux/tmux
+   ~/.tmux.conf: terminals/tmux/tmux.conf
+

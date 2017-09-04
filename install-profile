@@ -17,6 +17,7 @@ BIN="~/bin"
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
+# do an update on all git submodule
 cd "${BASE_DIR}"
 git submodule update --init --recursive --remote
 

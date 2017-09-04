@@ -12,3 +12,6 @@
 	path = src/dev/ninja
 	url = https://github.com/ninja-build/ninja.git
 	branch = release
+[submodule "src/dev/tmux"]
+	path = src/dev/tmux
+	url = https://github.com/tmux/tmux.git

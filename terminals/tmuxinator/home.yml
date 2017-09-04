@@ -44,6 +44,10 @@ root: ~/
 
 windows:
   - home:
-    - cd ~
+    - #empty
   - journal:
     - journal
+  - hizzle:
+    layout: main-vertical
+    panes:
+      - vim

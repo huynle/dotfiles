@@ -1,2 +1,5 @@
+- shell:
+     - sudo gem install tmuxinator
+
 - link:
      ~/.tmuxinator: terminals/tmuxinator
