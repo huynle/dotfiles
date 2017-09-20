@@ -11,6 +11,6 @@ windows:
         - vim
         -
         - vim README.md
-        - vim platformio.ini
+        - pio device monitor
   - journal:
       - journal
