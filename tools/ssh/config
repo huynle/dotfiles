@@ -3,6 +3,11 @@ Host bitbucket.org
  IdentityFile ~/.ssh/id_bitbucket
  Hostname bitbucket.org
 
+Host gitlab.com
+ User git
+ IdentityFile ~/.ssh/id_gitlab
+ Hostname gitlab.com
+
 Host github.com
  User git
  IdentityFile ~/.ssh/id_github
