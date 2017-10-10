@@ -50,5 +50,6 @@ Host beast
  User hle
  Port 22
  IdentitiesOnly yes
+ LocalForward 1313 localhost:1313
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116
