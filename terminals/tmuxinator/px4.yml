@@ -8,5 +8,3 @@ windows:
         - z qgroundcontrol && source qgroundcontrol-start.sh
         - #empty
         - #empty
-  - journal:
-      - journal

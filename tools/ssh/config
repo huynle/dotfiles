@@ -25,11 +25,11 @@ Host tnttportland.org
  IdentityFile ~/.ssh/id_hizzle_cloud
  Hostname tnttportland.org
 
-Host tiny_qnap
- User admin
+Host tiny
+ User hle
  Port 12121
  IdentitiesOnly yes
- IdentityFile ~/.ssh/id_tiny_admin
+ IdentityFile ~/.ssh/id_tiny
  Hostname 10.1.10.110
 
 Host tiny_root
@@ -53,3 +53,10 @@ Host beast
  LocalForward 1313 localhost:1313
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116
+
+Host mini
+ User admin
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_mini
+ Hostname 10.1.10.123
