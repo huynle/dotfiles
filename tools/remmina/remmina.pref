@@ -65,6 +65,7 @@ rdp_quality_9=80
 rdp_deviceScaleFactor=0
 rdp_desktopScaleFactor=0
 rdp_desktopOrientation=0
+fullscreen_toolbar_visibility=0
 
 [remmina]
 sound=off
