@@ -7,6 +7,7 @@ alias tns='tmux new-session -s'
 alias tls='tmux ls'
 alias tss='tmux switch -t'
 alias tks='tmux kill-session -t'
+alias tk='tmux kill-session'
 alias tkkk='tmux kill-server' # extra 'k' to make sure
 alias tmd='tmux detach'
 
