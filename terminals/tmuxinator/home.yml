@@ -30,17 +30,17 @@ name: home
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t monitor
 
-pre_window: z hizzle
+# pre_window: z hizzle
 windows:
-  - home:
-      layout: main-vertical
+  - working:
+      layout: even-horizontal
       panes:
         - #empty
         - journal
-        - cd content/essentials && vim vim.md
-  - hizzle:
+  - servers:
       layout: main-vertical
       panes:
-        - vim
-        - hugo server -D
         - #empty
+        - z hizzle && hugo server -D
+        - workon hass && hass
+        - z hizzle && cd content/essentials && vim vim.md
