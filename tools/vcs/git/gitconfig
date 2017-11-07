@@ -4,9 +4,12 @@
 
 [merge]
   ff = only
+  tool = vimdiff
+  conflictstyle = diff3
 
 [mergetool]
   keepBackup = false
+  prompt = false
 
 [difftool]
   keepBackup = false
