@@ -38,9 +38,9 @@ windows:
         - #empty
         - journal
   - servers:
-      layout: main-vertical
+      layout: even-vertical
       panes:
-        - #empty
         - z hizzle && hugo server -D
         - workon hass && hass
-        - z hizzle && cd content/essentials && vim vim.md
+        - z notebooks && workon jupyter && jupyter notebook --no-browser
+        - #empty
