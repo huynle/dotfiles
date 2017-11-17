@@ -35,7 +35,6 @@ for config ($ZSH/**/*completion.zsh) source $config
 
 source /usr/local/bin/virtualenvwrapper.sh
 
-alias journal=~/.dotfiles/journal.sh
 
 # [ -z "$TMUX" ] && export TERM=xterm-256color-italic
 

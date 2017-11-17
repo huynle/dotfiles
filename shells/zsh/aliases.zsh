@@ -37,6 +37,11 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # File size
 alias fs="stat -f \"%z bytes\""
 
+# Tmuxinator
+alias mux="tmuxinator"
+
+# quickaccess to journal
+alias journal=~/.dotfiles/journal.sh
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do

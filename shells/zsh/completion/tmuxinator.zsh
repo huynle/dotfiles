@@ -18,7 +18,6 @@ _tmuxinator() {
 }
 
 compdef _tmuxinator tmuxinator mux
-alias mux="tmuxinator"
 
 # Local Variables:
 # mode: Shell-Script
