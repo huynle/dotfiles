@@ -50,10 +50,18 @@ Host beast
  User hle
  Port 22
  IdentitiesOnly yes
+ ## Hizzle Blog
  LocalForward 1313 localhost:1313
+ ## Aewoah Blog
+ LocalForward 1314 localhost:1314
+ ## Home Assistant
  LocalForward 8123 localhost:8123
- LocalForward 8080 10.1.10.110:8080
+ ## Tiny web server
+ LocalForward 8080 localhost:8080
+ ## Jupyter Notebook
  LocalForward 8889 localhost:8889
+  ## WDB for python
+ LocalForward 1984 localhost:1984
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116
 

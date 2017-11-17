@@ -3,6 +3,7 @@
 export PATH=$DOTFILES/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # editors
 export EDITOR='nvim'
