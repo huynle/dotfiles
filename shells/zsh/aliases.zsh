@@ -40,6 +40,9 @@ alias fs="stat -f \"%z bytes\""
 # Tmuxinator
 alias mux="tmuxinator"
 
+# Start OpenVPNO
+alias vpn="sudo service openvpn start"
+
 # quickaccess to journal
 alias journal=~/.dotfiles/journal.sh
 

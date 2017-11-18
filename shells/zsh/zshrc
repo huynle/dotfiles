@@ -14,6 +14,9 @@ export REPORTTIME=10
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=xterm-256color
 
+# getting characters to show up properly
+export LANG=en_US.UTF-8
+
 # define the code directory
 # This is where my code exists and where I want the `c` autocomplete to work from exclusively
 if [[ -d ~/code ]]; then
