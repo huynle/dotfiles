@@ -3,6 +3,6 @@
    # - ./.dotfiles/scripts/tmux_install.sh
 
 - link:
-   ~/bin/tmux: src/dev/tmux/tmux
+   ~/.local/bin/tmux: src/dev/tmux/tmux
    ~/.tmux.conf: terminals/tmux/tmux.conf
-
+   ~/.tmux/plugins: terminals/tmux/tmux

@@ -45,3 +45,4 @@ windows:
         - workon hass && hass
         - z notebooks && workon jupyter && jupyter notebook --no-browser
         - WDB_NO_BROWSER_AUTO_OPEN=False wdb.server.py
+        - cloudcmd

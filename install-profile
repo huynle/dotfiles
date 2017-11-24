@@ -12,7 +12,7 @@ PROFILES_DIR="profiles"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
-BIN="${HOME}/bin"
+BIN="${HOME}/.local/bin"
 
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

@@ -3,5 +3,5 @@
 
 - link:
     ~/.ninja: src/dev/ninja
-    ~/bin/ninja: src/dev/ninja/ninja
+    ~/.local/bin/ninja: src/dev/ninja/ninja
 

@@ -60,8 +60,13 @@ Host beast
  LocalForward 8080 localhost:8080
  ## Jupyter Notebook
  LocalForward 8889 localhost:8889
-  ## WDB for python
+ ## WDB for python
  LocalForward 1984 localhost:1984
+ ## Cloud commander
+ LocalForward 8000 localhost:8000
+ ## rTail log viewer
+ LocalForward 7777 localhost:7777
+
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116
 
