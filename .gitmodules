@@ -15,6 +15,6 @@
 [submodule "src/dev/tmux"]
 	path = src/dev/tmux
 	url = https://github.com/tmux/tmux.git
-[submodule "terminals/tmux/tmux/plugins/tpm"]
-	path = terminals/tmux/tmux/plugins/tpm
+[submodule "terminals/tmux/plugins/tpm"]
+	path = terminals/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
