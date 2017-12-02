@@ -1,0 +1,7 @@
+- shell:
+    - cd ~/.dotfiles/src/dev/ninja && ./configure.py --bootstrap
+
+- link:
+    ~/.ninja: src/dev/ninja
+    ~/.local/bin/ninja: src/dev/ninja/ninja
+

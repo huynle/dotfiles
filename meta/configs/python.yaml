@@ -1,0 +1,4 @@
+- link:
+    ~/.pdbrc.py: languages/python/pdbrc.py
+    ~/.pdbrc: languages/python/pdbrc
+

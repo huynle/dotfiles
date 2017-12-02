@@ -1,5 +1,13 @@
 # reload zsh config
 alias reload!='RELOAD=1 source ~/.zshrc'
+## Another way of reloading
+function _accept-line() {
+    if [[ $BUFFER == "." ]]; then
+        BUFFER="source ~/.zshrc"
+    fi
+    zle .accept-line
+}
+zle -N accept-line _accept-line
 
 # use neovim as editor
 alias vim="nvim"

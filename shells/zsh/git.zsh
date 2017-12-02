@@ -5,14 +5,16 @@ alias gl='git pull'
 alias gp='git push'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gs='git s'
-alias gss='git stash save'
-alias gsp='git stash pop'
+alias gs='git status'
+# alias gss='git stash save'
+# alias gsp='git stash pop'
 alias gmv='git mv'
 alias grm='git rm'
 alias grn='git-rename'
-alias glog="git l"
+alias glog="git log"
+alias gloga="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias gaca="git add . && git commit --amend"
+alias gac="git add . && git commit -m"
 
 # alias git-amend='git commit --amend -C HEAD'
 alias git-undo='git reset --soft HEAD~1'
@@ -44,3 +46,16 @@ function g() {
         git s
     fi
 }
+
+
+# Submodule (S)
+alias gS='git submodule'
+alias gSa='git submodule add'
+alias gSf='git submodule foreach'
+alias gSi='git submodule init'
+alias gSI='git submodule update --init --recursive'
+alias gSl='git submodule status'
+alias gSm='git-submodule-move'
+alias gSs='git submodule sync'
+alias gSu='git submodule foreach git pull origin master'
+alias gSx='git-submodule-remove'
