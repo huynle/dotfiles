@@ -50,4 +50,4 @@ windows:
   - logs:
       layout: even-vertical
       panes:
-        - journalctl -f
+        - journalctl -f | lnav
