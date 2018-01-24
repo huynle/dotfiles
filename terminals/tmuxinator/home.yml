@@ -51,3 +51,4 @@ windows:
       layout: even-vertical
       panes:
         - journalctl -f | lnav
+        - lnav -c :"filter-in sshd" /var/log

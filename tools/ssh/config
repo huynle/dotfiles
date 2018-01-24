@@ -32,9 +32,9 @@ Host tiny
  IdentityFile ~/.ssh/id_tiny
  Hostname 10.1.10.110
 
-Host tiny_root
- User root
- Port 22
+Host tiny_admin
+ User admin
+ Port 12121
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_tiny_root
  Hostname 10.1.10.110

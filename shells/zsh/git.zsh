@@ -11,8 +11,8 @@ alias gs='git status'
 alias gmv='git mv'
 alias grm='git rm'
 alias grn='git-rename'
-alias glog="git log"
-alias gloga="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+# alias glog="git log"
+alias glog="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias gaca="git add . && git commit --amend"
 alias gac="git add . && git commit -m"
 
