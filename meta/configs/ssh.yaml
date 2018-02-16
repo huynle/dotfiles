@@ -1,2 +1,5 @@
+- shell:
+    - mkdir -p ~/.ssh
+ 
 - link:
     ~/.ssh/config: tools/ssh/config
