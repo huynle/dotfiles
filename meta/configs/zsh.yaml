@@ -1,3 +1,4 @@
 - link:
     ~/.zshrc: shells/zsh/zshrc
     ~/.zsh : shells/zsh
+    ~/.zplug: src/zplug
