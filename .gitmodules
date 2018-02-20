@@ -21,3 +21,6 @@
 [submodule "src/zplug"]
 	path = src/zplug
 	url = https://github.com/zplug/zplug
+[submodule "src/crouton-clipboard"]
+	path = src/crouton-clipboard
+	url = http://github.com/zwhitchcox/crouton-clipboard

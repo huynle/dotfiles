@@ -1,0 +1,9 @@
+# this copies the crouton script to run
+# to have the server up and running, it is dependent on having a node server
+# initated when starting zsh
+
+- link:
+    ~/.crouton-clipboard: src/crouton-clipboard
+
+- shell:
+    - touch ~/.crouton-clipboard/data.txt
