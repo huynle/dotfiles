@@ -1,7 +1,4 @@
-# ~/.tmuxinaz itor/monitor.yml
-
-name: home
-# root: ~/
+name: beauty
 
 # Optional tmux socket
 # socket_name: foo
@@ -42,11 +39,6 @@ windows:
       panes:
         - z hizzle && hugo server -D
         - z aewoah && hugo server -D -p 1314
-        - workon hass && hass
-        - z notebooks && workon jupyter && jupyter notebook --no-browser
-        - WDB_NO_BROWSER_AUTO_OPEN=False wdb.server.py
-        - cloudcmd --vim
-        - rtail-server --web-port 7777
   - logs:
       layout: even-vertical
       panes:

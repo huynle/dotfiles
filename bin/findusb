@@ -1,0 +1,5 @@
+#bin/sh
+
+sudo dmesg -c > /dev/null
+read -p "Unplug the MCU if it is connected, and plug it back in..." empty
+dmesg

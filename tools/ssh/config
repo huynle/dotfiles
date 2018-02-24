@@ -70,6 +70,13 @@ Host beast
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116
 
+Host beast-remote
+ User hle
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_beast
+ Hostname huynle.ddns.net
+
 Host mini
  User admin
  Port 22

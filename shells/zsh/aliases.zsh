@@ -38,6 +38,14 @@ alias grep='grep --color=auto'
 alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
 
+# USB info
+function devinfo() {
+    df -h
+    echo "Enter device name..."
+    read dev_name
+    udevadm info -a -p $(udevadm info -q path -n "$dev_name")
+}
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
@@ -50,6 +58,12 @@ alias mux="tmuxinator"
 
 # Start OpenVPNO
 alias vpn="sudo service openvpn start"
+
+# Change Directory to executable
+function whichcd() {
+    cd "$(dirname "$(which "$1")")"
+}
+
 
 # quickaccess to journal
 alias journal=~/.dotfiles/journal.sh
