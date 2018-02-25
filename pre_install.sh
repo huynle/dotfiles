@@ -39,3 +39,7 @@ apt install -y golang-go
 
 # install ruby gem
 apt install -y ruby-dev
+
+# install common ubuntu common commands
+apt install locate
+apt install usbutils
