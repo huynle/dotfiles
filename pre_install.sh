@@ -43,3 +43,12 @@ apt install -y ruby-dev
 # install common ubuntu common commands
 apt install locate
 apt install usbutils
+
+
+# install universal tags
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh 
+./configure
+make
+make install

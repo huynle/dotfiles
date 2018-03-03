@@ -1,9 +1,11 @@
 - shell:
    - cd ~/.dotfiles/src/dev/tmux && sh autogen.sh && ./configure && make
    - mkdir -p ~/.tmux/plugins
+   # - mkdir -p ~/.tmux/themes
    # - ./.dotfiles/scripts/tmux_install.sh
 
 - link:
    ~/.local/bin/tmux: src/dev/tmux/tmux
    ~/.tmux.conf: terminals/tmux/tmux.conf
    ~/.tmux/plugins/tpm: terminals/tmux/plugins/tpm
+   ~/.tmux/themes: terminals/tmux/themes

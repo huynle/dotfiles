@@ -50,8 +50,8 @@ set-option -g status-right-attr none
 set-option -g status-right-length 83
 set-option -g status-right "#[fg=colour239] #(tmux-mem-cpu-load -i 3) #[fg=colour237]#[fg=colour241] #(pmset -g batt | tail -n +2 | awk '{print $3}' | sed 's/;//') #[fg=colour237]#[fg=colour243] %H:%M #[fg=colour237]#[fg=colour246] #h "
 
-set-window-option -g window-style ''
-set-window-option -g window-active-style ''
+set-window-option -g window-style 'bg=colour234'
+set-window-option -g window-active-style 'bg=colour234'
 set-window-option -g pane-active-border-style ''
 
 set-window-option -g window-status-fg colour247
