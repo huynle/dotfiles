@@ -1,6 +1,8 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# quick location for profile
+export DOTFILES=$HOME/.dotfiles
+export BASH=$HOME/.dotfiles/shells/bash
+export GENERAL=$HOME/.dotfiles/shells/general
+export SHELLRC=$HOME/.bashrc
 
 # If not running interactively, don't do anything
 case $- in
@@ -8,6 +10,7 @@ case $- in
       *) return;;
 esac
 
+## Bash settings
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -25,7 +28,7 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -35,10 +38,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+# # set a fancy prompt (non-color, unless we know we "want" color)
+# case "$TERM" in
+#     xterm-color|*-256color) color_prompt=yes;;
+# esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -72,41 +75,12 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# hle aliases
-alias xclip='xclip -selection clipboard'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -123,31 +97,7 @@ export NVM_DIR="/home/hle/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
-# added by Miniconda3 4.1.11 installer
-#export PATH="/home/hle/miniconda3/bin:$PATH"
-
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-
-export PATH=/opt/ninja:$PATH
-
-# setting up go path and its binary
-export GOPATH=$HOME/GoProjects
-export PATH=$PATH:$(go env GOPATH)/bin
-
-# setting up android studio path and its binary
-export PATH=$PATH:/usr/local/android-studio/bin
-
-VIRTUALENVWRAPPER_PYTHON=/home/hle/.atom/packages/platformio-ide/penv/bin/python
-
-# settings keys for gloud storag
-export GOOGLE_APPLICATION_CREDENTIALS=~/Documents/hizzle-cloud-efd33462bbc0.json
-
-
-
 get_crtime() {
-
     for target in "${@}"; do
         inode=$(stat -c '%i' "${target}")
         fs=$(df  --output=source "${target}"  | tail -1)
@@ -157,12 +107,8 @@ get_crtime() {
     done
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/hle/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/hle/Downloads/google-cloud-sdk/path.bash.inc'; fi
+# Start loading all other configsk
+[ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/hle/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/hle/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source /opt/ros/kinetic/setup.bash
-source ~/catkin_ws/devel/setup.bash
+# Load generalrc first 
+[ -f $GENERAL/generalrc ] && source $GENERAL/generalrc

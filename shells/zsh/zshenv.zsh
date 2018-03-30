@@ -16,6 +16,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 # GoLang
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/GoProjects
+
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # export FZF_DEFAULT_COMMAND='ag -g ""'

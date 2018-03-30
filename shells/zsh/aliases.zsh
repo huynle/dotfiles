@@ -1,5 +1,6 @@
 # reload zsh config
 alias reload!='RELOAD=1 source ~/.zshrc'
+
 ## Another way of reloading
 function _accept-line() {
     if [[ $BUFFER == "." ]]; then

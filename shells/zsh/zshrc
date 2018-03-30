@@ -1,7 +1,8 @@
+# quick location for profile
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/shells/zsh
-# export BACKGROUND="dark"
-# export THEME="one"
+export GENERAL=$HOME/shells/general
+export SHELLRC=$HOME/.zshrc
 
 command_exists() {
     type "$1" > /dev/null 2>&1
@@ -43,30 +44,19 @@ stty -ixon
 
 # [ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
-# # install rbenv
-# if command_exists rbenv; then
-#     eval "$(rbenv init -)"
-# fi
-#
-# if [[ -d ~/.rvm ]]; then
-#     PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-#     source ~/.rvm/scripts/rvm
-# fi
-
 # alias git to hub
 if command_exists hub; then
     eval "$(hub alias -s)"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fpath=(~/.zsh $fpath)
-#
-
-# getting z to work
-# source ~/.zsh/z.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Start loading all other configs
+[ -f $ZSH/fzf.zsh ] && source $ZSH/fzf.zsh
+
+# Load generalrc first 
+[ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
 
