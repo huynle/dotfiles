@@ -38,6 +38,8 @@ for config ($ZSH/**/*completion.zsh) source $config
 
 source /usr/local/bin/virtualenvwrapper.sh
 
+# turn off legacy ctrl-s issue with buffer
+stty -ixon
 
 # [ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
@@ -67,3 +69,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

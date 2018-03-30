@@ -48,7 +48,7 @@ Host tiny_hle
 
 Host beast
  User hle
- Port 22
+ Port 443
  IdentitiesOnly yes
  ## Hizzle Blog
  LocalForward 1313 localhost:1313
@@ -72,7 +72,7 @@ Host beast
 
 Host beast-remote
  User hle
- Port 22
+ Port 443
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_beast
  Hostname huynle.ddns.net

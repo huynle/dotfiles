@@ -28,8 +28,8 @@ set-window-option -g clock-mode-style 24
 
 # Background
 #-------------------------------------------------
-set-window-option -gq window-style "fg=$huy_visual,bg=$huy_bg"
-set-window-option -gq window-active-style "fg=$huy_visual,bg=$huy_bg"
+set-window-option -gq window-style "fg=$huy_text,bg=$huy_bg"
+set-window-option -gq window-active-style "fg=$huy_text,bg=$huy_bg"
 set-window-option -gq pane-active-border-style ''
 
 # Status lines
@@ -55,7 +55,7 @@ set-option -g status-right-fg colour240
 set-option -g status-right-bg default
 set-option -g status-right-attr none
 set-option -g status-right-length 83
-set-option -g status-right "#[fg=colour239] #(tmux-mem-cpu-load -i 3) #[fg=colour237]#[fg=colour241] #(pmset -g batt | tail -n +2 | awk '{print $3}' | sed 's/;//') #[fg=colour237]#[fg=colour243] %H:%M #[fg=colour237]#[fg=colour246] #h "
+set-option -g status-right "#[fg=colour239] #(tmux-mem-cpu-load -i 3) #[fg=colour237]#[fg=colour241] #(pmset -g batt | tail -n +2 | awk '{print $3}' | sed 's/;//') #[fg=colour237]#[fg=colour243] %H:%M #[fg=colour237]#[fg=#000000,bg=$huy_green] #h "
 
 
 set-window-option -g window-status-fg colour247
