@@ -11,7 +11,7 @@ export GIT_EDITOR='vim'
 
 # Virtualenvs
 export WORKON_HOME=$HOME/.virtualenvs
-
+[ -f /usr/local/bin/virutalenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # GoLang
 export PATH=$PATH:/usr/local/go/bin
@@ -39,7 +39,6 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-# color/theme/visual
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 

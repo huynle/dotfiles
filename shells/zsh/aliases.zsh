@@ -1,10 +1,10 @@
 # reload zsh config
-alias reload!='RELOAD=1 source ~/.zshrc'
+alias reload='RELOAD=1 source $SHELLRC'
 
 ## Another way of reloading
 function _accept-line() {
     if [[ $BUFFER == "." ]]; then
-        BUFFER="source ~/.zshrc"
+        BUFFER="source $SHELLRC"
     fi
     zle .accept-line
 }

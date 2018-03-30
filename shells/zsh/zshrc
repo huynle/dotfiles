@@ -18,18 +18,6 @@ export TERM=xterm-256color
 # getting characters to show up properly
 export LANG=en_US.UTF-8
 
-# define the code directory
-# This is where my code exists and where I want the `c` autocomplete to work from exclusively
-if [[ -d ~/code ]]; then
-    export CODE_DIR=~/code
-fi
-
-# source all .zsh files inside of the zsh/ directory
-for config ($ZSH/**/*.zsh) source $config
-
-if [[ -a ~/.localrc ]]; then
-    source ~/.localrc
-fi
 
 # initialize autocomplete
 autoload -U compinit add-zsh-hook
@@ -37,26 +25,30 @@ compinit
 
 for config ($ZSH/**/*completion.zsh) source $config
 
-source /usr/local/bin/virtualenvwrapper.sh
-
 # turn off legacy ctrl-s issue with buffer
 stty -ixon
-
-# [ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
 # alias git to hub
 if command_exists hub; then
     eval "$(hub alias -s)"
 fi
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/nash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+##################################################
 # Start loading all other configs
+##################################################
 [ -f $ZSH/fzf.zsh ] && source $ZSH/fzf.zsh
+
+# source all .zsh files inside of the zsh/ directory
+for config ($ZSH/**/*.zsh) source $config
 
 # Load generalrc first 
 [ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
 
+# source localrc
+if [[ -a ~/.localrc ]]; then
+    source ~/.localrc
+fi
