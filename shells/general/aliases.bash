@@ -1,5 +1,5 @@
 # reload zsh config
-alias reload='RELOAD=1 source $SHELLRC'
+alias reload='export RELOAD=1 && source $SHELLRC'
 
 ## Another way of reloading
 function _accept-line() {

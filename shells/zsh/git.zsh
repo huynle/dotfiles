@@ -97,76 +97,75 @@ function g() {
     fi
 }
 
-function _git-submodule-move() {
-    #compdef git-submodule-move
-    #autoload
+#function _git-submodule-move() {
+#    #compdef git-submodule-move
+#    #autoload
 
-    #
-    # Completes git-submodule-move.
-    #
-    # Authors:
-    #   Sorin Ionescu <sorin.ionescu@gmail.com>
-    #
+#    #
+#    # Completes git-submodule-move.
+#    #
+#    # Authors:
+#    #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#    #
 
-    if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
-    return 1
-    fi
+#    if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+#        return 1
+#    fi
 
-    local state expl ret=1
-    local -a submodules
-    local submodule
+#    local state expl ret=1
+#    local -a submodules
+#    local submodule
 
-    _arguments -C -s -S \
-    '1::args:->submodule' \
-    '2::args:->directory' && ret=0
+#    _arguments -C -s -S \
+#    '1::args:->submodule' \
+#    '2::args:->directory' && ret=0
 
-    case "$state" in
-    (submodule)
-        while IFS=$'\n' read submodule; do
-        submodules+=("$submodule")
-        done < <(
-        git config --file "$(git-root)/.gitmodules" --list \
-            | grep '.path=' \
-            | cut -d= -f2-
-        )
+#    case "$state" in
+#    (submodule)
+#        while IFS=$'\n' read submodule; do
+#        submodules+=("$submodule")
+#        done < <(
+#        git config --file "$(git-root)/.gitmodules" --list \
+#            | grep '.path=' \
+#            | cut -d= -f2-
+#        )
 
-        _describe -t submodule 'submodules' submodules && ret=0
-    ;;
-    (directory)
-        _wanted directories expl 'directory' _path_files -/ || _message 'directory'
-    ;;
-    esac
+#        _describe -t submodule 'submodules' submodules && ret=0
+#    ;;
+#    (directory)
+#        _wanted directories expl 'directory' _path_files -/ || _message 'directory'
+#    ;;
+#    esac
 
-    return $ret
-}
+#    return $ret
+#}
 
-function _git-submodule-remove() {
+#function _git-submodule-remove() {
 
-    #compdef git-submodule-remove
-    #autoload
+#    #compdef git-submodule-remove
+#    #autoload
+#    #
+#    # Completes git-submodule-remove.
+#    #
+#    # Authors:
+#    #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#    #
 
-    #
-    # Completes git-submodule-remove.
-    #
-    # Authors:
-    #   Sorin Ionescu <sorin.ionescu@gmail.com>
-    #
+#    if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
+#    return 1
+#    fi
 
-    if ! is-true "$(git rev-parse --is-inside-work-tree 2> /dev/null)"; then
-    return 1
-    fi
+#    local -a submodules
+#    local submodule
 
-    local -a submodules
-    local submodule
+#    while IFS=$'\n' read submodule; do
+#    submodules+=("$submodule")
+#    done < <(
+#    git config --file "$(git-root)/.gitmodules" --list \
+#        | grep '.path=' \
+#        | cut -d= -f2-
+#    )
 
-    while IFS=$'\n' read submodule; do
-    submodules+=("$submodule")
-    done < <(
-    git config --file "$(git-root)/.gitmodules" --list \
-        | grep '.path=' \
-        | cut -d= -f2-
-    )
+#    _describe -t submodule 'submodules' submodules && return 0
 
-    _describe -t submodule 'submodules' submodules && return 0
-
-}
+#}
