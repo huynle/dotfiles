@@ -14,6 +14,10 @@ zle -N accept-line _accept-line
 alias vim="vim"
 # alias tmux="env TERM=xterm-256color tmux"
 
+##### for cygwin?
+# alias tmux="TERM=xterm-256color tmux"
+# or can get it to work with this
+# alias tmux="tmux -2"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
