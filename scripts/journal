@@ -1,0 +1,24 @@
+#!/usr/bin/zsh
+
+if [[ -z "$BLOG_DIR" ]]; then
+  echo "-- Set environment variable JOURNAL_DIR to where your journal entries are stored."
+  exit 0;
+fi
+
+if [[ -z "$1" ]]; then
+  NAME=$(date +"%Y-%m-%d")
+else
+  NAME=$1
+fi
+
+PROJECT_PATH="private/journal/$NAME.md"
+
+if [[ ! -f "$HUGO_CONTENT_DIR/$PROJECT_PATH" ]]; then
+  if [[ $(date +'%a') == 'Sun' ]]; then
+    hugo new -s $BLOG_DIR -k summary $PROJECT_PATH
+  else
+    hugo new -s $BLOG_DIR -k journal $PROJECT_PATH
+  fi
+fi
+
+$EDITOR "$HUGO_CONTENT_DIR/$PROJECT_PATH"

@@ -1,0 +1,24 @@
+#!/usr/bin/zsh
+
+# Create Hugo project page. It takes an argument of the project name.
+# IF the project exists already, then it will be opened with vim
+
+if [[ -z "$BLOG_DIR" ]]; then
+  echo "-- Set environment variable JOURNAL_DIR to where your journal entries are stored."
+  exit 0;
+fi
+
+if [[ -z "$1" ]]; then
+  NAME="Project $(date +"%Y-%m-%d")"
+else
+  NAME=$1
+fi
+
+PROJECT_PATH="projects/$NAME.md"
+
+
+if [[ ! -f "$HUGO_CONTENT_DIR/$PROJECT_PATH" ]]; then
+  hugo new -s $BLOG_DIR -k sm-project $PROJECT_PATH
+fi
+
+$EDITOR "$HUGO_CONTENT_DIR/$PROJECT_PATH"

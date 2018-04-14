@@ -49,6 +49,4 @@ for config ($ZSH/**/*.zsh) source $config
 [ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
 
 # source localrc
-if [[ -a ~/.localrc ]]; then
-    source ~/.localrc
-fi
+[ -e ~/.localrc ] && source ~/.localrc
