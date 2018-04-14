@@ -22,6 +22,9 @@ export GIT_EDITOR='nvim'
 export WORKON_HOME=$HOME/.virtualenvs
 [ -f /usr/local/bin/virutalenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
+# Clion
+export PATH=$PATH:$HOME/.local/clion/bin
+
 # export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
