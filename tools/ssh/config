@@ -75,6 +75,10 @@ Host beast-remote
  Port 443
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_beast
+ ## Hizzle Blog
+ LocalForward 1313 localhost:1313
+ ## Aewoah Blog
+ LocalForward 1314 localhost:1314
  Hostname huynle.ddns.net
 
 Host mini
