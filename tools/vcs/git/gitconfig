@@ -29,6 +29,7 @@
 
 [diff]
   tool = vimdiff
+  conflictstyle = diff3
 
 [alias]
   a = add --all

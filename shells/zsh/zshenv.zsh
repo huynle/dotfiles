@@ -6,8 +6,8 @@ export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 # editors
-export EDITOR='vim'
-export GIT_EDITOR='vim'
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 
 # Virtualenvs
 export WORKON_HOME=$HOME/.virtualenvs
@@ -27,6 +27,8 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
 export HUGO_BIN="/home/hle/GoProjects/bin/hugo"
 export JOURNAL_DIR="$HOME/Documents/hizzle/content/private/journal"
 export BLOG_DIR="$HOME/Documents/hizzle"
+
+
 
 # Custom Paths
 # add /usr/local/sbin
