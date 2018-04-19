@@ -13,7 +13,6 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/GoProjects
 export PATH=$PATH:$(go env GOPATH)/bin
 
-
 # Default Editors
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
@@ -34,6 +33,13 @@ export HUGO_BIN="/home/hle/GoProjects/bin/hugo"
 export JOURNAL_DIR="$HOME/Documents/hizzle/content/private/journal"
 export BLOG_DIR="$HOME/Documents/hizzle"
 export HUGO_CONTENT_DIR="$HOME/Documents/hizzle/content"
+
+
+# Standard libraries for CTAGS to be generated!
+# Any environment variable that starts with LIB, tags will generate
+export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
+
+
 
 
 BASE16_SHELL=$HOME/.config/base16-shell/
