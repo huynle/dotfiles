@@ -8,6 +8,16 @@ export PATH=$HOME/.local/bin:$PATH
 [[ -d ~/bin ]] && export PATH=~/bin:$PATH
 [[ -d /usr/local/sbin ]] && export PATH=/usr/local/sbin:$PATH
 
+
+## Local Development Libraries
+# Notes that these path should be symlinked
+export LIBS=$HOME/.local/lib
+
+## Local Development Includes
+# These too should be symlinked
+export INC=$HOME/.local/inc
+
+
 # GoLang paths
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/GoProjects

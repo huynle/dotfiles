@@ -1,0 +1,26 @@
+# Machine-generated file - use setup menu in minicom to change parameters.
+pu mdialpre         
+pu mdialsuf         
+pu mdialpre2        
+pu mdialsuf2        
+pu mdialpre3        
+pu mdialsuf3        
+pu mconnect         
+pu mnocon1          
+pu mnocon2          
+pu mnocon3          
+pu mnocon4          
+pu mhangup          
+pu mdialcan         
+pu mdialtime        
+pu mrdelay          
+pu mretries         
+pu mdropdtr         
+pu mautobaud        Yes
+pu escape-key       Escape (Meta)
+pu rtscts           No
+pu mfcolor          WHITE
+pu localecho        Yes
+pu addlinefeed      Yes
+pu displayhex       No 
+pu addcarreturn     Yes
