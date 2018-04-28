@@ -47,7 +47,7 @@ export HUGO_CONTENT_DIR="$HOME/Documents/hizzle/content"
 
 # Standard libraries for CTAGS to be generated!
 # Any environment variable that starts with LIB, tags will generate
-export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
+# export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
 
 
 
