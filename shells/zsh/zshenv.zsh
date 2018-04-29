@@ -8,14 +8,13 @@ export PATH=$HOME/.local/bin:$PATH
 [[ -d ~/bin ]] && export PATH=~/bin:$PATH
 [[ -d /usr/local/sbin ]] && export PATH=/usr/local/sbin:$PATH
 
+# ## Local Development Libraries
+# # Notes that these path should be symlinked
+# export LIBS=$HOME/.local/lib
 
-## Local Development Libraries
-# Notes that these path should be symlinked
-export LIBS=$HOME/.local/lib
-
-## Local Development Includes
-# These too should be symlinked
-export INC=$HOME/.local/inc
+# ## Local Development Includes
+# # These too should be symlinked
+# export INC=$HOME/.local/inc
 
 
 # GoLang paths
@@ -44,13 +43,15 @@ export JOURNAL_DIR="$HOME/Documents/hizzle/content/private/journal"
 export BLOG_DIR="$HOME/Documents/hizzle"
 export HUGO_CONTENT_DIR="$HOME/Documents/hizzle/content"
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+
+# ---------- Dev development ---------------------------------------------------
+export PATH=$PATH:/opt/esp-open-sdk/xtensa-lx106-elf/bin
+export ESP_SDK=/opt/esp-open-sdk/sdk
 # Standard libraries for CTAGS to be generated!
 # Any environment variable that starts with LIB, tags will generate
 # export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
 
 
-
-
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
