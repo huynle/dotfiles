@@ -39,8 +39,8 @@ windows:
       panes:
         - z hizzle && hugo server -D
         - z aewoah && hugo server -D -p 1314
-  - logs:
-      layout: even-vertical
-      panes:
-        - journalctl -f | lnav
-        - lnav -c :"filter-in sshd" /var/log
+  # - logs:
+  #     layout: even-vertical
+  #     panes:
+  #       - journalctl -f | lnav
+  #       - lnav -c :"filter-in sshd" /var/log
