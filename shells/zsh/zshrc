@@ -28,6 +28,9 @@ for config ($ZSH/**/*completion.zsh) source $config
 # turn off legacy ctrl-s issue with buffer
 stty -ixon
 
+# Setting DISPLAY for X application to work when calling in terminal with ZSH
+export DISPLAY=:0
+
 # alias git to hub
 if command_exists hub; then
     eval "$(hub alias -s)"
