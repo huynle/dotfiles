@@ -29,7 +29,7 @@ for config ($ZSH/**/*completion.zsh) source $config
 stty -ixon
 
 # Setting DISPLAY for X application to work when calling in terminal with ZSH
-export DISPLAY=:0
+# export DISPLAY=:0
 
 # alias git to hub
 if command_exists hub; then

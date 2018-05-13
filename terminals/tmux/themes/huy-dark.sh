@@ -5,7 +5,7 @@
 #                        reverse, hidden, or italics.
 
 # background color
-huy_bg="#282c34"
+huy_bg="#1d1f21"
 
 # text comments
 huy_comment="#707880"
