@@ -1,6 +1,3 @@
-Host *
- ForwardX11 yes
-
 Host bitbucket.org
  User git
  IdentityFile ~/.ssh/id_bitbucket
