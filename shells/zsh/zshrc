@@ -53,3 +53,4 @@ for config ($ZSH/**/*.zsh) source $config
 
 # source localrc
 [ -e ~/.localrc ] && source ~/.localrc
+
