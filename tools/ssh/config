@@ -52,6 +52,8 @@ Host beast
  IdentitiesOnly yes
  ## Hizzle Blog
  LocalForward 1313 localhost:1313
+ ## Data-lab
+ LocalForward 8081 localhost:8081
  ## Aewoah Blog
  LocalForward 1314 localhost:1314
  ## Home Assistant
@@ -77,6 +79,8 @@ Host beast-remote
  IdentityFile ~/.ssh/id_beast
  ## Hizzle Blog
  LocalForward 1313 localhost:1313
+ ## VNC
+ LocalForward 5901 localhost:5901
  ## Aewoah Blog
  LocalForward 1314 localhost:1314
  Hostname huynle.ddns.net
@@ -87,3 +91,17 @@ Host mini
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_mini
  Hostname 10.1.10.123
+
+Host ghost
+	HostName 23.251.153.171
+	IdentityFile ~/.ssh/google_compute_engine
+	UserKnownHostsFile=/dev/null
+	CheckHostIP=no
+	StrictHostKeyChecking=no
+
+Host letulfo
+	HostName 25.251.153.171
+	IdentityFile ~/.ssh/google_compute_engine
+	UserKnownHostsFile=/dev/null
+	CheckHostIP=no
+	StrictHostKeyChecking=no

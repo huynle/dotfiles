@@ -73,7 +73,16 @@ precmd() {
     print -P '\n%F{6}%~'
 }
 
-PROMPT_SYMBOL='>'
+PROMPT_SYMBOL='%n@%M:'
+
+get_pwd() {
+    echo "${PWD/$HOME/~}"
+}
+
+put_spacing() {
+
+}
 
 export PROMPT='%(?.%F{207}.%F{160})$PROMPT_SYMBOL%f '
+# export PROMPT='%m: '
 export RPROMPT='`git_dirty`%F{241}$vcs_info_msg_0_%f `upstream_branch``git_arrows``suspended_jobs`'
