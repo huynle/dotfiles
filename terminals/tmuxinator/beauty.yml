@@ -29,16 +29,19 @@ name: beauty
 
 # pre_window: z hizzle
 windows:
+  - notes:
+      panes:
+        - cd ~/docs/wiki && vim -c "silent! Vimwiki | SessionLoadCwd"
   - working:
       layout: even-horizontal
       panes:
         - #empty
-        - journal
-  - servers:
-      layout: even-vertical
-      panes:
-        - z hizzle && hugo server -D
-        - z aewoah && hugo server -D -p 1314
+        # - journal
+  # - servers:
+  #     layout: even-vertical
+  #     panes:
+  #       - z hizzle && hugo server -D
+  #       - z aewoah && hugo server -D -p 1314
   # - logs:
   #     layout: even-vertical
   #     panes:

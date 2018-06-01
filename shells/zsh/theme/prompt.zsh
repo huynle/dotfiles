@@ -83,6 +83,7 @@ put_spacing() {
 
 }
 
-export PROMPT='%(?.%F{207}.%F{160})$PROMPT_SYMBOL%f '
+# export PROMPT='%(?.%F{207}.%F{160})$PROMPT_SYMBOL%f '
+export PROMPT='%F{25}$PROMPT_SYMBOL%f '
 # export PROMPT='%m: '
 export RPROMPT='`git_dirty`%F{241}$vcs_info_msg_0_%f `upstream_branch``git_arrows``suspended_jobs`'
