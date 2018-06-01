@@ -28,7 +28,7 @@ export GIT_EDITOR='nvim'
 
 # Virtualenvs
 export WORKON_HOME=$HOME/.virtualenvs
-[ -f /usr/local/bin/virutalenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # Clion
 export PATH=$PATH:$HOME/.local/clion/bin
@@ -54,4 +54,7 @@ export ESP_SDK=/opt/esp-open-sdk/sdk
 # Any environment variable that starts with LIB, tags will generate
 # export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
 
-
+# ---- Cuda -----
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cude/extras/CUPTI/lib64
