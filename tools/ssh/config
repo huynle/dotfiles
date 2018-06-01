@@ -62,6 +62,8 @@ Host beast
  LocalForward 8080 localhost:8080
  ## Jupyter Notebook
  LocalForward 8889 localhost:8889
+ ## Tensorflow Jupyter Notebook
+ LocalForward 8890 localhost:8890
  ## WDB for python
  LocalForward 1984 localhost:1984
  ## Cloud commander
