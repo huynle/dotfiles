@@ -21,7 +21,7 @@ export LANG=en_US.UTF-8
 
 # initialize autocomplete
 autoload -U compinit add-zsh-hook
-compinit
+compinit -D
 
 for config ($ZSH/**/*completion.zsh) source $config
 
