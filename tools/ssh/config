@@ -53,6 +53,7 @@ Host tiny_hle
 Host beast
  User hle
  Port 443
+ ForwardX11 yes
  IdentitiesOnly yes
  ## Hizzle Blog
  LocalForward 1313 localhost:1313
@@ -64,8 +65,8 @@ Host beast
  LocalForward 8123 localhost:8123
  ## Tiny web server
  LocalForward 8080 localhost:8080
- ## Jupyter Notebook
- LocalForward 8889 localhost:8889
+ # ## Jupyter Notebook
+ # LocalForward 8889 localhost:8889
  ## Tensorflow Jupyter Notebook
  LocalForward 8890 localhost:8890
  ## WDB for python
@@ -74,6 +75,8 @@ Host beast
  LocalForward 8000 localhost:8000
  ## rTail log viewer
  LocalForward 7777 localhost:7777
+ ## mattemost
+ LocalForward 8181 localhost:8181
 
  IdentityFile ~/.ssh/id_beast
  Hostname 10.1.10.116

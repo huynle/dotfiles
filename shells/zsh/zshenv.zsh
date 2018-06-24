@@ -48,11 +48,18 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 
 # ---------- Dev development ---------------------------------------------------
-export PATH=$PATH:/opt/esp-open-sdk/xtensa-lx106-elf/bin
-export ESP_SDK=/opt/esp-open-sdk/sdk
 # Standard libraries for CTAGS to be generated!
 # Any environment variable that starts with LIB, tags will generate
+
+# ---- ESP8266 ----
+export PATH=$PATH:/opt/esp-open-sdk/xtensa-lx106-elf/bin
+export ESP_SDK=/opt/esp-open-sdk/sdk
 # export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
+
+# ---- ESP32 ----
+export PATH="$PATH:$HOME/toolchains/xtensa-esp32-elf/bin"
+export IDF_PATH=/home/hle/src/esp-idf
+
 
 # ---- Cuda -----
 export PATH=$PATH:/usr/local/cuda/bin
