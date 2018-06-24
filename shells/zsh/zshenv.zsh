@@ -1,4 +1,4 @@
-## ALL PATH goes here
+# ALL CUSTOM ENVIRONMENT PATH SETTINGS GOES HERE
 # adding path directory for custom scripts
 export PATH=$DOTFILES/bin:$PATH
 export PATH=$DOTFILES/scripts:$PATH
@@ -16,35 +16,36 @@ export PATH=$HOME/.local/bin:$PATH
 # # These too should be symlinked
 # export INC=$HOME/.local/inc
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# GoLang paths
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/GoProjects
-export PATH=$PATH:$(go env GOPATH)/bin
-
-# Default Editors
+# ---------- General -----------------------------------------------------------
+# ---- Default Editors ----
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 
-# Virtualenvs
-export WORKON_HOME=$HOME/.virtualenvs
-[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
-
-# Clion
-export PATH=$PATH:$HOME/.local/clion/bin
-
-# export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
-
-# hizzle blog
+# ---- Hizzle blog ----
 export HUGO_BIN="/home/hle/GoProjects/bin/hugo"
 export JOURNAL_DIR="$HOME/Documents/hizzle/content/private/journal"
 export BLOG_DIR="$HOME/Documents/hizzle"
 export HUGO_CONTENT_DIR="$HOME/Documents/hizzle/content"
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# ---- FZF - Fuzzy Search ----
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
+
+# ---------- Tools -------------------------------------------------------------
+# ---- GoLang paths ----
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/GoProjects
+export PATH=$PATH:$(go env GOPATH)/bin
+
+# ---- Virtualenvs ----
+export WORKON_HOME=$HOME/.virtualenvs
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+
+# ---- Clion ----
+export PATH=$PATH:$HOME/.local/clion/bin
 
 
 # ---------- Dev development ---------------------------------------------------
@@ -52,14 +53,13 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 # Any environment variable that starts with LIB, tags will generate
 
 # ---- ESP8266 ----
-export PATH=$PATH:/opt/esp-open-sdk/xtensa-lx106-elf/bin
-export ESP_SDK=/opt/esp-open-sdk/sdk
+export PATH=$PATH:$HOME/toolchains/xtensa-lx106-elf/bin
+export ESP_SDK=$HOME/toolchains/esp-open-sdk/sdk
 # export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
 
 # ---- ESP32 ----
-export PATH="$PATH:$HOME/toolchains/xtensa-esp32-elf/bin"
-export IDF_PATH=/home/hle/src/esp-idf
-
+export PATH=$PATH:$HOME/toolchains/xtensa-esp32-elf/bin
+export IDF_PATH=$HOME/src/esp-idf
 
 # ---- Cuda -----
 export PATH=$PATH:/usr/local/cuda/bin
