@@ -58,10 +58,11 @@ export ESP_SDK=$HOME/toolchains/esp-open-sdk/sdk
 # export LIB_ESP="/home/hle/src/esp-open-sdk/xtensa-lx106-elf"
 
 # ---- ESP32 ----
+# Toolchains, compiler, linker, etc...
 export PATH=$PATH:$HOME/toolchains/xtensa-esp32-elf/bin
-export IDF_PATH=$HOME/src/esp-idf
+export IDF_PATH=$HOME/toolchains/esp-idf
 
-# ---- Cuda -----
-export PATH=$PATH:/usr/local/cuda/bin
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/lib
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cude/extras/CUPTI/lib64
+# # ---- Cuda -----
+# export PATH=$PATH:/usr/local/cuda/bin
+# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/lib
+# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cude/extras/CUPTI/lib64

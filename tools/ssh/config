@@ -114,3 +114,10 @@ Host letulfo
 	UserKnownHostsFile=/dev/null
 	CheckHostIP=no
 	StrictHostKeyChecking=no
+
+Host bookstack
+	HostName 35.226.220.102
+	IdentityFile ~/.ssh/google_compute_engine
+	UserKnownHostsFile=/dev/null
+	CheckHostIP=no
+	StrictHostKeyChecking=no
