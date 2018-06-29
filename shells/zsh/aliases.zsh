@@ -70,3 +70,4 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
 
+alias largefiles='sudo find / -type f -exec du -Sh {} + | sort -rh | head -n 5'
