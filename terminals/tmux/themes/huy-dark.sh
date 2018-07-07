@@ -5,6 +5,7 @@
 #                        reverse, hidden, or italics.
 
 # background color
+# huy_bg="#282c34"
 huy_bg="#282c34"
 
 # text comments
@@ -21,5 +22,7 @@ huy_green="#98c379"
 huy_yellow="#e5c07b"
 huy_red="#e06c75"
 huy_white="#aab2bf"
+
+# Set pane colors (Terminal must be using utf-8)
 
 source ~/.tmux/themes/huy.sh
