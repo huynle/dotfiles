@@ -8,5 +8,5 @@
     '~/.config'
 ]
 
-- shell:
-    - [git submodule update --init --recursive, Installing submodule]
+#- shell:
+#- [git submodule update --init --recursive, Installing submodule]

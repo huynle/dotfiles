@@ -60,3 +60,6 @@ if [ -f '/home/hle/.local/opt/google-cloud-sdk/path.zsh.inc' ]; then source '/ho
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/hle/.local/opt/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/hle/.local/opt/google-cloud-sdk/completion.zsh.inc'; fi
+
+## Just for chromeos
+export DISPLAY=:0

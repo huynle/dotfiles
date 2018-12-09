@@ -2,25 +2,25 @@
 locale-gen us_EN.UFT-8
 
 # dev source building tools
-apt install -y build-essential
-apt install -y libssl-dev
-apt install -y autotools-dev automake libncurses-dev libevent-dev
+apt-get install -y build-essential
+apt-get install -y libssl-dev
+apt-get install -y autotools-dev automake libncurses-dev libevent-dev
 
 # getting system setup
-apt install -y python-software-properties
-apt install -y software-properties-common
+apt-get install -y python-software-properties
+apt-get install -y software-properties-common
 
 # getting zsh up
-apt install -y zsh
+apt-get install -y zsh
 
 # adding repo
 add-apt-repository -y ppa:neovim-ppa/stable
 
-apt update
-apt upgrade
+apt-get update
+apt-get upgrade
 
 # python
-apt install -y python-pip python-dev python3-dev python3-pip
+apt-get install -y python-pip python-dev python3-dev python3-pip
 pip install --upgrade pip
 pip install --upgrade virtualenv
 pip install --upgrade virtualenvwrapper
@@ -30,19 +30,19 @@ curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | s
 nvm install 8.9.4
 
 # neovim
-apt install -y neovim python-neovim python3-neovim
+apt-get install -y neovim python-neovim python3-neovim
 
 # tmux
 
 # golang
-apt install -y golang-go
+apt-get install -y golang-go
 
 # install ruby gem
-apt install -y ruby-dev
+apt-get install -y ruby-dev
 
 # install common ubuntu common commands
-apt install locate
-apt install usbutils
+apt-get install locate
+apt-get install usbutils
 
 
 # install universal tags
