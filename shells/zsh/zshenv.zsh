@@ -5,6 +5,7 @@ export PATH=$DOTFILES/scripts:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 [[ -d ~/bin ]] && export PATH=~/bin:$PATH
 [[ -d /usr/local/sbin ]] && export PATH=/usr/local/sbin:$PATH
 
