@@ -1,5 +1,5 @@
-Host *
- ForwardX11 yes
+# Host *
+#  ForwardX11 yes
 
 Host bitbucket.org
  User git
@@ -34,6 +34,14 @@ Host tiny
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_tiny
  Hostname 10.1.10.110
+
+Host mini
+ User hle
+ Port 22
+ IdentitiesOnly yes
+ ForwardX11 yes
+ IdentityFile ~/.ssh/id_mini
+ Hostname 10.1.10.117
 
 Host tiny_admin
  User admin
