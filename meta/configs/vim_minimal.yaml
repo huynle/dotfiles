@@ -1,0 +1,14 @@
+
+- link:
+    ~/.vim:   editors/vim
+    ~/.config/nvim: editors/vim
+    ~/.vimrc: editors/vim/vimrc_minimal
+    # ~/.: editors/vim/vimrv.bundles
+
+# - shell:
+#     - source editors/vim/venv.sh
+# - shell:
+#     - [vim -c 'PluginInstall' +qall, Installing vim plugins]
+# - shell:
+    # - [nvim +source ~/.nvimrc +PlugInstall +PlugClean! +qa, Installing and clean vim plugins]
+#     - [vim +VundleInstall +qall, Installing vim plugins]
