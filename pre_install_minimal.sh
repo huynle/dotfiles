@@ -24,8 +24,8 @@ fi
 
 locale-gen us_EN.UFT-8
 
-# ## First thing first. Install git
-# apt-get install -y git
+## First thing first. Install git
+apt-get install -y git
 
 # # dev source building tools
 # apt-get install -y build-essential
