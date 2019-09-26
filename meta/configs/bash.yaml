@@ -1,3 +1,8 @@
+- clean: ["~"]
+
+- shell:
+    - [mv ~/.bashrc ~/.bashrc_bckup 2> /dev/null, "Backing up existing .bashrc file"]
+
 - link:
     ~/.bashrc:       shells/bash/bashrc
     # ~/.bash_aliases: shells/bash/aliases
