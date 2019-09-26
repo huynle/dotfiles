@@ -21,6 +21,7 @@ BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASE_DIR}"
 # get the latest revision for all submodules
 # git submodule update --init --recursive --remote
+git submodule update --init --recursive ${BASE_DIR}/meta/dotbot
 
 mkdir -p "${BIN}"
 
@@ -31,7 +32,7 @@ done < "${META_DIR}/${PROFILES_DIR}/$1"
 shift
 
 
-"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
+"hkk${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
 
 for config in ${CONFIGS} ${@}; do
     echo -e "\nConfigure $config"
