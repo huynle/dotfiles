@@ -1,4 +1,5 @@
-# Host *
+Host *
+ LogLevel ERROR
 #  ForwardX11 yes
 
 Host bitbucket.org
@@ -28,20 +29,27 @@ Host tnttportland.org
  IdentityFile ~/.ssh/id_hizzle_cloud
  Hostname tnttportland.org
 
+Host usg
+ User huynle
+ IdentityFile ~/.ssh/id_unifi
+ Hostname 10.1.10.1
+
+Host switch
+ User huynle
+ IdentityFile ~/.ssh/id_unifi
+ Hostname 10.1.10.2
+
+Host controller
+ User huynle
+ IdentityFile ~/.ssh/id_unifi
+ Hostname 10.1.10.3
+
 Host tiny
  User hle
  Port 12121
  IdentitiesOnly yes
- IdentityFile ~/.ssh/id_tiny
+ IdentityFile ~/.ssh/id_tiny_hle
  Hostname 10.1.10.110
-
-Host mini
- User hle
- Port 22
- IdentitiesOnly yes
- ForwardX11 yes
- IdentityFile ~/.ssh/id_mini
- Hostname 10.1.10.117
 
 Host tiny_admin
  User admin
@@ -92,6 +100,7 @@ Host beast-remote
  User hle
  Port 443
  IdentitiesOnly yes
+ ForwardX11 yes
  IdentityFile ~/.ssh/id_beast
  ## Hizzle Blog
  LocalForward 1313 localhost:1313
@@ -99,7 +108,9 @@ Host beast-remote
  LocalForward 5901 localhost:5901
  ## Aewoah Blog
  LocalForward 1314 localhost:1314
- Hostname huynle.ddns.net
+ ## Tiny web server
+ LocalForward 8080 localhost:8080
+ Hostname home.huynle.com
 
 Host mini
  User admin
@@ -107,6 +118,13 @@ Host mini
  IdentitiesOnly yes
  IdentityFile ~/.ssh/id_mini
  Hostname 10.1.10.123
+
+Host pi
+ User pi
+ Port 22
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_rsp
+ Hostname 10.1.10.212
 
 Host ghost
 	HostName 23.251.153.171
