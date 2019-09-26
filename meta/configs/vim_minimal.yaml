@@ -1,5 +1,3 @@
-- clean[: ["~"]
-
 - shell:
     - [mv ~/.vim ~/.vim_bckup 2> /dev/null, "Backing up vim to ~/.vim_bckup"]
     - [git submodule update --init --recursive editors/vim]
