@@ -7,5 +7,5 @@
     ~/.zsh : shells/zsh
     ~/.zplug: src/zplug
 
-- shell:
-    - chsh -s $(which zsh)
+# - shell:
+#     - chsh -s $(which zsh)
