@@ -22,7 +22,7 @@ if [ "$DISTRO"  == *"Debian"* ]; then
     apt-get install debconf
 fi
 
-locale-gen us_EN.UFT-8
+# locale-gen us_EN.UFT-8
 
 ## First thing first. Install git
 apt-get install -y git
@@ -41,7 +41,7 @@ apt-get install -y git
 # # getting zsh up
 apt-get install -y zsh
 
-
+chsh -s $(which zsh)
 # # build and install neovim
 # git clone https://github.com/neovim/neovim.git /tmp/
 # cd /tmp/neovim
