@@ -1,6 +1,0 @@
-# source all .bash files inside of the bash/ directory
-
-for config in $($GENERAL/**/*.bash); do source $config; done
-
-# source /opt/ros/kinetic/setup.bash
-# source ~/catkin_ws/devel/setup.bash

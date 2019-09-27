@@ -93,8 +93,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export NVM_DIR="/home/hle/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="/home/hle/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
 get_crtime() {
@@ -110,9 +110,12 @@ get_crtime() {
 # # Start loading all other configsk
 # [ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
 
-# Load generalrc first 
-[ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+for f in $BASH/*.bash; do source $f; done
+
+
+# # Load generalrc first 
+# [ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # source /opt/ros/kinetic/setup.bash
 # source ~/catkin_ws/devel/setup.bash
