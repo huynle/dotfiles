@@ -1,4 +1,10 @@
+- shell:
+    - apt-get install -y zsh
+
 - link:
     ~/.zshrc: shells/zsh/zshrc
     ~/.zsh : shells/zsh
     ~/.zplug: src/zplug
+
+- shell:
+    - chsh -s $(which zsh)

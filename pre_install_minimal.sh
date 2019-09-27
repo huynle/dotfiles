@@ -39,9 +39,8 @@ apt-get install -y git
 # apt-get install -y software-properties-common
 
 # # getting zsh up
-apt-get install -y zsh
+# apt-get install -y zsh
 
-chsh -s $(which zsh)
 # # build and install neovim
 # git clone https://github.com/neovim/neovim.git /tmp/
 # cd /tmp/neovim
