@@ -39,7 +39,7 @@ apt-get install -y git
 # apt-get install -y software-properties-common
 
 # # getting zsh up
-# apt-get install -y zsh
+apt-get install -y zsh
 
 
 # # build and install neovim
