@@ -1,17 +1,8 @@
 # reload zsh config
 alias reload='export RELOAD=1 && source $SHELLRC'
 
-## Another way of reloading
-function _accept-line() {
-    if [[ $BUFFER == "." ]]; then
-        BUFFER="source $SHELLRC"
-    fi
-    zle .accept-line
-}
-zle -N accept-line _accept-line
-
 # use neovim as editor
-alias vim="vim"
+alias vim="vi"
 # alias tmux="env TERM=xterm-256color tmux"
 
 ##### for cygwin?
