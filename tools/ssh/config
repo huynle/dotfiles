@@ -18,6 +18,12 @@ Host github.com
  Hostname ssh.github.com
  Port 22
 
+Host aws
+ User ec2-user
+ IdentityFile ~/.ssh/id_aws
+ Hostname ec2-54-200-159-71.us-west-2.compute.amazonaws.com
+ Port 22
+
 Host huynle.com
  User hle
  IdentityFile ~/.ssh/id_hizzle_cloud
@@ -43,6 +49,12 @@ Host controller
  User huynle
  IdentityFile ~/.ssh/id_unifi
  Hostname 10.1.10.3
+
+Host guardian
+ User hle
+ Port 22
+ IdentityFile ~/.ssh/id_github
+ Hostname 10.1.10.64
 
 Host tiny
  User hle
