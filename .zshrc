@@ -1,7 +1,7 @@
 # quick location for profile
 export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/shells/zsh
-export GENERAL=$HOME/shells/general
+export ZSH=$HOME/.zsh
+# export GENERAL=$HOME/shells/general
 export SHELLRC=$HOME/.zshrc
 
 command_exists() {
