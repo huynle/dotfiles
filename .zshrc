@@ -63,3 +63,14 @@ if [ -f '/home/hle/.local/opt/google-cloud-sdk/completion.zsh.inc' ]; then sourc
 
 ## Just for chromeos
 # export DISPLAY=:0
+#
+
+
+### pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+eval "$(pyenv virtualenv-init -)"
