@@ -10,3 +10,5 @@ editors/vim/swapfiles/*
 editors/vim/undofiles/*
 tags
 ctags/
+
+archive/
