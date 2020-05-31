@@ -30,7 +30,7 @@ alias .....="cd ../../../.."
 
 alias l="ls -lah ${colorflag}"
 alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
+alias ll="ls -artlFh ${colorflag}"
 alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
 
@@ -71,3 +71,5 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 alias largefiles='sudo find / -type f -exec du -Sh {} + | sort -rh | head -n 5'
+
+alias mux='tmux attach -d || tmux new'

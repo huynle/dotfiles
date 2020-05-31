@@ -118,9 +118,6 @@ export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 alias mux='tmux attach -d || tmux new'
 alias vm='ssh vm'
 # alias pip=pip3
-# alias python=python3
-export http_proxy=http://proxy2.lmco.com:80
-export https_proxy=$http_proxy
 
 export PATH="/home/e367212/.pyenv/bin:$PATH"
 # eval "$(pyenv init -)"
