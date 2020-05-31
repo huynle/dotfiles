@@ -1,7 +1,5 @@
 # quick location for profile
 export DOTFILES=$HOME/.dotfiles
-export BASH=$HOME/.dotfiles/shells/bash
-export GENERAL=$HOME/.dotfiles/shells/general
 export SHELLRC=$HOME/.bashrc
 
 # If not running interactively, don't do anything
@@ -110,7 +108,6 @@ get_crtime() {
 # # Start loading all other configsk
 # [ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
 
-for f in $BASH/*.bash; do source $f; done
 
 export GIT_SSL_NO_VERIFY=1
 export PYTHONWARNINGS="ignore:Unverified HTTPS request"
@@ -119,18 +116,14 @@ alias mux='tmux attach -d || tmux new'
 alias vm='ssh vm'
 # alias pip=pip3
 # alias python=python3
-export http_proxy=http://proxy2.lmco.com:80
-export https_proxy=$http_proxy
 
 export PATH="/home/e367212/.pyenv/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 
-# alias curl="curl -k -x http://proxy2.lmco.com:80"
 alias nim='$HOME/hle/Downloads/squashfs-root/AppRun'
 
 # # Load generalrc first 
-# [ -f $GENERAL/generalrc ] && source $GENERAL/generalrc
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
