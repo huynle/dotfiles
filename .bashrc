@@ -2,6 +2,9 @@
 export DOTFILES=$HOME/.dotfiles
 export SHELLRC=$HOME/.bashrc
 
+for f in $DOTFILES/bash/*.bash; do source $f; done
+
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -107,6 +110,9 @@ get_crtime() {
 
 # # Start loading all other configsk
 # [ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
+
+
+[ -f $HOME/.localrc ] && source $HOME/.localrc
 
 
 export GIT_SSL_NO_VERIFY=1
