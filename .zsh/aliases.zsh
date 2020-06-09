@@ -30,7 +30,7 @@ alias .....="cd ../../../.."
 
 alias l="ls -lah ${colorflag}"
 alias la="ls -AF ${colorflag}"
-alias ll="ls -artlFh ${colorflag}"
+alias ll="ls -arlt ${colorflag}"
 alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
 
