@@ -11,7 +11,7 @@ function _accept-line() {
 zle -N accept-line _accept-line
 
 # use neovim as editor
-alias vim="nvim"
+# alias vim="nvim"
 # alias tmux="env TERM=xterm-256color tmux"
 
 

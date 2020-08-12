@@ -1,0 +1,14 @@
+.git*
+logs*
+docs*
+trace*
+*.pyc
+.lvimrc
+.rsync_exclude
+
+*.lock
+*.temp
+tags
+
+archive
+

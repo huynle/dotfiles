@@ -10,7 +10,8 @@
 
 [merge]
   ff = only
-  tool = vimdiff
+# 	tool = vimdiff
+  tool = ediff
   conflictstyle = diff3
 
 [mergetool]
@@ -28,11 +29,15 @@
   prune = true
 
 [diff]
-  tool = vimdiff
+# tool = vimdiff
+  tool = ediff
   conflictstyle = diff3
 
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+# [mergetool "vimdiff"]
+#   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[mergetool "ediff"]
+  cmd = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 
 [alias]
   a = add --all

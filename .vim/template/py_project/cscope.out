@@ -1,0 +1,1559 @@
+cscope 15 $HOME/edev/OrionSim/SIMSW/sECLSS/.project               0000006801
+	@/home/e367212/edev/OrionSim/SIMSW/sECLSS/.project/plotLog.py
+
+1 #// 
+g©h”
+ 
+the
+ 
+pošts
+ 
+š
+ 
+c
+++
+
+5 #fÜ (
+i
+ = 0; i < 2000; i++)
+
+10 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜA
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+,
+
+11 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜB
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+,
+
+12 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜC
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+,
+
+13 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜD
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+,
+
+14 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜE
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+,
+
+15 #uutArsPhysMod–->
+ÿbšPhysics
+.
+£ùÜF
+.
+æuidVŞume
+.
+tÙ®P»ssu»
+);
+
+19 
+impÜt
+ 
+m©h
+
+
+20 
+äom
+ 
+cŞËùiÚs
+ 
+impÜt
+ 
+deçuÉdiù
+
+
+21 
+impÜt
+ 
+	gm©¶Ùlib
+.
+py¶Ù
+ 
+as
+ 
+¶t
+
+
+24 
+def
+ 
+	$upd©e_ªnÙ
+(
+šd
+):
+
+25 
+pos
+ = 
+sc
+.
+	`g‘_off£ts
+()[
+šd
+["ind"][0]]
+
+26 
+ªnÙ
+.
+xy
+ = 
+pos
+
+
+27 
+‹xt
+ = "{}, {}".
+	`fÜm©
+(" ".
+	`još
+(
+	`li¡
+(
+	`m­
+(
+¡r
+,
+šd
+["ind"]))),
+
+28 " ".
+	`još
+([
+Çmes
+[
+n
+] À
+š
+ 
+šd
+["ind"]]))
+
+29 
+ªnÙ
+.
+	$£t_‹xt
+(
+‹xt
+)
+
+30 
+ªnÙ
+.
+	`g‘_bbox_·tch
+().
+	`£t_çûcŞÜ
+(
+	`cm­
+(
+	`nÜm
+(
+c
+[
+šd
+["ind"][0]])))
+
+31 
+ªnÙ
+.
+	`g‘_bbox_·tch
+().
+	$£t_®pha
+(0.4)
+
+34 
+def
+ 
+	$hov”
+(
+ev’t
+):
+
+35 
+vis
+ = 
+ªnÙ
+.
+	$g‘_visibË
+()
+
+36 
+ev’t
+.
+šaxes
+ =ğ
+ax
+:
+
+37 
+cÚt
+, 
+šd
+ = 
+sc
+.
+	$cÚšs
+(
+ev’t
+)
+
+38 
+cÚt
+:
+
+39 
+	$upd©e_ªnÙ
+(
+šd
+)
+
+40 
+ªnÙ
+.
+	$£t_visibË
+(
+True
+)
+
+41 
+fig
+.
+ÿnvas
+.
+	$d¿w_idË
+()
+
+43 
+vis
+:
+
+44 
+ªnÙ
+.
+	$£t_visibË
+(
+F®£
+)
+
+45 
+fig
+.
+ÿnvas
+.
+	$d¿w_idË
+()
+
+48 
+şass
+ 
+	$AÂÙeFšd”
+(
+objeù
+):
+
+50 
+şicked
+ 
+Ú
+. 
+The
+ 
+pošt
+ 
+which
+ 
+is
+ 
+şo£¡
+ 
+to
+ 
+the
+ 
+şick
+ 
+ªd
+ 
+w™hš
+
+
+51 
+xtŞ
+ 
+ªd
+ 
+ytŞ
+ 
+is
+ 
+id’tif›d
+.
+
+53 
+Regi¡”
+ 
+this
+ 
+funùiÚ
+ 
+like
+his:
+
+55 
+	$sÿ‰”
+(
+xd©a
+, 
+yd©a
+)
+
+56 
+af
+ = 
+	$AÂÙeFšd”
+(
+xd©a
+, 
+yd©a
+, 
+ªnÙes
+)
+
+57 
+	`cÚÃù
+('bu‰Ú_´ess_ev’t', 
+af
+)
+
+60 
+def
+ 
+	$__š™__
+(
+£lf
+, 
+xd©a
+, 
+yd©a
+, 
+ªnÙes
+, 
+ax
+=
+NÚe
+, 
+xtŞ
+=NÚe, 
+ytŞ
+=None):
+
+61 
+£lf
+.
+d©a
+ = 
+	`li¡
+(
+	$z
+(
+xd©a
+, 
+yd©a
+, 
+ªnÙes
+))
+
+62 
+xtŞ
+ 
+is
+ 
+NÚe
+:
+
+63 
+xtŞ
+ = ((
+	`max
+(
+xd©a
+è- 
+	`mš
+(xd©a))/(
+	`Ën
+(xdata)))/2
+
+64 
+ytŞ
+ 
+is
+ 
+NÚe
+:
+
+65 
+ytŞ
+ = ((
+	`max
+(
+yd©a
+è- 
+	`mš
+(yd©a))/(
+	`Ën
+(ydata)))/2
+
+66 
+£lf
+.
+xtŞ
+ = xtol
+
+67 
+£lf
+.
+ytŞ
+ = ytol
+
+68 
+ax
+ 
+is
+ 
+NÚe
+:
+
+69 
+£lf
+.
+ax
+ = 
+¶t
+.
+	$gÿ
+()
+
+71 
+£lf
+.
+ax
+ =‡x
+
+72 
+£lf
+.
+d¿wnAÂÙ©iÚs
+ = {
+	}
+}
+
+73 
+£lf
+.
+lšks
+ = []
+
+75 
+def
+ 
+	$di¡ªû
+(
+£lf
+, 
+x1
+, 
+x2
+, 
+y1
+, 
+y2
+):
+
+77  
+the
+ 
+di¡ªû
+ 
+b‘w“n
+ 
+two
+ 
+pošts
+
+
+79 (
+m©h
+.
+	`sq¹
+((
+x1
+ - 
+x2
+)**2 + (
+y1
+ - 
+y2
+)**2))
+
+81 
+def
+ 
+	$__ÿÎ__
+(
+£lf
+, 
+ev’t
+):
+
+83 
+ev’t
+.
+šaxes
+:
+
+84 
+şickX
+ = 
+ev’t
+.
+xd©a
+
+
+85 
+şickY
+ = 
+ev’t
+.
+yd©a
+
+
+86 ià(
+£lf
+.
+ax
+ 
+is
+ 
+NÚe
+è
+	$Ü
+ (
+£lf
+.
+ax
+ 
+is
+ 
+ev’t
+.
+šaxes
+):
+
+88 
+ªnÙes
+ = []
+
+89 #´št(
+ev’t
+.
+xd©a
+,ƒv’t.
+yd©a
+)
+
+90 
+x
+, 
+y
+, 
+a
+ 
+š
+ 
+£lf
+.
+d©a
+:
+
+91 
+	`´št
+("GOT HEREØªnÙe {} {} {}".
+	$fÜm©
+(
+x
+,
+y
+,
+a
+))
+
+92 #´št(
+x
+, 
+y
+, 
+a
+)
+
+93 ià((
+şickX
+-
+£lf
+.
+xtŞ
+ < 
+x
+ < clickX+£lf.xtŞè
+	`ªd
+ (
+şickY
+-£lf.
+ytŞ
+ < 
+y
+ < clickY+self.ytol)):
+
+94 
+ªnÙes
+.
+	`­³nd
+((
+£lf
+.
+	`di¡ªû
+(
+x
+, 
+şickX
+, 
+y
+, 
+şickY
+), x, y, 
+a
+))
+
+95 
+ªnÙes
+:
+
+96 
+ªnÙes
+.
+	$sÜt
+()
+
+97 
+di¡ªû
+, 
+x
+, 
+y
+, 
+ªnÙe
+ = 
+ªnÙes
+[0]
+
+98 
+£lf
+.
+	$d¿wAÂÙe
+(
+ev’t
+.
+šaxes
+, 
+x
+, 
+y
+, 
+ªnÙe
+)
+
+99 
+l
+ 
+š
+ 
+£lf
+.
+lšks
+:
+
+100 
+l
+.
+	$d¿wS³cificAÂÙe
+(
+ªnÙe
+)
+
+102 
+def
+ 
+	$d¿wAÂÙe
+(
+£lf
+, 
+ax
+, 
+x
+, 
+y
+, 
+ªnÙe
+):
+
+104 
+D¿w
+ 
+the
+ 
+ªnÙ©iÚ
+ 
+Ú
+h
+¶Ù
+
+
+106 ià(
+x
+, 
+y
+è
+š
+ 
+£lf
+.
+d¿wnAÂÙ©iÚs
+:
+
+107 
+m¬k”s
+ = 
+£lf
+.
+d¿wnAÂÙ©iÚs
+[(
+x
+, 
+y
+)]
+
+108 
+m
+ 
+š
+ 
+m¬k”s
+:
+
+109 
+m
+.
+	`£t_visibË
+(
+nÙ
+ m.
+	$g‘_visibË
+())
+
+110 
+£lf
+.
+ax
+.
+figu»
+.
+ÿnvas
+.
+	$d¿w_idË
+()
+
+112 
+t
+ = 
+ax
+.
+	`‹xt
+(
+x
+, 
+y
+, " - %s" % (
+ªnÙe
+),)
+
+113 
+m
+ = 
+ax
+.
+	`sÿ‰”
+([
+x
+], [
+y
+], 
+m¬k”
+='d', 
+c
+='r', 
+zÜd”
+=100)
+
+114 
+£lf
+.
+d¿wnAÂÙ©iÚs
+[(
+x
+, 
+y
+)] = (
+t
+, 
+m
+)
+
+115 
+£lf
+.
+ax
+.
+figu»
+.
+ÿnvas
+.
+	$d¿w_idË
+()
+
+117 
+def
+ 
+	$d¿wS³cificAÂÙe
+(
+£lf
+, 
+ªnÙe
+):
+
+118 
+ªnÙesToD¿w
+ = [(
+x
+, 
+y
+, 
+a
+èx, y,‡ 
+š
+ 
+£lf
+.
+d©a
+ ¨=ğ
+ªnÙe
+]
+
+119 
+x
+, 
+y
+, 
+a
+ 
+š
+ 
+ªnÙesToD¿w
+:
+
+120 
+£lf
+.
+	$d¿wAÂÙe
+(
+£lf
+.
+ax
+, 
+x
+, 
+y
+, 
+a
+)
+
+122 #cid = 
+fig
+.
+ÿnvas
+.
+	`m¶_cÚÃù
+('bu‰Ú_´ess_ev’t', 
+Úşick
+)
+
+124 #fig.
+ÿnvas
+.
+	`m¶_cÚÃù
+("mÙiÚ_nÙify_ev’t", 
+hov”
+)
+
+127 
+def
+ 
+	$Úşick
+(
+ev’t
+):
+
+128 
+	`´št
+('%s click: button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
+
+129 ('doubË' 
+ev’t
+.
+dblşick
+ 'sšgË',ƒv’t.
+bu‰Ú
+,
+
+130 
+ev’t
+.
+x
+,ƒv’t.
+y
+,ƒv’t.
+xd©a
+,ƒv’t.
+yd©a
+))
+
+132 
+def
+ 
+	$lškAÂÙ©iÚFšd”s
+(
+afs
+):
+
+133 
+i
+ 
+š
+ 
+	`¿nge
+(
+	$Ën
+(
+afs
+)):
+
+134 
+®lButS–fAfs
+ = 
+afs
+[:
+i
+]+afs[i+1:]
+
+135 
+afs
+[
+i
+].
+lšks
+.
+	$ex‹nd
+(
+®lButS–fAfs
+)
+
+137 
+¡ršgM¬k”
+ = "----------"
+
+138 
+foundIt
+ = 
+F®£
+
+
+139 
+d©a
+ = 
+	$deçuÉdiù
+(
+Ïmbda
+: [])
+
+140 
+Ïb–s
+ = 
+	$deçuÉdiù
+(
+Ïmbda
+: [])
+
+142 
+ax_kw¬gs
+ = 
+	`deçuÉdiù
+(
+Ïmbda
+: 
+	$diù
+())
+
+146 
+f•©h
+ = '/home/e367212/edev/OrionSim/SIMSW/sECLSS/sECLSS_ut.log'
+
+147 
+w™h
+ 
+	$İ’
+(
+f•©h
+è
+as
+ 
+å
+:
+
+148 
+lše
+ = 
+å
+.
+	$»adlše
+()
+
+149 
+út
+ = 1
+
+150 
+lše
+:
+
+151 
+¡ršgM¬k”
+ 
+š
+ 
+lše
+:
+
+153 
+foundIt
+ = 
+nÙ
+ foundIt
+
+155 
+foundIt
+:
+
+156 
+lše_¥l™
+ = 
+lše
+.
+	`¥l™
+("=")
+
+157 
+	`Ën
+(
+lše_¥l™
+)==2:
+
+158 
+ax_n
+ = 
+lše_¥l™
+[0]
+
+159 
+lše_d©a
+ = 
+lše_¥l™
+[1]
+
+161 
+ax_n
+ = "default"
+
+162 
+lše_d©a
+ = 
+lše
+
+
+164 
+Œy
+:
+
+165 #´št("{}".
+	`fÜm©
+(
+lše_d©a
+.
+	`¥l™
+(',')))
+
+166 
+d©um
+ = [(
+x
+èx 
+š
+ 
+lše_d©a
+.
+	`¡r
+().
+	`¥l™
+(',')]
+
+167 #´št("lše: {}".
+	`fÜm©
+(
+lše_d©a
+))
+
+168 #´št("ax_n:{}, {}".
+	`fÜm©
+(
+ax_n
+,
+d©um
+))
+
+169 
+d©a
+[
+ax_n
+].
+	$­³nd
+(
+d©um
+)
+
+170 
+exû±
+ 
+V®ueE¼Ü
+ 
+as
+ 
+”r
+:
+
+171 #´št("WARNING: {0}\Æše_d©a: {1}".
+	`fÜm©
+(
+”r
+, 
+lše_d©a
+))
+
+172 "Ëg’d" 
+š
+ 
+lše_d©a
+:
+
+173 
+	`´št
+("Ëg’d: {}".
+	$fÜm©
+(
+lše_d©a
+))
+
+174 
+¥l™
+ = 
+lše_d©a
+.
+	`¥l™
+(":")
+
+175 
+Ïb–s
+[
+ax_n
+] = 
+¥l™
+[1].
+	`¥l™
+(",")
+
+176 
+	`´št
+("Ïb–s:{}".
+	$fÜm©
+(
+Ïb–s
+))
+
+178 
+šfŞše_d©a
+ = 
+lše_d©a
+.
+	`¡r
+().
+	`¥l™
+(',')
+
+179 
+šfo
+ 
+š
+ 
+šfŞše_d©a
+:
+
+180 
+	`´št
+("šfo: {}".
+	$fÜm©
+(
+šfo
+))
+
+181 
+¥l™
+ = 
+šfo
+.
+	`¥l™
+(":")
+
+182 
+	`Ën
+(
+¥l™
+) == 2:
+
+183 
+ax_kw¬gs
+[
+ax_n
+].
+	`upd©e
+({
+¥l™
+[0]: s¶™[1]
+	}
+})
+
+185 
+lše
+ = 
+å
+.
+	$»adlše
+()
+
+186 
+út
+ += 1
+
+188 
+afs
+ = []
+
+189 
+key
+, 
+d©a_n
+ 
+š
+ 
+d©a
+.
+	$™”™ems
+():
+
+190 
+Œª¥o£d
+ = 
+	$z
+(*
+d©a_n
+)
+
+191 #´št(
+Œª¥o£d
+)
+
+193 
+šd•
+ = 
+Œª¥o£d
+.
+	$pİ
+(0)
+
+195 
+fig
+ = 
+¶t
+.
+	$figu»
+(
+key
+)
+
+196 
+ax
+ = 
+¶t
+.
+	$axes
+(**
+ax_kw¬gs
+[
+key
+])
+
+198 
+i
+ 
+š
+ 
+	`¿nge
+(
+	$Ën
+(
+Œª¥o£d
+)):
+
+199 
+Ïb–s
+:
+
+200 
+ax
+.
+	$¶Ù
+(
+šd•
+, 
+Œª¥o£d
+[
+i
+], 
+Ïb–
+=
+Ïb–s
+[
+key
+][i])
+
+202 
+ax
+.
+	$¶Ù
+(
+šd•
+, 
+Œª¥o£d
+[
+i
+])
+
+203 #aàğ
+	`AÂÙeFšd”
+(
+šd•
+, 
+Œª¥o£d
+[
+i
+], [
+	`¡r
+(
+™em
+è™em 
+š
+¿n¥o£d[i]], 
+ax
+=ax)
+
+205 #g‘tšg 
+ªnÙ©iÚ
+
+
+206 #fÜ 
+i
+,
+j
+ 
+š
+ 
+	`z
+(
+šd•
+,
+Œª¥o£d
+[i]):
+
+207 #ªnÙ = 
+ax
+.
+	`ªnÙ©e
+(
+	`¡r
+(
+j
+), 
+xy
+=(
+i
+, j))
+
+208 #ªnÙ.
+	`£t_visibË
+(
+F®£
+)
+
+210 #ià
+šd•Name
+:
+
+211 #ax.
+	`£t_xÏb–
+(
+šd•Name
+)
+
+212 
+Ïb–s
+[
+key
+]:
+
+213 
+ax
+.
+	$Ëg’d
+()
+
+215 
+mng
+ = 
+¶t
+.
+	$g‘_cu¼’t_fig_mªag”
+()
+
+216 #mng.
+	`fuÎ_sü“n_toggË
+()
+
+218 #®low 
+—ch
+ 
+figu»
+ 
+to
+ 
+be
+ 
+şickabË
+
+
+219 #cid = 
+fig
+.
+ÿnvas
+.
+	`m¶_cÚÃù
+('bu‰Ú_´ess_ev’t', 
+Úşick
+)
+
+220 #cid = 
+fig
+.
+ÿnvas
+.
+	`m¶_cÚÃù
+('bu‰Ú_´ess_ev’t', 
+af
+)
+
+221 #afs.
+	`­³nd
+(
+af
+)
+
+224 
+	$lškAÂÙ©iÚFšd”s
+(
+afs
+)
+
+227 
+¶t
+.
+	$show
+()
+
+229 
+¶t
+.
+	`¿w_šput
+()
+
+	@
+1
+.
+1
+/usr/include
+1
+61
+/home/e367212/edev/OrionSim/SIMSW/sECLSS/.project/plotLog.py

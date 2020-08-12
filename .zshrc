@@ -4,7 +4,7 @@ export ZSH=$HOME/.zsh
 export SHELLRC=$HOME/.zshrc
 
 
-# initialize autocomplete
+# # initialize autocomplete
 # autoload -U compinit add-zsh-hook
 # compinit -D
 
@@ -52,3 +52,5 @@ for config ($ZSH/**/*completion.zsh) source $config
 
 # # Virtualenv
 # eval "$(pyenv virtualenv-init -)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

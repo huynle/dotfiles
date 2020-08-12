@@ -28,3 +28,6 @@ export GIT_EDITOR='nvim'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
 
+# ---- PYENV stuff -----
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
