@@ -39,10 +39,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# # set a fancy prompt (non-color, unless we know we "want" color)
-# case "$TERM" in
-#     xterm-color|*-256color) color_prompt=yes;;
-# esac
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -111,11 +111,10 @@ get_crtime() {
 # # Start loading all other configsk
 # [ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
 
-
 [ -f $HOME/.localrc ] && source $HOME/.localrc
 
 
-export GIT_SSL_NO_VERIFY=1
+# export GIT_SSL_NO_VERIFY=1
 export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 # export PIP_REQUIRE_VIRTUALENV=false
 alias mux='tmux attach -d || tmux new'
@@ -133,5 +132,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# source /opt/ros/kinetic/setup.bash
-# source ~/catkin_ws/devel/setup.bash
+# emac GUI
+function em()
+{
+	# -c creates a new frame
+	# -a= fires a new emacs server if none is running
+	emacsclient -c -a= $*
+}
+# emac terminal
+function emt()
+{
+	# -c creates a new frame
+	# -a= fires a new emacs server if none is running
+	emacsclient -t -a= $*
+}
+
+
