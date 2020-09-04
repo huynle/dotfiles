@@ -30,8 +30,8 @@
   prune = true
 
 [diff]
-# tool = vimdiff
-  tool = ediff
+  tool = vimdiff
+# tool = ediff
   conflictstyle = diff3
 
 # [mergetool "vimdiff"]
