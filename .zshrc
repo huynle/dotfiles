@@ -3,10 +3,12 @@ export DOTFILES=$HOME/.dotfiles
 export ZSH=$HOME/.zsh
 export SHELLRC=$HOME/.zshrc
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 
 # # initialize autocomplete
-# autoload -U compinit add-zsh-hook
-# compinit -D
+autoload -Uz compinit && compinit -i
 
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
@@ -54,3 +56,11 @@ for config ($ZSH/**/*completion.zsh) source $config
 # eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+alias scp="noglob scp"
