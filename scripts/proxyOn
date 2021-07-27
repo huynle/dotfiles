@@ -1,0 +1,3 @@
+echo "Enabling Proxy env vars"
+export http_proxy=http://proxy2.lmco.com:80
+export https_proxy=http://proxy2.lmco.com:80

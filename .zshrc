@@ -14,8 +14,8 @@ autoload -Uz compinit && compinit -i
 export REPORTTIME=10
 
 # this sets the color for zsh default and will change to screen-256color if in tmux session
-export TERM=xterm-256color
-[ -n "$TMUX" ] && export TERM=xterm-256color
+# export TERM=xterm-256color
+# [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # getting characters to show up properly
 export LANG=en_US.UTF-8
@@ -42,8 +42,6 @@ for config ($ZSH/**/*.zsh) source $config
 # source all .zsh files for completions
 for config ($ZSH/**/*completion.zsh) source $config
 
-# source localrc
-[ -e ~/.localrc ] && source ~/.localrc
 
 ### pyenv setup
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -64,3 +62,10 @@ fi
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 alias scp="noglob scp"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# source localrc
+[ -e ~/.localrc ] && source ~/.localrc

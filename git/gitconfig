@@ -9,19 +9,8 @@
   autocrlf = input
 	compression = 0
 
-[merge]
-  ff = only
-	tool = vimdiff
- # tool = ediff
-  conflictstyle = diff3
 
-[mergetool]
-  keepBackup = false
-  prompt = false
 
-[difftool]
-  keepBackup = false
-  prompt = false
 
 [push]
   default = current
@@ -31,11 +20,29 @@
 
 [diff]
   # tool = ediff
-  tool = vimdiff
+  ; tool = vimdiff
+  tool = nvimdiff
   conflictstyle = diff3
 
-# [mergetool "vimdiff"]
-#   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = true
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+  ff = only
+	tool = nvimdiff
+	; tool = vimdiff
+ # tool = ediff
+  conflictstyle = diff3
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[mergetool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [mergetool "ediff"]
   cmd = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
