@@ -148,3 +148,4 @@ function emt()
 }
 
 
+. "$HOME/.cargo/env"
