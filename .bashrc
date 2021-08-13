@@ -4,6 +4,9 @@ export SHELLRC=$HOME/.bashrc
 
 for f in $DOTFILES/bash/*.bash; do source $f; done
 
+set -o vi
+bind '"jk":vi-movement-mode'
+
 
 # If not running interactively, don't do anything
 case $- in
@@ -111,20 +114,12 @@ get_crtime() {
 # # Start loading all other configsk
 # [ -f $BASH/fzf.bash ] && source $BASH/fzf.bash
 
-[ -f $HOME/.localrc ] && source $HOME/.localrc
 
 
 # export GIT_SSL_NO_VERIFY=1
-export PYTHONWARNINGS="ignore:Unverified HTTPS request"
+# export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 # export PIP_REQUIRE_VIRTUALENV=false
 alias mux='tmux attach -d || tmux new'
-alias vm='ssh vm'
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
-alias nim='$HOME/hle/Downloads/squashfs-root/AppRun'
 
 # # Load generalrc first 
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -147,5 +142,7 @@ function emt()
 	emacsclient -t -a= $*
 }
 
-
 . "$HOME/.cargo/env"
+
+[ -f $HOME/.localrc ] && source $HOME/.localrc
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
