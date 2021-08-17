@@ -7,6 +7,8 @@ for f in $DOTFILES/bash/*.bash; do source $f; done
 set -o vi
 bind '"jk":vi-movement-mode'
 
+. ~/.dotfiles/bin/z.sh
+
 
 # If not running interactively, don't do anything
 case $- in
