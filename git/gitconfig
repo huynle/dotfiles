@@ -5,7 +5,7 @@
 
 [core]
   editor = vim
-  excludesfile = $HOME/.gitignore
+  excludesfile = /home/huy/.gitignore
   autocrlf = input
 
 [merge]

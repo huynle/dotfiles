@@ -1,5 +1,0 @@
-# USB info
-df -h
-echo "Enter device name..."
-read dev_name
-udevadm info -a -p $(udevadm info -q path -n "$dev_name")
