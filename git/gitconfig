@@ -5,12 +5,9 @@
 
 [core]
   editor = vim
-  excludesfile = $HOME/.gitignore
+  excludesfile = /Users/e367212/.gitignore
   autocrlf = input
 	compression = 0
-
-
-
 
 [push]
   default = current
@@ -18,17 +15,27 @@
 [fetch]
   prune = true
 
+[difftool]
+  prompt = false
+
+[difftool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE
+
 [diff]
   # tool = ediff
-  ; tool = vimdiff
+  # tool = vimdiff
   tool = nvimdiff
   conflictstyle = diff3
 
-[difftool]
-  prompt = true
+[mergetool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[mergetool "ediff"]
+  cmd = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
+
+[mergetool]
+  keepBackup = false
+  prompt = false
 
 [merge]
   ff = only
@@ -37,15 +44,7 @@
  # tool = ediff
   conflictstyle = diff3
 
-[mergetool]
-  keepBackup = false
-  prompt = false
 
-[mergetool "nvimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-[mergetool "ediff"]
-  cmd = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 
 [alias]
   a = add --all

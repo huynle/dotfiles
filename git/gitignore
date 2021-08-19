@@ -1,1 +1,4 @@
 *.swp
+pkgs
+1
+.env
